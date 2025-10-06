@@ -8,6 +8,7 @@
   will-change: transform;
   top: -50px;
   left: -50px;
+  transform-origin: center;
 }
 .cursor {
   width: 12px;

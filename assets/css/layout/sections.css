@@ -85,34 +85,6 @@ section.visible {
 }
 #contact .section-bg {
   background-image: url("https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1600&q=80&auto=format&fit=crop");
-  background-image: url("https://images.unsplash.com/photo-1518709268801-4f5d3f4c5c3d?w=1200&q=80&auto=format&fit=crop");
-}
-#about .section-bg {
-  background-image: url("https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=1200&q=80&auto=format&fit=crop");
-}
-#mission .section-bg {
-  background-image: url("https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&q=80&auto=format&fit=crop");
-}
-#vision .section-bg {
-  background-image: url("https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1200&q=80&auto=format&fit=crop");
-}
-#values .section-bg {
-  background-image: url("https://images.unsplash.com/photo-1553484771-371a605b060b?w=1200&q=80&auto=format&fit=crop");
-}
-#services .section-bg {
-  background-image: url("https://images.unsplash.com/photo-1559028012-481c04fa702d?w=1200&q=80&auto=format&fit=crop");
-}
-#team .section-bg {
-  background-image: url("https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1200&q=80&auto=format&fit=crop");
-}
-#testimonials .section-bg {
-  background-image: url("https://images.unsplash.com/photo-1551836026-d5c88ac5d69a?w=1200&q=80&auto=format&fit=crop");
-}
-#blog .section-bg {
-  background-image: url("https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=1200&q=80&auto=format&fit=crop");
-}
-#contact .section-bg {
-  background-image: url("https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&q=80&auto=format&fit=crop");
 }
 section.visible .section-bg {
   opacity: 1;

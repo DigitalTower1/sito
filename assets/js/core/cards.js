@@ -1,163 +1,171 @@
-const vaultCards = Array.from(
+(() => {
+  const overlay = document.getElementById("cardOverlay");
+  const vaultCards = Array.from(
     document.querySelectorAll(
       ".vault-card, .service-card, .team-card, .testimonial-card, .blog-card",
     ),
-  ),
-  overlay = document.getElementById("cardOverlay");
-let activeCard = null;
-const hasAudioContext =
-  typeof window.AudioContext !== "undefined" ||
-  typeof window.webkitAudioContext !== "undefined";
-let audioContext = null;
-function ensureAudioContext() {
-  if (!hasAudioContext) return null;
-  return (
-    audioContext || (audioContext = new (window.AudioContext || window.webkitAudioContext)())
   );
-}
-function playFlipSound() {
-  const ctx = ensureAudioContext();
-  if (!ctx) return;
-  const now = ctx.currentTime,
-    osc = ctx.createOscillator(),
-    gain = ctx.createGain();
-  osc.type = "triangle";
-  osc.frequency.setValueAtTime(340, now);
-  osc.frequency.exponentialRampToValueAtTime(180, now + 0.18);
-  gain.gain.setValueAtTime(0.0001, now);
-  gain.gain.exponentialRampToValueAtTime(0.12, now + 0.04);
-  gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.28);
-  osc.connect(gain);
-  gain.connect(ctx.destination);
-  osc.start(now);
-  osc.stop(now + 0.3);
-}
-function setGroupState(targetCard, muted) {
-  const group = targetCard.dataset.vaultGroup;
-  vaultCards.forEach((card) => {
-    if (card === targetCard) return;
-    card.classList.toggle("is-muted", muted && card.dataset.vaultGroup === group);
-  });
-}
-function focusCard(card) {
-  if (activeCard === card) {
-    releaseCard();
-    return;
+
+  let activeCard = null;
+
+  const hasAudioContext =
+    typeof window.AudioContext !== "undefined" ||
+    typeof window.webkitAudioContext !== "undefined";
+  let audioContext = null;
+
+  function ensureAudioContext() {
+    if (!hasAudioContext) {
+      return null;
+    }
+    if (!audioContext) {
+      const Ctor = window.AudioContext || window.webkitAudioContext;
+      audioContext = new Ctor();
+    }
+    return audioContext;
   }
-  vaultCards.forEach((c) => {
-    c.classList.remove("flipped", "vault-card-active");
-  });
-  card.classList.add("flipped", "vault-card-active");
-  setGroupState(card, !0);
-  overlay.classList.add("active");
-  document.body.classList.add("card-open");
-  document.documentElement.classList.add("card-open");
-  document.body.style.overflow = "hidden";
-  activeCard = card;
-  playFlipSound();
-}
-function releaseCard() {
-  activeCard = null;
-  vaultCards.forEach((c) => {
-    c.classList.remove("flipped", "vault-card-active", "is-muted");
-  });
-  overlay.classList.remove("active");
-  document.body.classList.remove("card-open");
-  document.documentElement.classList.remove("card-open");
-  document.body.style.overflow = "";
-}
-function attachCardListeners(card) {
-  if (!card.getAttribute("onclick")) {
+
+  function playFlipSound() {
+    const ctx = ensureAudioContext();
+    if (!ctx) {
+      return;
+    }
+
+    const now = ctx.currentTime;
+    const oscillator = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    oscillator.type = "triangle";
+    oscillator.frequency.setValueAtTime(340, now);
+    oscillator.frequency.exponentialRampToValueAtTime(180, now + 0.18);
+
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.exponentialRampToValueAtTime(0.12, now + 0.04);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.28);
+
+    oscillator.connect(gain);
+    gain.connect(ctx.destination);
+
+    oscillator.start(now);
+    oscillator.stop(now + 0.3);
+  }
+
+  function setGroupState(targetCard, muted) {
+    const group = targetCard.dataset.vaultGroup || "global";
+    vaultCards.forEach((card) => {
+      if (card === targetCard) {
+        return;
+      }
+      const shouldMute = muted && card.dataset.vaultGroup === group;
+      card.classList.toggle("is-muted", shouldMute);
+    });
+  }
+
+  function releaseCard() {
+    activeCard = null;
+    vaultCards.forEach((card) => {
+      card.classList.remove("flipped", "vault-card-active", "is-muted");
+    });
+    if (overlay) {
+      overlay.classList.remove("active");
+    }
+    document.body.classList.remove("card-open");
+    document.documentElement.classList.remove("card-open");
+    document.body.style.overflow = "";
+  }
+
+  function focusCard(card) {
+    if (activeCard === card) {
+      releaseCard();
+      return;
+    }
+
+    vaultCards.forEach((item) => {
+      item.classList.remove("flipped", "vault-card-active");
+    });
+
+    card.classList.add("flipped", "vault-card-active");
+    setGroupState(card, true);
+
+    if (overlay) {
+      overlay.classList.add("active");
+    }
+    document.body.classList.add("card-open");
+    document.documentElement.classList.add("card-open");
+    document.body.style.overflow = "hidden";
+
+    activeCard = card;
+    playFlipSound();
+  }
+
+  function attachCardListeners(card) {
+    if (!card.dataset.vaultGroup) {
+      card.dataset.vaultGroup = "global";
+    }
+
+    if (!card.hasAttribute("tabindex")) {
+      card.setAttribute("tabindex", "0");
+    }
+
     card.addEventListener("click", (event) => {
-      const innerLinks = card.querySelectorAll("a, button");
-      for (const link of innerLinks) {
-        if (link.contains(event.target)) {
+      const interactiveChildren = card.querySelectorAll("a, button");
+      for (const child of interactiveChildren) {
+        if (child.contains(event.target)) {
           return;
         }
       }
       focusCard(card);
     });
-  }
-  if (!card.hasAttribute("tabindex")) {
-    card.setAttribute("tabindex", "0");
-  }
-  card.addEventListener("keydown", (event) => {
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      focusCard(card);
-    }
-  });
-  card.addEventListener("mouseenter", () => {
-    card.classList.add("is-hovered");
-    setGroupState(card, !0);
-    playFlipSound();
-  });
-  card.addEventListener("mouseleave", () => {
-    card.classList.remove("is-hovered");
-    if (!card.classList.contains("flipped")) {
-      setGroupState(card, !1);
-    }
-  });
-}
-function initVaultCards() {
-  if (!vaultCards.length) return;
-  vaultCards.forEach((card) => {
-    if (!card.dataset.vaultGroup) {
-      card.dataset.vaultGroup = "global";
-    }
-    card.classList.add("vault-card");
-    attachCardListeners(card);
-  });
-}
-overlay &&
-  overlay.addEventListener("click", () => {
-    releaseCard();
-  });
-window.addEventListener("keyup", (event) => {
-  "Escape" === event.key && activeCard && releaseCard();
-});
-window.addEventListener("scroll", () => {
-  activeCard && releaseCard();
-});
-initVaultCards();
-window.toggleCard = focusCard;
-window.closeActiveCard = releaseCard;
-function toggleVault(card) {
-  const isOpen = card.classList.contains("flipped"),
-    allCards = document.querySelectorAll(
-      ".vault-card, .service-card, .team-card, .testimonial-card, .blog-card",
-    );
-  if (isOpen) {
-    (card.classList.remove("flipped"),
-      cardOverlay.classList.remove("active"),
-      document
-        .querySelector(".slider-wrapper")
-        .parentElement.classList.remove("cards-dimmed"),
-      (document.body.style.overflow = ""));
-  } else {
-    (allCards.forEach((c) => c.classList.remove("flipped")),
-      card.classList.add("flipped"),
-      cardOverlay.classList.add("active"),
-      card
-        .closest(".slider-wrapper")
-        .parentElement.classList.add("cards-dimmed"),
-      (document.body.style.overflow = "hidden"));
-  }
-}
 
-function toggleCard(card) {
-  toggleVault(card);
-}
+    card.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        focusCard(card);
+      }
+    });
 
-cardOverlay.addEventListener("click", () => {
-  (document
-    .querySelectorAll(
-      ".vault-card, .service-card, .team-card, .testimonial-card, .blog-card",
-    )
-    .forEach((c) => c.classList.remove("flipped")),
-    cardOverlay.classList.remove("active"),
-    document
-      .querySelectorAll(".slider-container")
-      .forEach((c) => c.classList.remove("cards-dimmed")),
-    (document.body.style.overflow = ""));
-});
+    card.addEventListener("mouseenter", () => {
+      card.classList.add("is-hovered");
+      setGroupState(card, true);
+      playFlipSound();
+    });
+
+    card.addEventListener("mouseleave", () => {
+      card.classList.remove("is-hovered");
+      if (!card.classList.contains("flipped")) {
+        setGroupState(card, false);
+      }
+    });
+  }
+
+  function initVaultCards() {
+    if (!vaultCards.length) {
+      return;
+    }
+
+    vaultCards.forEach((card) => {
+      card.classList.add("vault-card");
+      attachCardListeners(card);
+    });
+  }
+
+  if (overlay) {
+    overlay.addEventListener("click", releaseCard);
+  }
+
+  window.addEventListener("keyup", (event) => {
+    if (event.key === "Escape" && activeCard) {
+      releaseCard();
+    }
+  });
+
+  window.addEventListener("scroll", () => {
+    if (activeCard) {
+      releaseCard();
+    }
+  });
+
+  initVaultCards();
+
+  window.toggleCard = focusCard;
+  window.closeActiveCard = releaseCard;
+})();

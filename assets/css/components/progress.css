@@ -11,10 +11,6 @@
   opacity: 0;
   transition: opacity 0.8s ease;
   mix-blend-mode: screen;
-  z-index: 999;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.8s ease;
 }
 .progress-bar-container.visible {
   opacity: 1;
@@ -44,18 +40,6 @@
   will-change: height;
   animation: progressGlow 3s ease-in-out infinite;
   mix-blend-mode: screen;
-    rgba(255, 107, 53, 0.9) 15%,
-    rgba(212, 175, 55, 0.95) 50%,
-    rgba(74, 155, 142, 0.9) 85%,
-    rgba(74, 155, 142, 0) 100%
-  );
-  box-shadow:
-    0 0 25px rgba(212, 175, 55, 0.9),
-    0 0 40px rgba(255, 107, 53, 0.5);
-  transition: height 0.1s linear;
-  filter: blur(0.8px);
-  will-change: height;
-  animation: progressGlow 3s ease-in-out infinite;
 }
 @keyframes progressGlow {
   0%,
@@ -128,12 +112,6 @@
   }
 }
 @keyframes scrollSectionPulse {
-.progress-bar.section-pulse {
-  animation:
-    sectionPulse 0.8s ease-out,
-    progressGlow 3s ease-in-out infinite;
-}
-@keyframes sectionPulse {
   0% {
     box-shadow:
       0 0 25px rgba(212, 175, 55, 0.9),
