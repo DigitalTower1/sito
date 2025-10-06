@@ -79,21 +79,21 @@
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
 
-    osc.type = "triangle";
-    osc.frequency.setValueAtTime(260, now);
-    osc.frequency.linearRampToValueAtTime(380, now + 0.08);
-    osc.frequency.linearRampToValueAtTime(220, now + 0.32);
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(220, now);
+    osc.frequency.linearRampToValueAtTime(320, now + 0.08);
+    osc.frequency.linearRampToValueAtTime(180, now + 0.28);
 
     gain.gain.setValueAtTime(0.0001, now);
-    gain.gain.exponentialRampToValueAtTime(0.1, now + 0.05);
-    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.35);
+    gain.gain.exponentialRampToValueAtTime(0.06, now + 0.05);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.3);
 
     const noise = ctx.createBufferSource();
-    noise.buffer = createNoiseBuffer(ctx, 0.22);
+    noise.buffer = createNoiseBuffer(ctx, 0.18);
     const noiseGain = ctx.createGain();
     noiseGain.gain.setValueAtTime(0.0001, now);
-    noiseGain.gain.linearRampToValueAtTime(0.05, now + 0.04);
-    noiseGain.gain.linearRampToValueAtTime(0.0001, now + 0.25);
+    noiseGain.gain.linearRampToValueAtTime(0.03, now + 0.04);
+    noiseGain.gain.linearRampToValueAtTime(0.0001, now + 0.2);
 
     osc.connect(gain);
     noise.connect(noiseGain);
@@ -101,9 +101,9 @@
     noiseGain.connect(ctx.destination);
 
     osc.start(now);
-    osc.stop(now + 0.45);
+    osc.stop(now + 0.36);
     noise.start(now);
-    noise.stop(now + 0.26);
+    noise.stop(now + 0.21);
   }
 
   function playHover() {
@@ -112,7 +112,7 @@
       frequencyStart: 520,
       frequencyEnd: 680,
       duration: 0.25,
-      gainPeak: 0.05,
+      gainPeak: 0.035,
       gainEnd: 0.0001,
     });
   }
@@ -134,28 +134,6 @@
       frequencyEnd: open ? 520 : 240,
       duration: 0.28,
       gainPeak: 0.06,
-    });
-  }
-
-  function playSectionChime() {
-    const ctx = getContext();
-    if (!ctx) {
-      return;
-    }
-    playTone({
-      type: "sine",
-      frequencyStart: 480,
-      frequencyEnd: 560,
-      duration: 0.24,
-      gainPeak: 0.05,
-    });
-    playTone({
-      type: "triangle",
-      frequencyStart: 660,
-      frequencyEnd: 720,
-      duration: 0.32,
-      gainPeak: 0.035,
-      startTime: 0.08,
     });
   }
 
@@ -201,9 +179,6 @@
         break;
       case "menu-close":
         playMenu(false);
-        break;
-      case "section-change":
-        playSectionChime();
         break;
       case "indicator":
         playIndicatorPulse();

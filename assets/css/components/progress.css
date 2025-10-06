@@ -2,14 +2,13 @@
 .progress-bar-container {
   position: fixed;
   top: 0;
-  right: clamp(24px, 4vw, 72px);
-  width: 5px;
+  right: var(--progress-offset);
+  width: 6px;
   height: 100vh;
   z-index: 60;
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.8s ease;
-  mix-blend-mode: screen;
 }
 .progress-bar-container.visible {
   opacity: 1;
@@ -22,37 +21,36 @@
   height: 0;
   background: linear-gradient(
     180deg,
-    rgba(74, 155, 142, 0) 0%,
-    rgba(74, 155, 142, 0.35) 14%,
-    rgba(212, 175, 55, 0.55) 38%,
-    rgba(255, 107, 53, 0.45) 72%,
-    rgba(255, 107, 53, 0.12) 100%
+    rgba(74, 155, 142, 0.05) 0%,
+    rgba(74, 155, 142, 0.25) 18%,
+    rgba(212, 175, 55, 0.4) 44%,
+    rgba(255, 166, 81, 0.32) 72%,
+    rgba(255, 166, 81, 0.08) 100%
   );
   box-shadow:
-    0 0 18px rgba(212, 175, 55, 0.55),
-    0 0 32px rgba(255, 107, 53, 0.25);
+    0 0 12px rgba(212, 175, 55, 0.32),
+    0 0 24px rgba(255, 140, 0, 0.22);
   transition:
     height 0.12s linear,
-    filter 0.3s ease,
-    box-shadow 0.3s ease,
-    opacity 0.3s ease;
-  filter: blur(0.6px);
+    filter 0.35s ease,
+    box-shadow 0.35s ease,
+    opacity 0.35s ease;
+  filter: blur(0.45px);
   will-change: height;
-  animation: progressGlow 3s ease-in-out infinite;
-  mix-blend-mode: screen;
-  opacity: calc(0.55 + var(--progress-ratio, 0) * 0.3);
+  animation: progressGlow 3.6s ease-in-out infinite;
+  opacity: calc(0.4 + var(--progress-ratio, 0) * 0.28);
 }
 @keyframes progressGlow {
   0%,
   100% {
     box-shadow:
-      0 0 18px rgba(212, 175, 55, 0.7),
-      0 0 30px rgba(255, 107, 53, 0.35);
+      0 0 14px rgba(212, 175, 55, 0.5),
+      0 0 26px rgba(255, 140, 0, 0.28);
   }
   50% {
     box-shadow:
-      0 0 26px rgba(255, 215, 0, 0.85),
-      0 0 44px rgba(255, 140, 0, 0.55);
+      0 0 22px rgba(255, 215, 0, 0.65),
+      0 0 36px rgba(255, 166, 81, 0.4);
   }
 }
 .progress-bar.scroll-glow {
@@ -63,8 +61,8 @@
 .progress-bar.scroll-contact {
   filter: blur(0.4px);
   box-shadow:
-    0 0 30px rgba(255, 255, 255, 0.7),
-    0 0 70px rgba(255, 184, 0, 0.55);
+    0 0 22px rgba(255, 255, 255, 0.55),
+    0 0 45px rgba(255, 184, 0, 0.38);
 }
 .progress-bar::before {
   content: "";
@@ -72,13 +70,13 @@
   bottom: -8px;
   left: 50%;
   transform: translateX(-50%);
-  width: 14px;
-  height: 14px;
-  background: radial-gradient(circle, rgba(212, 175, 55, 0.8), transparent 70%);
+  width: 12px;
+  height: 12px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.7), transparent 70%);
   border-radius: 50%;
   box-shadow:
-    0 0 16px rgba(212, 175, 55, 0.8),
-    0 0 22px rgba(255, 107, 53, 0.4);
+    0 0 12px rgba(212, 175, 55, 0.65),
+    0 0 18px rgba(255, 140, 0, 0.35);
   animation: dotPulse 2s ease-in-out infinite;
 }
 .progress-bar.scroll-glow::before {
@@ -146,8 +144,8 @@
 .scroll-indicator {
   position: absolute;
   bottom: 2rem;
-  right: clamp(20px, 4vw, 64px);
-  transform: translateX(0);
+  right: calc(var(--progress-offset) - 3px);
+  transform: translateX(50%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -156,6 +154,7 @@
   transition: opacity 0.5s;
   z-index: 30;
   cursor: pointer;
+  pointer-events: auto;
 }
 section.visible .scroll-indicator {
   opacity: 0.8;

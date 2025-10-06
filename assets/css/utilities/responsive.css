@@ -1,4 +1,7 @@
 @media (max-width: 1024px) {
+  :root {
+    --progress-offset: clamp(22px, 6vw, 52px);
+  }
   .nav-menu {
     display: none;
   }
@@ -23,14 +26,11 @@
   .cursor-follower {
     display: none;
   }
-  .progress-bar-container {
-    right: clamp(18px, 5vw, 40px);
-  }
-  .scroll-indicator {
-    right: clamp(18px, 5vw, 40px);
-  }
 }
 @media (max-width: 768px) {
+  :root {
+    --progress-offset: clamp(18px, 7vw, 40px);
+  }
   nav {
     padding: 1rem 5%;
   }
@@ -56,12 +56,6 @@
   .services-grid {
     grid-template-columns: 1fr;
   }
-  .progress-bar-container {
-    right: clamp(12px, 4vw, 28px);
-  }
-  .scroll-indicator {
-    right: clamp(12px, 4vw, 28px);
-  }
   .sub-footer {
     grid-template-columns: 1fr;
   }
@@ -74,6 +68,9 @@
   }
 }
 @media (max-width: 480px) {
+  :root {
+    --progress-offset: clamp(14px, 8vw, 26px);
+  }
   .section-content {
     padding: 2rem 1rem;
   }
@@ -83,12 +80,6 @@
   .team-card {
     min-width: 240px;
     max-width: 240px;
-  }
-  .progress-bar-container {
-    right: 14px;
-  }
-  .scroll-indicator {
-    right: 14px;
   }
   .mobile-menu {
     max-width: 100%;

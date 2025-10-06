@@ -1,36 +1,55 @@
 (() => {
   const overlay = document.getElementById("cardOverlay");
-  const vaultCards = Array.from(
-    document.querySelectorAll(
-      ".vault-card, .service-card, .team-card, .testimonial-card, .blog-card",
-    ),
-  );
-
+  const vaultCards = Array.from(document.querySelectorAll(".vault-card"));
   const audio = window.uiSound || null;
   let activeCard = null;
+  let unlockTimeout = null;
 
-  function setGroupState(targetCard, muted) {
-    const group = targetCard.dataset.vaultGroup || "global";
+  function dimGroup(target, dimmed) {
+    const group = target.dataset.vaultGroup || "global";
     vaultCards.forEach((card) => {
-      if (card === targetCard) {
+      if (card === target) {
         return;
       }
-      const shouldMute = muted && card.dataset.vaultGroup === group;
-      card.classList.toggle("is-muted", shouldMute);
+      if ((card.dataset.vaultGroup || "global") === group) {
+        card.classList.toggle("is-muted", dimmed);
+      }
     });
   }
 
-  function releaseCard() {
+  function unlockCard(card) {
+    card.classList.add("is-unlocked");
+    if (unlockTimeout) {
+      window.clearTimeout(unlockTimeout);
+    }
+    unlockTimeout = window.setTimeout(() => {
+      unlockTimeout = null;
+    }, 450);
+  }
+
+  function lockCard(card) {
+    if (unlockTimeout) {
+      window.clearTimeout(unlockTimeout);
+      unlockTimeout = null;
+    }
+    window.setTimeout(() => {
+      card.classList.remove("is-unlocked");
+    }, 300);
+  }
+
+  function closeActiveCard() {
+    if (!activeCard) {
+      return;
+    }
+    activeCard.classList.remove("is-active");
+    lockCard(activeCard);
+    dimGroup(activeCard, false);
     activeCard = null;
-    vaultCards.forEach((card) => {
-      card.classList.remove("flipped", "vault-card-active", "is-muted");
-    });
     if (overlay) {
       overlay.classList.remove("active");
     }
     document.body.classList.remove("card-open");
     document.documentElement.classList.remove("card-open");
-    document.body.style.overflow = "";
     if (audio) {
       audio.play("card-close");
     }
@@ -38,80 +57,73 @@
 
   function focusCard(card) {
     if (activeCard === card) {
-      releaseCard();
+      closeActiveCard();
       return;
     }
-
-    vaultCards.forEach((item) => {
-      item.classList.remove("flipped", "vault-card-active");
-    });
-
-    card.classList.add("flipped", "vault-card-active");
-    setGroupState(card, true);
-
+    if (activeCard) {
+      closeActiveCard();
+    }
+    unlockCard(card);
+    card.classList.add("is-active");
+    dimGroup(card, true);
     if (overlay) {
       overlay.classList.add("active");
     }
     document.body.classList.add("card-open");
     document.documentElement.classList.add("card-open");
-    document.body.style.overflow = "hidden";
-
     activeCard = card;
+    const closeButton = card.querySelector(".vault-close");
+    if (closeButton) {
+      try {
+        closeButton.focus({ preventScroll: true });
+      } catch (error) {
+        closeButton.focus();
+      }
+    }
     if (audio) {
       audio.play("card-flip");
     }
   }
 
-  function attachCardListeners(card) {
+  function onCardClick(card, event) {
+    const closeButton = event.target.closest(".vault-close");
+    if (closeButton) {
+      event.stopPropagation();
+      closeActiveCard();
+      return;
+    }
+    const link = event.target.closest("a");
+    if (link) {
+      return;
+    }
+    focusCard(card);
+  }
+
+  function bindCard(card) {
     if (!card.dataset.vaultGroup) {
       card.dataset.vaultGroup = "global";
     }
-
     if (!card.hasAttribute("tabindex")) {
       card.setAttribute("tabindex", "0");
     }
 
     card.addEventListener("click", (event) => {
-      if (card.dataset.touchActivated === "true") {
-        card.dataset.touchActivated = "false";
-        return;
-      }
-      const interactiveChildren = card.querySelectorAll("a, button");
-      for (const child of interactiveChildren) {
-        if (child.contains(event.target)) {
-          return;
-        }
-      }
-      focusCard(card);
+      onCardClick(card, event);
     });
 
     card.addEventListener(
       "pointerdown",
       (event) => {
         if (event.pointerType === "touch") {
-          const interactiveChildren = card.querySelectorAll("a, button");
-          for (const child of interactiveChildren) {
-            if (child.contains(event.target)) {
-              return;
-            }
-          }
-          card.dataset.touchActivated = "true";
-          focusCard(card);
+          onCardClick(card, event);
         }
       },
       { passive: true },
     );
 
-    card.addEventListener("keydown", (event) => {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        focusCard(card);
-      }
-    });
-
     card.addEventListener("mouseenter", () => {
       card.classList.add("is-hovered");
-      setGroupState(card, true);
+      dimGroup(card, true);
       if (audio) {
         audio.play("card-hover");
       }
@@ -119,41 +131,41 @@
 
     card.addEventListener("mouseleave", () => {
       card.classList.remove("is-hovered");
-      if (!card.classList.contains("flipped")) {
-        setGroupState(card, false);
+      if (!card.classList.contains("is-active")) {
+        dimGroup(card, false);
+      }
+    });
+
+    card.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        focusCard(card);
       }
     });
   }
 
-  function initVaultCards() {
-    if (!vaultCards.length) {
-      return;
-    }
-
-    vaultCards.forEach((card) => {
-      card.classList.add("vault-card");
-      attachCardListeners(card);
-    });
-  }
+  vaultCards.forEach(bindCard);
 
   if (overlay) {
-    overlay.addEventListener("click", releaseCard);
+    overlay.addEventListener("click", closeActiveCard);
   }
 
-  window.addEventListener("keyup", (event) => {
-    if (event.key === "Escape" && activeCard) {
-      releaseCard();
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeActiveCard();
     }
   });
 
-  window.addEventListener("scroll", () => {
-    if (activeCard) {
-      releaseCard();
-    }
-  });
+  window.addEventListener(
+    "resize",
+    () => {
+      if (activeCard) {
+        // ensure active card remains centered on resize
+        activeCard.classList.add("is-active");
+      }
+    },
+    { passive: true },
+  );
 
-  initVaultCards();
-
-  window.toggleCard = focusCard;
-  window.closeActiveCard = releaseCard;
+  window.closeActiveCard = closeActiveCard;
 })();

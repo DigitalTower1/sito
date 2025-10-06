@@ -48,7 +48,42 @@
     const rawProgress = (scrollY - heroStart) / range;
     const scrollPercent = Math.max(0, Math.min(1, rawProgress));
     const easedPercent = Math.pow(scrollPercent, 0.92);
-    const progressHeight = Math.min(maxHeight, easedPercent * maxHeight);
+    let progressHeight = Math.min(maxHeight, easedPercent * maxHeight);
+
+    if (scrollIndicators.length) {
+      let highestVisible = 0;
+      let upperLimit = maxHeight;
+      let cappedFuture = false;
+      scrollIndicators.forEach((indicator) => {
+        const rect = indicator.getBoundingClientRect();
+        const mid = rect.top + rect.height / 2;
+        const clampedMid = Math.max(0, Math.min(maxHeight, mid));
+
+        if (rect.bottom <= 0) {
+          highestVisible = Math.max(highestVisible, clampedMid);
+          return;
+        }
+
+        if (rect.top <= window.innerHeight * 0.98) {
+          highestVisible = Math.max(highestVisible, clampedMid);
+        } else if (!cappedFuture) {
+          upperLimit = Math.min(upperLimit, Math.max(clampedMid, 0));
+          cappedFuture = true;
+        }
+      });
+
+      if (upperLimit < highestVisible) {
+        upperLimit = highestVisible;
+      }
+
+      if (highestVisible > 0) {
+        progressHeight = Math.max(progressHeight, highestVisible);
+      }
+
+      progressHeight = Math.min(progressHeight, upperLimit);
+    }
+
+    progressHeight = Math.max(0, Math.min(maxHeight, progressHeight));
 
     progressBar.style.height = `${progressHeight}px`;
     progressBar.style.setProperty("--progress-ratio", easedPercent.toFixed(3));
@@ -69,9 +104,6 @@
       window.setTimeout(() => {
         progressBar.classList.remove("scroll-glow");
       }, 800);
-      if (audio) {
-        audio.play("section-change");
-      }
     }
 
     if (progressHeight <= 0) {
