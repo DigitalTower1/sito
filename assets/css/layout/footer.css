@@ -20,6 +20,25 @@ footer {
   letter-spacing: 0.2em;
   font-weight: 800;
 }
+
+.footer-logo {
+  display: inline-flex;
+  text-decoration: none;
+  background: linear-gradient(135deg, #ffd700, #ff6b35, #d4af37);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.footer-logo:hover {
+  transform: translateY(-1px);
+  filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.45));
+}
+
+.footer-logo:focus-visible {
+  outline: 2px solid rgba(255, 215, 0, 0.6);
+  outline-offset: 4px;
+}
 .footer-bio {
   color: var(--white-dim);
   line-height: 1.7;

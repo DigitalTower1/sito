@@ -25,6 +25,7 @@ nav.scrolled {
     0 0 15px rgba(255, 107, 53, 0.1);
 }
 .nav-logo {
+  display: inline-flex;
   font-size: 1.5rem;
   font-weight: 900;
   letter-spacing: 0.1em;
@@ -35,6 +36,7 @@ nav.scrolled {
   cursor: pointer;
   transition: all 0.3s;
   filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3));
+  text-decoration: none;
 }
 .nav-logo:hover {
   transform: scale(1.05);

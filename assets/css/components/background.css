@@ -137,6 +137,22 @@
   }
 }
 
+@media (max-width: 768px) {
+  .cloud-layer {
+    opacity: calc(0.16 + var(--cloud-progress) * 0.18);
+  }
+
+  .cloud-layer .cloud {
+    animation: none;
+    filter: none;
+  }
+
+  .cloud-layer .cloud::before,
+  .cloud-layer .cloud::after {
+    opacity: 0.4;
+  }
+}
+
 .vignette {
   position: fixed;
   top: 0;

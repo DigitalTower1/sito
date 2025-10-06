@@ -35,6 +35,7 @@
       defer
     ></script>
     <title>Digital Tower - Scaliamo Insieme la Torre del Successo</title>
+    <link rel="home" href="digital-tower-optimized(1).html" />
     <link rel="stylesheet" href="assets/css/base/variables.css" />
     <link rel="stylesheet" href="assets/css/base/base.css" />
     <link rel="stylesheet" href="assets/css/components/loader.css" />
@@ -51,6 +52,7 @@
     <link rel="stylesheet" href="assets/css/layout/footer.css" />
     <link rel="stylesheet" href="assets/css/components/tower-effects.css" />
     <link rel="stylesheet" href="assets/css/utilities/responsive.css" />
+    <link rel="stylesheet" href="assets/css/layout/pages.css" />
   </head>
   <body>
     <div class="loader" id="loader">
@@ -151,9 +153,9 @@
     <div class="light-glow" id="lightGlow2" style="top: 60%; right: 10%"></div>
 
     <nav id="mainNav">
-      <div class="nav-logo" onclick="scrollToSection('hero')">
+      <a class="nav-logo" href="digital-tower-optimized(1).html#hero">
         DIGITAL TOWER
-      </div>
+      </a>
       <ul class="nav-menu">
         <li class="nav-dropdown">
           <a href="javascript:void(0)">Chi Siamo</a>
@@ -549,7 +551,7 @@
                 <div class="vault-icon-display" aria-hidden="true">🎨</div>
                 <h3>Web Design Premium</h3>
                 <p>Dalla progettazione UX/UI strategica alla realizzazione tecnica impeccabile, creiamo piattaforme responsive e ottimizzate SEO che trasformano i visitatori in clienti fedeli.</p>
-                <a href="#servizi-web-design" class="vault-link">Scopri di più</a>
+                <a href="pages/servizi/web-design.html" class="vault-link">Scopri di più</a>
               </div>
             </div>
           </article>
@@ -564,7 +566,7 @@
                 <div class="vault-icon-display" aria-hidden="true">✍️</div>
                 <h3>Content Marketing</h3>
                 <p>Narrazioni autentiche per social, blog e campagne che costruiscono autorità, engagement e legami emotivi duraturi.</p>
-                <a href="#servizi-contenuti" class="vault-link">Scopri di più</a>
+                <a href="pages/servizi/content-strategy.html" class="vault-link">Scopri di più</a>
               </div>
             </div>
           </article>
@@ -579,7 +581,7 @@
                 <div class="vault-icon-display" aria-hidden="true">⚡</div>
                 <h3>Brand Identity</h3>
                 <p>Logo, tono di voce e linee guida complete per un'immagine memorabile, distintiva e perfettamente allineata ai tuoi valori.</p>
-                <a href="#servizi-branding" class="vault-link">Scopri di più</a>
+                <a href="pages/servizi/branding.html" class="vault-link">Scopri di più</a>
               </div>
             </div>
           </article>
@@ -594,7 +596,7 @@
                 <div class="vault-icon-display" aria-hidden="true">🚀</div>
                 <h3>Performance Advertising</h3>
                 <p>Campagne data-driven su Google, Meta e LinkedIn ottimizzate al centesimo per generare lead qualificati e conversioni costanti.</p>
-                <a href="#servizi-advertising" class="vault-link">Scopri di più</a>
+                <a href="pages/servizi/advertising.html" class="vault-link">Scopri di più</a>
               </div>
             </div>
           </article>
@@ -609,7 +611,7 @@
                 <div class="vault-icon-display" aria-hidden="true">📊</div>
                 <h3>SEO Strategico</h3>
                 <p>Audit tecnici, ottimizzazione on e off-page, content mirato e link building di qualità per scalare la SERP con risultati misurabili.</p>
-                <a href="#servizi-seo" class="vault-link">Scopri di più</a>
+                <a href="pages/servizi/seo-strategico.html" class="vault-link">Scopri di più</a>
               </div>
             </div>
           </article>
@@ -624,7 +626,7 @@
                 <div class="vault-icon-display" aria-hidden="true">📱</div>
                 <h3>Social Media Management</h3>
                 <p>Strategie editoriali, community management e campagne ibride organiche e paid che fanno crescere community fedeli e attive.</p>
-                <a href="#servizi-social" class="vault-link">Scopri di più</a>
+                <a href="pages/servizi/social-media.html" class="vault-link">Scopri di più</a>
               </div>
             </div>
           </article>
@@ -664,15 +666,37 @@
                   <p class="vault-prompt">Clicca per scoprire</p>
                 </div>
                 <div class="vault-face vault-content">
-                  <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&auto=format&fit=crop&q=80" alt="Ritratto di Roberto Esposito" class="team-photo-full" />
+                  <div class="team-media">
+                    <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&auto=format&fit=crop&q=80" alt="Ritratto di Roberto Esposito" class="team-photo-full" />
+                  </div>
                   <div class="team-details">
                     <h3>Roberto Esposito</h3>
                     <p class="team-role">CEO & Founder</p>
                     <p>Ha guidato oltre 180 progetti digitali per PMI e brand internazionali. Con empatia e lucidità strategica costruisce percorsi di crescita sostenibile.</p>
                     <div class="team-social">
-                      <a href="https://www.digitaltower.it/roberto" target="_blank" rel="noopener">Sito web</a>
-                      <a href="https://www.instagram.com/roberto.esposito" target="_blank" rel="noopener">Instagram</a>
-                      <a href="https://www.linkedin.com/in/roberto-esposito" target="_blank" rel="noopener">LinkedIn</a>
+                      <a class="team-social-link" href="https://www.digitaltower.it/roberto" target="_blank" rel="noopener" aria-label="Sito web di Roberto Esposito">
+                        <svg class="team-social-icon" viewBox="0 0 24 24" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round">
+                          <circle cx="12" cy="12" r="9"></circle>
+                          <path d="M3 12h18"></path>
+                          <path d="M12 3a18 18 0 0 1 0 18"></path>
+                          <path d="M12 3a18 18 0 0 0 0 18"></path>
+                        </svg>
+                        <span class="visually-hidden">Sito web</span>
+                      </a>
+                      <a class="team-social-link" href="https://www.instagram.com/roberto.esposito" target="_blank" rel="noopener" aria-label="Instagram di Roberto Esposito">
+                        <svg class="team-social-icon" viewBox="0 0 24 24" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round">
+                          <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+                          <circle cx="12" cy="12" r="3.5"></circle>
+                          <circle cx="17" cy="7" r="1"></circle>
+                        </svg>
+                        <span class="visually-hidden">Instagram</span>
+                      </a>
+                      <a class="team-social-link" href="https://www.linkedin.com/in/roberto-esposito" target="_blank" rel="noopener" aria-label="LinkedIn di Roberto Esposito">
+                        <svg class="team-social-icon team-social-icon--filled" viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M4.5 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm-2 6.5h4v11h-4Zm6 0h3.6v1.5h.05c.5-.9 1.7-1.9 3.5-1.9 3.74 0 4.45 2.46 4.45 5.66V21h-4v-4.3c0-1.03-.02-2.36-1.44-2.36-1.45 0-1.67 1.11-1.67 2.28V21h-4Z"></path>
+                        </svg>
+                        <span class="visually-hidden">LinkedIn</span>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -687,15 +711,37 @@
                   <p class="vault-prompt">Clicca per scoprire</p>
                 </div>
                 <div class="vault-face vault-content">
-                  <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&auto=format&fit=crop&q=80" alt="Ritratto di Laura Bianchi" class="team-photo-full" />
+                  <div class="team-media">
+                    <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&auto=format&fit=crop&q=80" alt="Ritratto di Laura Bianchi" class="team-photo-full" />
+                  </div>
                   <div class="team-details">
                     <h3>Laura Bianchi</h3>
                     <p class="team-role">Creative Director</p>
                     <p>Specialista in experience design per fashion e hospitality, unisce arte e conversione per brand italiani di fascia alta.</p>
                     <div class="team-social">
-                      <a href="https://www.digitaltower.it/laura" target="_blank" rel="noopener">Sito web</a>
-                      <a href="https://www.instagram.com/laura.bianchi" target="_blank" rel="noopener">Instagram</a>
-                      <a href="https://www.linkedin.com/in/laura-bianchi" target="_blank" rel="noopener">LinkedIn</a>
+                      <a class="team-social-link" href="https://www.digitaltower.it/laura" target="_blank" rel="noopener" aria-label="Sito web di Laura Bianchi">
+                        <svg class="team-social-icon" viewBox="0 0 24 24" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round">
+                          <circle cx="12" cy="12" r="9"></circle>
+                          <path d="M3 12h18"></path>
+                          <path d="M12 3a18 18 0 0 1 0 18"></path>
+                          <path d="M12 3a18 18 0 0 0 0 18"></path>
+                        </svg>
+                        <span class="visually-hidden">Sito web</span>
+                      </a>
+                      <a class="team-social-link" href="https://www.instagram.com/laura.bianchi" target="_blank" rel="noopener" aria-label="Instagram di Laura Bianchi">
+                        <svg class="team-social-icon" viewBox="0 0 24 24" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round">
+                          <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+                          <circle cx="12" cy="12" r="3.5"></circle>
+                          <circle cx="17" cy="7" r="1"></circle>
+                        </svg>
+                        <span class="visually-hidden">Instagram</span>
+                      </a>
+                      <a class="team-social-link" href="https://www.linkedin.com/in/laura-bianchi" target="_blank" rel="noopener" aria-label="LinkedIn di Laura Bianchi">
+                        <svg class="team-social-icon team-social-icon--filled" viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M4.5 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm-2 6.5h4v11h-4Zm6 0h3.6v1.5h.05c.5-.9 1.7-1.9 3.5-1.9 3.74 0 4.45 2.46 4.45 5.66V21h-4v-4.3c0-1.03-.02-2.36-1.44-2.36-1.45 0-1.67 1.11-1.67 2.28V21h-4Z"></path>
+                        </svg>
+                        <span class="visually-hidden">LinkedIn</span>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -710,15 +756,37 @@
                   <p class="vault-prompt">Clicca per scoprire</p>
                 </div>
                 <div class="vault-face vault-content">
-                  <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&auto=format&fit=crop&q=80" alt="Ritratto di Marco Verdi" class="team-photo-full" />
+                  <div class="team-media">
+                    <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&auto=format&fit=crop&q=80" alt="Ritratto di Marco Verdi" class="team-photo-full" />
+                  </div>
                   <div class="team-details">
                     <h3>Marco Verdi</h3>
                     <p class="team-role">Tech Lead</p>
                     <p>Coordina team di sviluppo full stack, integra stack headless e soluzioni cloud per garantire scalabilità e tempi di caricamento record.</p>
                     <div class="team-social">
-                      <a href="https://www.digitaltower.it/marco" target="_blank" rel="noopener">Sito web</a>
-                      <a href="https://www.instagram.com/marco.verdi" target="_blank" rel="noopener">Instagram</a>
-                      <a href="https://www.linkedin.com/in/marco-verdi" target="_blank" rel="noopener">LinkedIn</a>
+                      <a class="team-social-link" href="https://www.digitaltower.it/marco" target="_blank" rel="noopener" aria-label="Sito web di Marco Verdi">
+                        <svg class="team-social-icon" viewBox="0 0 24 24" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round">
+                          <circle cx="12" cy="12" r="9"></circle>
+                          <path d="M3 12h18"></path>
+                          <path d="M12 3a18 18 0 0 1 0 18"></path>
+                          <path d="M12 3a18 18 0 0 0 0 18"></path>
+                        </svg>
+                        <span class="visually-hidden">Sito web</span>
+                      </a>
+                      <a class="team-social-link" href="https://www.instagram.com/marco.verdi" target="_blank" rel="noopener" aria-label="Instagram di Marco Verdi">
+                        <svg class="team-social-icon" viewBox="0 0 24 24" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round">
+                          <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+                          <circle cx="12" cy="12" r="3.5"></circle>
+                          <circle cx="17" cy="7" r="1"></circle>
+                        </svg>
+                        <span class="visually-hidden">Instagram</span>
+                      </a>
+                      <a class="team-social-link" href="https://www.linkedin.com/in/marco-verdi" target="_blank" rel="noopener" aria-label="LinkedIn di Marco Verdi">
+                        <svg class="team-social-icon team-social-icon--filled" viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M4.5 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm-2 6.5h4v11h-4Zm6 0h3.6v1.5h.05c.5-.9 1.7-1.9 3.5-1.9 3.74 0 4.45 2.46 4.45 5.66V21h-4v-4.3c0-1.03-.02-2.36-1.44-2.36-1.45 0-1.67 1.11-1.67 2.28V21h-4Z"></path>
+                        </svg>
+                        <span class="visually-hidden">LinkedIn</span>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -733,15 +801,37 @@
                   <p class="vault-prompt">Clicca per scoprire</p>
                 </div>
                 <div class="vault-face vault-content">
-                  <img src="https://images.unsplash.com/photo-1524503033411-c9566986fc8f?w=600&auto=format&fit=crop&q=80" alt="Ritratto di Giulia Contini" class="team-photo-full" />
+                  <div class="team-media">
+                    <img src="https://images.unsplash.com/photo-1524503033411-c9566986fc8f?w=600&auto=format&fit=crop&q=80" alt="Ritratto di Giulia Contini" class="team-photo-full" />
+                  </div>
                   <div class="team-details">
                     <h3>Giulia Contini</h3>
                     <p class="team-role">UX Strategist</p>
                     <p>Ha condotto oltre 300 sessioni di user research: trasforma dati comportamentali in journey digitali inclusivi e ad altissimo tasso di conversione.</p>
                     <div class="team-social">
-                      <a href="https://www.digitaltower.it/giulia" target="_blank" rel="noopener">Sito web</a>
-                      <a href="https://www.instagram.com/giulia.contini" target="_blank" rel="noopener">Instagram</a>
-                      <a href="https://www.linkedin.com/in/giulia-contini" target="_blank" rel="noopener">LinkedIn</a>
+                      <a class="team-social-link" href="https://www.digitaltower.it/giulia" target="_blank" rel="noopener" aria-label="Sito web di Giulia Contini">
+                        <svg class="team-social-icon" viewBox="0 0 24 24" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round">
+                          <circle cx="12" cy="12" r="9"></circle>
+                          <path d="M3 12h18"></path>
+                          <path d="M12 3a18 18 0 0 1 0 18"></path>
+                          <path d="M12 3a18 18 0 0 0 0 18"></path>
+                        </svg>
+                        <span class="visually-hidden">Sito web</span>
+                      </a>
+                      <a class="team-social-link" href="https://www.instagram.com/giulia.contini" target="_blank" rel="noopener" aria-label="Instagram di Giulia Contini">
+                        <svg class="team-social-icon" viewBox="0 0 24 24" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round">
+                          <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+                          <circle cx="12" cy="12" r="3.5"></circle>
+                          <circle cx="17" cy="7" r="1"></circle>
+                        </svg>
+                        <span class="visually-hidden">Instagram</span>
+                      </a>
+                      <a class="team-social-link" href="https://www.linkedin.com/in/giulia-contini" target="_blank" rel="noopener" aria-label="LinkedIn di Giulia Contini">
+                        <svg class="team-social-icon team-social-icon--filled" viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M4.5 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm-2 6.5h4v11h-4Zm6 0h3.6v1.5h.05c.5-.9 1.7-1.9 3.5-1.9 3.74 0 4.45 2.46 4.45 5.66V21h-4v-4.3c0-1.03-.02-2.36-1.44-2.36-1.45 0-1.67 1.11-1.67 2.28V21h-4Z"></path>
+                        </svg>
+                        <span class="visually-hidden">LinkedIn</span>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -756,15 +846,37 @@
                   <p class="vault-prompt">Clicca per scoprire</p>
                 </div>
                 <div class="vault-face vault-content">
-                  <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&auto=format&fit=crop&q=80" alt="Ritratto di Alessandro Rinaldi" class="team-photo-full" />
+                  <div class="team-media">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&auto=format&fit=crop&q=80" alt="Ritratto di Alessandro Rinaldi" class="team-photo-full" />
+                  </div>
                   <div class="team-details">
                     <h3>Alessandro Rinaldi</h3>
                     <p class="team-role">Head of Data & AI</p>
                     <p>Ex data scientist nel fintech, oggi sviluppa dashboard predittive e automazioni AI che ottimizzano campagne e funnel in tempo reale.</p>
                     <div class="team-social">
-                      <a href="https://www.digitaltower.it/alessandro" target="_blank" rel="noopener">Sito web</a>
-                      <a href="https://www.instagram.com/alessandro.rinaldi" target="_blank" rel="noopener">Instagram</a>
-                      <a href="https://www.linkedin.com/in/alessandro-rinaldi" target="_blank" rel="noopener">LinkedIn</a>
+                      <a class="team-social-link" href="https://www.digitaltower.it/alessandro" target="_blank" rel="noopener" aria-label="Sito web di Alessandro Rinaldi">
+                        <svg class="team-social-icon" viewBox="0 0 24 24" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round">
+                          <circle cx="12" cy="12" r="9"></circle>
+                          <path d="M3 12h18"></path>
+                          <path d="M12 3a18 18 0 0 1 0 18"></path>
+                          <path d="M12 3a18 18 0 0 0 0 18"></path>
+                        </svg>
+                        <span class="visually-hidden">Sito web</span>
+                      </a>
+                      <a class="team-social-link" href="https://www.instagram.com/alessandro.rinaldi" target="_blank" rel="noopener" aria-label="Instagram di Alessandro Rinaldi">
+                        <svg class="team-social-icon" viewBox="0 0 24 24" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round">
+                          <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+                          <circle cx="12" cy="12" r="3.5"></circle>
+                          <circle cx="17" cy="7" r="1"></circle>
+                        </svg>
+                        <span class="visually-hidden">Instagram</span>
+                      </a>
+                      <a class="team-social-link" href="https://www.linkedin.com/in/alessandro-rinaldi" target="_blank" rel="noopener" aria-label="LinkedIn di Alessandro Rinaldi">
+                        <svg class="team-social-icon team-social-icon--filled" viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M4.5 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm-2 6.5h4v11h-4Zm6 0h3.6v1.5h.05c.5-.9 1.7-1.9 3.5-1.9 3.74 0 4.45 2.46 4.45 5.66V21h-4v-4.3c0-1.03-.02-2.36-1.44-2.36-1.45 0-1.67 1.11-1.67 2.28V21h-4Z"></path>
+                        </svg>
+                        <span class="visually-hidden">LinkedIn</span>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -779,15 +891,37 @@
                   <p class="vault-prompt">Clicca per scoprire</p>
                 </div>
                 <div class="vault-face vault-content">
-                  <img src="https://images.unsplash.com/photo-1544723795-4325370ad0da?w=600&auto=format&fit=crop&q=80" alt="Ritratto di Sofia Martelli" class="team-photo-full" />
+                  <div class="team-media">
+                    <img src="https://images.unsplash.com/photo-1544723795-4325370ad0da?w=600&auto=format&fit=crop&q=80" alt="Ritratto di Sofia Martelli" class="team-photo-full" />
+                  </div>
                   <div class="team-details">
                     <h3>Sofia Martelli</h3>
                     <p class="team-role">Digital PR & Partnerships</p>
                     <p>Coordina collaborazioni con media, creator e stakeholder strategici, generando coperture stampa e partnership ad alto impatto.</p>
                     <div class="team-social">
-                      <a href="https://www.digitaltower.it/sofia" target="_blank" rel="noopener">Sito web</a>
-                      <a href="https://www.instagram.com/sofia.martelli" target="_blank" rel="noopener">Instagram</a>
-                      <a href="https://www.linkedin.com/in/sofia-martelli" target="_blank" rel="noopener">LinkedIn</a>
+                      <a class="team-social-link" href="https://www.digitaltower.it/sofia" target="_blank" rel="noopener" aria-label="Sito web di Sofia Martelli">
+                        <svg class="team-social-icon" viewBox="0 0 24 24" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round">
+                          <circle cx="12" cy="12" r="9"></circle>
+                          <path d="M3 12h18"></path>
+                          <path d="M12 3a18 18 0 0 1 0 18"></path>
+                          <path d="M12 3a18 18 0 0 0 0 18"></path>
+                        </svg>
+                        <span class="visually-hidden">Sito web</span>
+                      </a>
+                      <a class="team-social-link" href="https://www.instagram.com/sofia.martelli" target="_blank" rel="noopener" aria-label="Instagram di Sofia Martelli">
+                        <svg class="team-social-icon" viewBox="0 0 24 24" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round">
+                          <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+                          <circle cx="12" cy="12" r="3.5"></circle>
+                          <circle cx="17" cy="7" r="1"></circle>
+                        </svg>
+                        <span class="visually-hidden">Instagram</span>
+                      </a>
+                      <a class="team-social-link" href="https://www.linkedin.com/in/sofia-martelli" target="_blank" rel="noopener" aria-label="LinkedIn di Sofia Martelli">
+                        <svg class="team-social-icon team-social-icon--filled" viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M4.5 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm-2 6.5h4v11h-4Zm6 0h3.6v1.5h.05c.5-.9 1.7-1.9 3.5-1.9 3.74 0 4.45 2.46 4.45 5.66V21h-4v-4.3c0-1.03-.02-2.36-1.44-2.36-1.45 0-1.67 1.11-1.67 2.28V21h-4Z"></path>
+                        </svg>
+                        <span class="visually-hidden">LinkedIn</span>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -804,7 +938,7 @@
           </div>
         </div>
         <div class="team-join">
-          <a href="#carriere" class="cta-button">Unisciti al Team</a>
+          <a href="pages/team/unisciti-al-team.html" class="cta-button">Unisciti al Team</a>
         </div>
       </div>
     </section>
@@ -931,7 +1065,7 @@
               <div class="blog-body">
                 <h3>Brand Storytelling che Converte</h3>
                 <p>Tecniche narrative per dare voce al tuo brand e guidare l'utente verso l'azione.</p>
-                <a href="#blog-storytelling" class="blog-link">Visualizza articolo</a>
+                <a href="pages/blog/brand-storytelling-che-converte.html" class="blog-link">Visualizza articolo</a>
               </div>
             </article>
             <article class="blog-card">
@@ -939,7 +1073,7 @@
               <div class="blog-body">
                 <h3>UX Writing per eCommerce</h3>
                 <p>Microcopy e percorsi persuasivi per ridurre l'abbandono del carrello.</p>
-                <a href="#blog-ux" class="blog-link">Visualizza articolo</a>
+                <a href="pages/blog/ux-writing-per-ecommerce.html" class="blog-link">Visualizza articolo</a>
               </div>
             </article>
             <article class="blog-card">
@@ -947,7 +1081,7 @@
               <div class="blog-body">
                 <h3>SEO Locale per PMI</h3>
                 <p>Strategie pratiche per dominare le ricerche vicino a te e generare visite in store.</p>
-                <a href="#blog-seo" class="blog-link">Visualizza articolo</a>
+                <a href="pages/blog/seo-locale-per-pmi.html" class="blog-link">Visualizza articolo</a>
               </div>
             </article>
             <article class="blog-card">
@@ -955,7 +1089,7 @@
               <div class="blog-body">
                 <h3>Performance Ads 2025</h3>
                 <p>Budget smart e creatività dinamiche per campagne ad alto impatto.</p>
-                <a href="#blog-ads" class="blog-link">Visualizza articolo</a>
+                <a href="pages/blog/performance-ads-2025.html" class="blog-link">Visualizza articolo</a>
               </div>
             </article>
             <article class="blog-card">
@@ -963,7 +1097,7 @@
               <div class="blog-body">
                 <h3>AI nel Marketing</h3>
                 <p>Workflow intelligenti che liberano tempo al tuo team e aumentano il ROI.</p>
-                <a href="#blog-ai" class="blog-link">Visualizza articolo</a>
+                <a href="pages/blog/ai-nel-marketing.html" class="blog-link">Visualizza articolo</a>
               </div>
             </article>
             <article class="blog-card">
@@ -971,7 +1105,7 @@
               <div class="blog-body">
                 <h3>Social Commerce</h3>
                 <p>Come trasformare Instagram e TikTok in canali di vendita diretta.</p>
-                <a href="#blog-social" class="blog-link">Visualizza articolo</a>
+                <a href="pages/blog/social-commerce.html" class="blog-link">Visualizza articolo</a>
               </div>
             </article>
             <article class="blog-card">
@@ -979,7 +1113,7 @@
               <div class="blog-body">
                 <h3>Email Journey Memorabili</h3>
                 <p>Automazioni che nutrono la relazione con il cliente e aumentano il valore medio.</p>
-                <a href="#blog-email" class="blog-link">Visualizza articolo</a>
+                <a href="pages/blog/email-journey-memorabili.html" class="blog-link">Visualizza articolo</a>
               </div>
             </article>
             <article class="blog-card">
@@ -987,7 +1121,7 @@
               <div class="blog-body">
                 <h3>Metriche da Monitorare</h3>
                 <p>I KPI essenziali per valutare ogni progetto digitale con lucidità.</p>
-                <a href="#blog-metriche" class="blog-link">Visualizza articolo</a>
+                <a href="pages/blog/metriche-da-monitorare.html" class="blog-link">Visualizza articolo</a>
               </div>
             </article>
             <article class="blog-card">
@@ -995,7 +1129,7 @@
               <div class="blog-body">
                 <h3>Customer Journey Omnicanale</h3>
                 <p>Integrare online e offline per esperienze coerenti e memorabili.</p>
-                <a href="#blog-journey" class="blog-link">Visualizza articolo</a>
+                <a href="pages/blog/customer-journey-omnicanale.html" class="blog-link">Visualizza articolo</a>
               </div>
             </article>
             <article class="blog-card">
@@ -1003,7 +1137,7 @@
               <div class="blog-body">
                 <h3>Rebranding Senza Stress</h3>
                 <p>Checklist completa per rilanciare l'immagine aziendale senza perdere riconoscibilità.</p>
-                <a href="#blog-rebranding" class="blog-link">Visualizza articolo</a>
+                <a href="pages/blog/rebranding-senza-stress.html" class="blog-link">Visualizza articolo</a>
               </div>
             </article>
           </div>
@@ -1117,7 +1251,7 @@
     <footer>
       <div class="sub-footer">
         <div class="footer-section">
-          <h3>DIGITAL TOWER</h3>
+          <h3><a class="footer-logo" href="digital-tower-optimized(1).html#hero">DIGITAL TOWER</a></h3>
           <p class="footer-bio">
             Agenzia digitale di marketing e comunicazione a Napoli, ma operante
             in tutta Italia, specializzata in web design innovativo, branding

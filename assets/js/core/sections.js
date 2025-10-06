@@ -5,6 +5,8 @@
   const heroSection = document.getElementById("hero");
   const contactSection = document.getElementById("contact");
   const footer = document.querySelector("footer");
+  const homeLinkElement = document.querySelector('link[rel="home"]');
+  const homeHref = homeLinkElement ? homeLinkElement.getAttribute("href") : null;
 
   let ticking = false;
 
@@ -102,6 +104,17 @@
   function scrollToSection(id) {
     const section = document.getElementById(id);
     if (!section) {
+      if (typeof window.closeMobileMenu === "function") {
+        window.closeMobileMenu();
+      }
+      const targetUrl = homeHref || "digital-tower-optimized(1).html";
+      try {
+        const url = new URL(targetUrl, window.location.href);
+        url.hash = id;
+        window.location.href = url.toString();
+      } catch (error) {
+        window.location.href = `${targetUrl}#${id}`;
+      }
       return;
     }
     const navHeight = mainNav ? mainNav.getBoundingClientRect().height : 0;
