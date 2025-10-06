@@ -23,6 +23,12 @@
   .cursor-follower {
     display: none;
   }
+  .progress-bar-container {
+    right: clamp(18px, 5vw, 40px);
+  }
+  .scroll-indicator {
+    right: clamp(18px, 5vw, 40px);
+  }
 }
 @media (max-width: 768px) {
   nav {
@@ -50,6 +56,12 @@
   .services-grid {
     grid-template-columns: 1fr;
   }
+  .progress-bar-container {
+    right: clamp(12px, 4vw, 28px);
+  }
+  .scroll-indicator {
+    right: clamp(12px, 4vw, 28px);
+  }
   .sub-footer {
     grid-template-columns: 1fr;
   }
@@ -71,6 +83,12 @@
   .team-card {
     min-width: 240px;
     max-width: 240px;
+  }
+  .progress-bar-container {
+    right: 14px;
+  }
+  .scroll-indicator {
+    right: 14px;
   }
   .mobile-menu {
     max-width: 100%;

@@ -5,6 +5,9 @@
   const mainNav = document.getElementById("mainNav");
   const progressBar = document.getElementById("progressBar");
   const progressBarContainer = document.getElementById("progressBarContainer");
+  const heroSection = document.getElementById("hero");
+  const contactSection = document.getElementById("contact");
+  const audio = window.uiSound || null;
 
   let lastSection = null;
   let hasScrolled = false;
@@ -33,11 +36,23 @@
       : document.documentElement.scrollHeight;
 
     const maxHeight = Math.max(0, footerTop - navHeight - 80);
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const scrollPercent = docHeight > 0 ? Math.max(0, Math.min(1, scrollY / docHeight)) : 0;
-    const progressHeight = Math.min(maxHeight, scrollPercent * maxHeight);
+    const docHeight = Math.max(
+      1,
+      document.documentElement.scrollHeight - window.innerHeight,
+    );
+    const heroStart = heroSection ? heroSection.offsetTop : 0;
+    const contactEnd = contactSection
+      ? contactSection.offsetTop + contactSection.offsetHeight - window.innerHeight
+      : docHeight;
+    const range = Math.max(1, contactEnd - heroStart);
+    const rawProgress = (scrollY - heroStart) / range;
+    const scrollPercent = Math.max(0, Math.min(1, rawProgress));
+    const easedPercent = Math.pow(scrollPercent, 0.92);
+    const progressHeight = Math.min(maxHeight, easedPercent * maxHeight);
 
     progressBar.style.height = `${progressHeight}px`;
+    progressBar.style.setProperty("--progress-ratio", easedPercent.toFixed(3));
+    window.__towerScrollProgress = easedPercent;
 
     let currentSection = null;
     sections.forEach((section) => {
@@ -54,6 +69,9 @@
       window.setTimeout(() => {
         progressBar.classList.remove("scroll-glow");
       }, 800);
+      if (audio) {
+        audio.play("section-change");
+      }
     }
 
     if (progressHeight <= 0) {
@@ -93,6 +111,9 @@
       window.setTimeout(() => {
         progressBar.classList.remove("scroll-glow");
       }, 750);
+      if (audio) {
+        audio.play("indicator");
+      }
     });
   }
 
@@ -154,6 +175,10 @@
     if (sections[0]) {
       sections[0].classList.add("visible");
     }
+    if (progressBarContainer && !progressBarContainer.classList.contains("visible")) {
+      progressBarContainer.classList.add("visible");
+    }
+    hasScrolled = true;
     updateSections();
   }
 

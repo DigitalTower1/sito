@@ -6,48 +6,8 @@
     ),
   );
 
+  const audio = window.uiSound || null;
   let activeCard = null;
-
-  const hasAudioContext =
-    typeof window.AudioContext !== "undefined" ||
-    typeof window.webkitAudioContext !== "undefined";
-  let audioContext = null;
-
-  function ensureAudioContext() {
-    if (!hasAudioContext) {
-      return null;
-    }
-    if (!audioContext) {
-      const Ctor = window.AudioContext || window.webkitAudioContext;
-      audioContext = new Ctor();
-    }
-    return audioContext;
-  }
-
-  function playFlipSound() {
-    const ctx = ensureAudioContext();
-    if (!ctx) {
-      return;
-    }
-
-    const now = ctx.currentTime;
-    const oscillator = ctx.createOscillator();
-    const gain = ctx.createGain();
-
-    oscillator.type = "triangle";
-    oscillator.frequency.setValueAtTime(340, now);
-    oscillator.frequency.exponentialRampToValueAtTime(180, now + 0.18);
-
-    gain.gain.setValueAtTime(0.0001, now);
-    gain.gain.exponentialRampToValueAtTime(0.12, now + 0.04);
-    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.28);
-
-    oscillator.connect(gain);
-    gain.connect(ctx.destination);
-
-    oscillator.start(now);
-    oscillator.stop(now + 0.3);
-  }
 
   function setGroupState(targetCard, muted) {
     const group = targetCard.dataset.vaultGroup || "global";
@@ -71,6 +31,9 @@
     document.body.classList.remove("card-open");
     document.documentElement.classList.remove("card-open");
     document.body.style.overflow = "";
+    if (audio) {
+      audio.play("card-close");
+    }
   }
 
   function focusCard(card) {
@@ -94,7 +57,9 @@
     document.body.style.overflow = "hidden";
 
     activeCard = card;
-    playFlipSound();
+    if (audio) {
+      audio.play("card-flip");
+    }
   }
 
   function attachCardListeners(card) {
@@ -107,6 +72,10 @@
     }
 
     card.addEventListener("click", (event) => {
+      if (card.dataset.touchActivated === "true") {
+        card.dataset.touchActivated = "false";
+        return;
+      }
       const interactiveChildren = card.querySelectorAll("a, button");
       for (const child of interactiveChildren) {
         if (child.contains(event.target)) {
@@ -115,6 +84,23 @@
       }
       focusCard(card);
     });
+
+    card.addEventListener(
+      "pointerdown",
+      (event) => {
+        if (event.pointerType === "touch") {
+          const interactiveChildren = card.querySelectorAll("a, button");
+          for (const child of interactiveChildren) {
+            if (child.contains(event.target)) {
+              return;
+            }
+          }
+          card.dataset.touchActivated = "true";
+          focusCard(card);
+        }
+      },
+      { passive: true },
+    );
 
     card.addEventListener("keydown", (event) => {
       if (event.key === "Enter" || event.key === " ") {
@@ -126,7 +112,9 @@
     card.addEventListener("mouseenter", () => {
       card.classList.add("is-hovered");
       setGroupState(card, true);
-      playFlipSound();
+      if (audio) {
+        audio.play("card-hover");
+      }
     });
 
     card.addEventListener("mouseleave", () => {

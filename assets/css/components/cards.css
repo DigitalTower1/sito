@@ -4,11 +4,11 @@
   inset: 0;
   background: radial-gradient(
       circle at 50% 30%,
-      rgba(11, 19, 32, 0.2),
-      transparent 55%
+      rgba(11, 19, 32, 0.18),
+      transparent 60%
     ),
-    rgba(5, 10, 18, 0.65);
-  backdrop-filter: blur(3px);
+    rgba(5, 10, 18, 0.5);
+  backdrop-filter: blur(2.4px);
   opacity: 0;
   visibility: hidden;
   transition:
@@ -29,12 +29,17 @@ body.card-open .carbon-fiber,
 body.card-open #particleCanvas,
 body.card-open .light-glow,
 body.card-open .progress-bar-container {
-  filter: brightness(0.6) saturate(0.8);
+  filter: brightness(0.75) saturate(0.92);
   transition: filter 0.4s ease;
 }
 body.card-open .vault-card.flipped,
 body.card-open .vault-card.flipped * {
   filter: none !important;
+}
+body.card-open .section-content,
+body.card-open nav,
+body.card-open footer {
+  will-change: filter;
 }
 /* VAULT CARDS OTTIMIZZATE */
 .vault-card,
@@ -50,14 +55,20 @@ body.card-open .vault-card.flipped * {
     box-shadow 0.4s ease;
   cursor: pointer;
   isolation: isolate;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+  border-radius: 14px;
+  overflow: visible;
+  background-color: rgba(7, 12, 20, 0.58);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
 }
 .cards-dimmed .vault-card:not(.flipped),
 .cards-dimmed .service-card:not(.flipped),
 .cards-dimmed .team-card:not(.flipped),
 .cards-dimmed .testimonial-card:not(.flipped),
 .cards-dimmed .blog-card:not(.flipped) {
-  opacity: 0.4;
-  transform: scale(0.98);
+  opacity: 0.55;
+  transform: scale(0.985);
 }
 .vault-card.flipped,
 .service-card.flipped,
@@ -65,11 +76,11 @@ body.card-open .vault-card.flipped * {
 .testimonial-card.flipped,
 .blog-card.flipped {
   z-index: 999;
-  transform: scale(1.08) !important;
+  transform: scale(1.12) !important;
   opacity: 1 !important;
   box-shadow:
-    0 25px 80px rgba(0, 0, 0, 0.9),
-    0 0 60px rgba(255, 107, 53, 0.6) !important;
+    0 28px 90px rgba(0, 0, 0, 0.78),
+    0 0 55px rgba(255, 107, 53, 0.45) !important;
 }
 .vault-card::before {
   content: "";
@@ -111,9 +122,16 @@ body.card-open .vault-card.flipped * {
 .vault-card.is-hovered::after {
   opacity: 1;
 }
+.vault-card:not(.flipped):hover,
+.vault-card.is-hovered:not(.flipped) {
+  transform: translateY(-8px) scale(1.04);
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.45),
+    0 0 28px rgba(212, 175, 55, 0.18);
+}
 .vault-card.is-muted {
-  opacity: 0.35 !important;
-  filter: blur(0.5px) saturate(0.9);
+  opacity: 0.55 !important;
+  filter: blur(0.35px) saturate(0.95);
   transform: scale(0.97) !important;
 }
 .vault-card-inner,
@@ -126,6 +144,7 @@ body.card-open .vault-card.flipped * {
   height: 100%;
   transform-style: preserve-3d;
   transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: inherit;
 }
 .vault-card.flipped .vault-card-inner,
 .service-card.flipped .service-card-inner,
@@ -154,6 +173,25 @@ body.card-open .vault-card.flipped * {
 .testimonial-back,
 .blog-back {
   transform: rotateY(180deg);
+  overflow-y: auto;
+  padding: 2rem;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(212, 175, 55, 0.4) transparent;
+}
+.vault-back::-webkit-scrollbar,
+.service-back::-webkit-scrollbar,
+.team-back::-webkit-scrollbar,
+.testimonial-back::-webkit-scrollbar,
+.blog-back::-webkit-scrollbar {
+  width: 6px;
+}
+.vault-back::-webkit-scrollbar-thumb,
+.service-back::-webkit-scrollbar-thumb,
+.team-back::-webkit-scrollbar-thumb,
+.testimonial-back::-webkit-scrollbar-thumb,
+.blog-back::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(212, 175, 55, 0.6), rgba(74, 155, 142, 0.6));
+  border-radius: 6px;
 }
 .service-card {
   background: linear-gradient(
@@ -547,22 +585,22 @@ body.card-open .vault-card.flipped * {
   filter: brightness(1.05) contrast(1.1);
 }
 .team-card:nth-child(1) .team-photo {
-  background-image: url("https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop&crop=faces");
+  background-image: url("https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=500&q=80");
 }
 .team-card:nth-child(2) .team-photo {
-  background-image: url("https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=500&fit=crop&crop=faces");
+  background-image: url("https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=500&q=80");
 }
 .team-card:nth-child(3) .team-photo {
-  background-image: url("https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=500&fit=crop&crop=faces");
+  background-image: url("https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=500&q=80");
 }
 .team-card:nth-child(4) .team-photo {
-  background-image: url("https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=500&fit=crop&crop=faces");
+  background-image: url("https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=500&q=80");
 }
 .team-card:nth-child(5) .team-photo {
-  background-image: url("https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=500&fit=crop&crop=faces");
+  background-image: url("https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=500&q=80");
 }
 .team-card:nth-child(6) .team-photo {
-  background-image: url("https://images.unsplash.com/photo-1544723795-3fb6469f5b39?w=400&h=500&fit=crop&crop=faces");
+  background-image: url("https://images.unsplash.com/photo-1521043722997-9285d170f9b0?auto=format&fit=crop&w=500&q=80");
 }
 .team-info {
   padding: 1.5rem;
@@ -692,7 +730,7 @@ body.card-open .vault-card.flipped * {
 }
 .testimonial-back {
   transform: rotateY(180deg);
-  padding: 1.5rem;
+  padding: 2rem;
 }
 .testimonial-card::before {
   content: "";
@@ -736,34 +774,34 @@ body.card-open .vault-card.flipped * {
   z-index: 2;
 }
 .testimonial-card:nth-child(1) .testimonial-image {
-  background-image: url("https://i.pravatar.cc/150?img=12");
+  background-image: url("https://images.unsplash.com/photo-1525182008055-f88b95ff7980?auto=format&fit=crop&w=500&q=80");
 }
 .testimonial-card:nth-child(2) .testimonial-image {
-  background-image: url("https://i.pravatar.cc/150?img=5");
+  background-image: url("https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=500&q=80");
 }
 .testimonial-card:nth-child(3) .testimonial-image {
-  background-image: url("https://i.pravatar.cc/150?img=33");
+  background-image: url("https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=500&q=80");
 }
 .testimonial-card:nth-child(4) .testimonial-image {
-  background-image: url("https://i.pravatar.cc/150?img=9");
+  background-image: url("https://images.unsplash.com/photo-1544723795-432537f52c61?auto=format&fit=crop&w=500&q=80");
 }
 .testimonial-card:nth-child(5) .testimonial-image {
-  background-image: url("https://i.pravatar.cc/150?img=13");
+  background-image: url("https://images.unsplash.com/photo-1520962918287-7448c2878f65?auto=format&fit=crop&w=500&q=80");
 }
 .testimonial-card:nth-child(6) .testimonial-image {
-  background-image: url("https://i.pravatar.cc/150?img=14");
+  background-image: url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=500&q=80");
 }
 .testimonial-card:nth-child(7) .testimonial-image {
-  background-image: url("https://i.pravatar.cc/150?img=20");
+  background-image: url("https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=500&q=80");
 }
 .testimonial-card:nth-child(8) .testimonial-image {
-  background-image: url("https://i.pravatar.cc/150?img=68");
+  background-image: url("https://images.unsplash.com/photo-1521119989659-a83eee488004?auto=format&fit=crop&w=500&q=80");
 }
 .testimonial-card:nth-child(9) .testimonial-image {
-  background-image: url("https://i.pravatar.cc/150?img=27");
+  background-image: url("https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=500&q=80");
 }
 .testimonial-card:nth-child(10) .testimonial-image {
-  background-image: url("https://i.pravatar.cc/150?img=32");
+  background-image: url("https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=500&q=80");
 }
 .testimonial-text {
   font-size: 1rem;
@@ -894,45 +932,45 @@ body.card-open .vault-card.flipped * {
 /* STILI DEDICATI PER OGNI SEZIONE */
 .vault-card-values {
   border: 1px solid rgba(212, 175, 55, 0.28);
-  background: linear-gradient(160deg, rgba(12, 20, 30, 0.96), rgba(18, 34, 48, 0.94));
+  background: linear-gradient(160deg, rgba(14, 22, 34, 0.92), rgba(26, 44, 60, 0.9));
   box-shadow:
-    0 12px 40px rgba(0, 0, 0, 0.55),
+    0 12px 40px rgba(0, 0, 0, 0.48),
     inset 0 0 18px rgba(212, 175, 55, 0.18);
 }
 .vault-card-values .vault-front {
-  background: linear-gradient(165deg, rgba(14, 22, 34, 0.95), rgba(19, 32, 46, 0.92));
+  background: linear-gradient(165deg, rgba(18, 30, 44, 0.9), rgba(27, 46, 60, 0.88));
   border-color: rgba(212, 175, 55, 0.45);
 }
 .vault-card-values .vault-back {
-  background: linear-gradient(165deg, rgba(16, 28, 42, 0.98), rgba(24, 42, 60, 0.94));
+  background: linear-gradient(165deg, rgba(20, 34, 50, 0.92), rgba(32, 52, 68, 0.9));
   border-color: rgba(255, 215, 0, 0.35);
   box-shadow: inset 0 0 18px rgba(212, 175, 55, 0.22);
 }
 .vault-card-servizi {
   border: 1px solid rgba(74, 155, 142, 0.35);
   box-shadow:
-    0 10px 40px rgba(10, 26, 38, 0.6),
+    0 10px 40px rgba(10, 26, 38, 0.52),
     inset 0 0 12px rgba(74, 155, 142, 0.2);
 }
 .vault-card-servizi .service-front {
-  background: linear-gradient(160deg, rgba(8, 16, 26, 0.95), rgba(12, 30, 45, 0.9));
+  background: linear-gradient(160deg, rgba(10, 20, 32, 0.88), rgba(18, 40, 54, 0.86));
 }
 .vault-card-servizi .service-back {
-  background: linear-gradient(160deg, rgba(8, 16, 26, 0.98), rgba(18, 52, 64, 0.95));
+  background: linear-gradient(160deg, rgba(12, 24, 34, 0.9), rgba(24, 56, 70, 0.88));
   border: 1px solid rgba(212, 175, 55, 0.25);
 }
 
 .vault-card-team {
   border: 1px solid rgba(212, 175, 55, 0.32);
   box-shadow:
-    0 12px 45px rgba(0, 0, 0, 0.55),
+    0 12px 45px rgba(0, 0, 0, 0.48),
     inset 0 0 20px rgba(212, 175, 55, 0.1);
 }
 .vault-card-team .team-front {
-  background: linear-gradient(150deg, rgba(10, 14, 20, 0.96), rgba(17, 31, 46, 0.92));
+  background: linear-gradient(150deg, rgba(16, 22, 32, 0.9), rgba(25, 40, 56, 0.88));
 }
 .vault-card-team .team-back {
-  background: linear-gradient(150deg, rgba(12, 20, 32, 0.98), rgba(29, 44, 62, 0.94));
+  background: linear-gradient(150deg, rgba(18, 28, 42, 0.9), rgba(34, 50, 66, 0.88));
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 .vault-card-team .team-photo::after {
@@ -950,32 +988,32 @@ body.card-open .vault-card.flipped * {
 }
 
 .vault-card-testimonials {
-  border: 1px solid rgba(255, 107, 53, 0.25);
-  background: linear-gradient(170deg, rgba(8, 14, 24, 0.95), rgba(15, 26, 39, 0.92));
+  border: 1px solid rgba(255, 107, 53, 0.22);
+  background: linear-gradient(170deg, rgba(10, 18, 28, 0.9), rgba(20, 32, 46, 0.88));
   box-shadow:
-    0 12px 35px rgba(0, 0, 0, 0.55),
-    inset 0 0 18px rgba(255, 107, 53, 0.15);
+    0 12px 35px rgba(0, 0, 0, 0.48),
+    inset 0 0 18px rgba(255, 107, 53, 0.12);
 }
 .vault-card-testimonials .testimonial-front {
   padding: 2rem;
 }
 .vault-card-testimonials .testimonial-back {
-  background: linear-gradient(170deg, rgba(13, 22, 33, 0.98), rgba(24, 36, 50, 0.92));
-  border: 1px solid rgba(74, 155, 142, 0.2);
+  background: linear-gradient(170deg, rgba(18, 28, 40, 0.9), rgba(30, 44, 58, 0.88));
+  border: 1px solid rgba(74, 155, 142, 0.22);
 }
 
 .vault-card-blog {
   border: 1px solid rgba(255, 215, 0, 0.22);
-  background: linear-gradient(160deg, rgba(10, 14, 20, 0.96), rgba(19, 26, 42, 0.94));
+  background: linear-gradient(160deg, rgba(14, 20, 30, 0.9), rgba(24, 34, 48, 0.88));
   box-shadow:
-    0 14px 40px rgba(0, 0, 0, 0.55),
+    0 14px 40px rgba(0, 0, 0, 0.48),
     inset 0 0 16px rgba(255, 215, 0, 0.12);
 }
 .vault-card-blog .blog-front {
-  background: linear-gradient(160deg, rgba(12, 20, 32, 0.9), rgba(20, 34, 50, 0.92));
+  background: linear-gradient(160deg, rgba(16, 26, 38, 0.9), rgba(26, 40, 54, 0.88));
 }
 .vault-card-blog .blog-back {
-  background: linear-gradient(160deg, rgba(13, 22, 33, 0.98), rgba(25, 38, 52, 0.94));
+  background: linear-gradient(160deg, rgba(20, 30, 42, 0.9), rgba(32, 46, 60, 0.88));
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 

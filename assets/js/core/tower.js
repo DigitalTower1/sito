@@ -6,10 +6,10 @@ let windowMeshes = [];
 const towerClock = new (window.THREE ? THREE.Clock : function () {})();
 let towerSections = [];
 const towerParams = {
-  levels: 28,
-  baseWidth: 3.8,
-  topWidth: 0.65,
-  floorHeight: 1.6,
+  levels: 34,
+  baseWidth: 4.6,
+  topWidth: 0.85,
+  floorHeight: 1.7,
 };
 function createCanvasTexture(drawFn) {
   const size = 128,
@@ -23,28 +23,41 @@ function createCanvasTexture(drawFn) {
 }
 function createFacadeTexture() {
   return createCanvasTexture((ctx, size) => {
-    ctx.fillStyle = "#1a2433";
+    ctx.fillStyle = "#141d29";
     ctx.fillRect(0, 0, size, size);
-    ctx.fillStyle = "rgba(255,255,255,0.05)";
-    for (let i = 0; i < size; i += 8) {
-      ctx.fillRect(0, i, size, 2);
+
+    ctx.fillStyle = "rgba(255, 255, 255, 0.05)";
+    for (let y = 0; y < size; y += 6) {
+      ctx.fillRect(0, y, size, 1);
     }
-    ctx.fillStyle = "rgba(255,255,255,0.08)";
-    for (let j = 0; j < size; j += 6) {
-      ctx.fillRect(j, 0, 2, size);
+
+    ctx.fillStyle = "rgba(255, 255, 255, 0.08)";
+    for (let x = 0; x < size; x += 8) {
+      ctx.fillRect(x, 0, 1, size);
+    }
+
+    ctx.strokeStyle = "rgba(255, 215, 0, 0.08)";
+    ctx.lineWidth = 1;
+    for (let d = -size; d < size; d += 16) {
+      ctx.beginPath();
+      ctx.moveTo(0, d + size * 0.2);
+      ctx.lineTo(size, d + size * 0.6);
+      ctx.stroke();
     }
   });
 }
 function createMetalTexture() {
   return createCanvasTexture((ctx, size) => {
     const gradient = ctx.createLinearGradient(0, 0, size, size);
-    gradient.addColorStop(0, "#273548");
-    gradient.addColorStop(0.5, "#1b2838");
-    gradient.addColorStop(1, "#31445c");
+    gradient.addColorStop(0, "#28394a");
+    gradient.addColorStop(0.5, "#1c2a39");
+    gradient.addColorStop(1, "#344b62");
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, size, size);
-    ctx.fillStyle = "rgba(255,255,255,0.15)";
-    ctx.fillRect(0, size * 0.45, size, size * 0.1);
+    ctx.fillStyle = "rgba(255, 255, 255, 0.12)";
+    ctx.fillRect(0, size * 0.45, size, size * 0.08);
+    ctx.fillStyle = "rgba(255, 255, 255, 0.08)";
+    ctx.fillRect(0, size * 0.7, size, size * 0.04);
   });
 }
 function createNeonTexture() {
@@ -95,6 +108,8 @@ function init3DScene() {
   rimLight.position.set(0, 40, -40);
   scene.add(rimLight);
   towerGroup = new THREE.Group();
+  towerGroup.scale.setScalar(1.15);
+  towerGroup.position.y = 1.2;
   scene.add(towerGroup);
   const facadeTexture = createFacadeTexture();
   facadeTexture.repeat.set(4, towerParams.levels * 0.8);
@@ -153,6 +168,10 @@ function init3DScene() {
     }
     addWindowBand(width, depth, level * floorHeight + floorHeight / 2);
   }
+  addVerticalFins(totalHeight, baseWidth, topWidth);
+  addBaseTerraces(baseWidth);
+  addSkyDeck(totalHeight, topWidth);
+
   const crownMaterial = new THREE.MeshStandardMaterial({
     map: neonTexture,
     color: 0x2e3f55,
@@ -289,6 +308,106 @@ function createOrbitingLights(totalHeight) {
   }
   return orbiters;
 }
+function addVerticalFins(totalHeight, baseWidth, topWidth) {
+  const finMaterial = new THREE.MeshStandardMaterial({
+    color: 0x182230,
+    emissive: 0x1f2e42,
+    emissiveIntensity: 0.18,
+    metalness: 0.85,
+    roughness: 0.35,
+    transparent: true,
+    opacity: 0.85,
+  });
+  for (let i = 0; i < 4; i += 1) {
+    const ratio = 0.6 + i * 0.1;
+    const fin = new THREE.Mesh(
+      new THREE.BoxGeometry(baseWidth * ratio * 0.14, totalHeight + 4, 0.12),
+      finMaterial.clone(),
+    );
+    const angle = (Math.PI / 2) * i;
+    const radiusBase = (baseWidth + topWidth) * 0.4;
+    const radius = radiusBase + i * baseWidth * 0.06;
+    fin.position.set(Math.cos(angle) * radius, totalHeight / 2, Math.sin(angle) * radius);
+    fin.rotation.y = angle;
+    towerGroup.add(fin);
+  }
+
+  const latticeMaterial = new THREE.MeshStandardMaterial({
+    color: 0x1f2b3a,
+    emissive: 0x2e4b61,
+    emissiveIntensity: 0.12,
+    metalness: 0.7,
+    roughness: 0.4,
+    transparent: true,
+    opacity: 0.7,
+  });
+  for (let tier = 0; tier < 3; tier += 1) {
+    const lattice = new THREE.Mesh(
+      new THREE.CylinderGeometry(
+        (baseWidth * (0.95 - tier * 0.18) + topWidth * 0.5) / 1.0,
+        (baseWidth * (0.9 - tier * 0.18) + topWidth * 0.45) / 1.0,
+        0.2,
+        48,
+        1,
+        true,
+      ),
+      latticeMaterial.clone(),
+    );
+    lattice.position.y = totalHeight * (0.32 + tier * 0.2);
+    towerGroup.add(lattice);
+  }
+}
+function addBaseTerraces(baseWidth) {
+  const terraceMaterial = new THREE.MeshStandardMaterial({
+    color: 0x0d1622,
+    metalness: 0.55,
+    roughness: 0.8,
+  });
+  for (let i = 0; i < 3; i += 1) {
+    const terrace = new THREE.Mesh(
+      new THREE.CylinderGeometry(
+        baseWidth * (1.8 + i * 0.25),
+        baseWidth * (2.1 + i * 0.25),
+        0.4,
+        48,
+      ),
+      terraceMaterial,
+    );
+    terrace.position.y = -1.2 - i * 0.45;
+    towerGroup.add(terrace);
+  }
+}
+function addSkyDeck(totalHeight, topWidth) {
+  const deckMaterial = new THREE.MeshStandardMaterial({
+    color: 0x23364d,
+    metalness: 0.65,
+    roughness: 0.35,
+    emissive: 0x3f6c7a,
+    emissiveIntensity: 0.25,
+  });
+  const deck = new THREE.Mesh(
+    new THREE.RingGeometry(topWidth * 1.4, topWidth * 2.1, 64, 1),
+    deckMaterial,
+  );
+  deck.rotation.x = Math.PI / 2;
+  deck.position.y = totalHeight + 0.6;
+  towerGroup.add(deck);
+
+  const lightMaterial = new THREE.MeshBasicMaterial({
+    color: 0xffd27f,
+    transparent: true,
+    opacity: 0.4,
+    blending: THREE.AdditiveBlending,
+    side: THREE.DoubleSide,
+  });
+  const lightRing = new THREE.Mesh(
+    new THREE.RingGeometry(topWidth * 1.55, topWidth * 1.75, 64, 1),
+    lightMaterial,
+  );
+  lightRing.rotation.x = Math.PI / 2;
+  lightRing.position.y = deck.position.y + 0.15;
+  towerGroup.add(lightRing);
+}
 function animate3D() {
   requestAnimationFrame(animate3D);
   const elapsed = towerClock.getElapsedTime ? towerClock.getElapsedTime() : 0;
@@ -297,43 +416,58 @@ function animate3D() {
     1,
     document.documentElement.scrollHeight - window.innerHeight,
   );
-  const scrollProgress = Math.min(scrollY / maxScroll, 1);
+  const scrollProgress =
+    typeof window.__towerScrollProgress === "number"
+      ? window.__towerScrollProgress
+      : Math.min(scrollY / maxScroll, 1);
+  const easedProgress = Math.pow(scrollProgress, 0.9);
   const totalHeight = towerParams.levels * towerParams.floorHeight;
-  const sectionCount = towerSections.length || 1;
-  const sectionSize = (totalHeight + 18) / sectionCount;
-  const sectionFloat = scrollProgress * sectionCount;
-  const sectionIndex = Math.min(sectionCount - 1, Math.floor(sectionFloat));
+  const sectionCount = Math.max(1, (towerSections.length || 1) - 1);
+  const sectionFloat = easedProgress * sectionCount;
+  const sectionIndex = Math.min(sectionCount, Math.floor(sectionFloat));
   const sectionLocal = sectionFloat - sectionIndex;
-  const focusHeight = 6 + sectionIndex * sectionSize + sectionLocal * sectionSize;
-  const radius = 20 - scrollProgress * 11;
-  const angle = scrollProgress * Math.PI * 7 + sectionIndex * 0.4;
+  const focusHeight =
+    6 + (sectionIndex + sectionLocal) * (totalHeight / sectionCount);
+  const radius = 26 - easedProgress * 17;
+  const angle = easedProgress * Math.PI * 6.6 + sectionIndex * 0.35;
+  const zoomZ = 44 - easedProgress * 28;
+  const heightOffset = 4 + easedProgress * 12;
   const targetPosition = new THREE.Vector3(
-    Math.sin(angle) * radius * 0.45,
-    focusHeight,
-    (34 - scrollProgress * 20) + Math.sin(elapsed * 0.3) * 0.6,
+    Math.sin(angle) * radius * 0.52,
+    focusHeight + heightOffset,
+    zoomZ + Math.sin(elapsed * 0.24) * 0.7,
   );
   camera.position.lerp(targetPosition, 0.08);
-  camera.lookAt(0, focusHeight - 3.5, 0);
-  const subtleRotate = 0.002 + scrollProgress * 0.004;
-  towerGroup.rotation.y += subtleRotate;
-  towerGroup.position.y = Math.sin(elapsed * 0.4) * 0.1;
+  camera.lookAt(0, focusHeight + heightOffset - 6 + easedProgress * 6, 0);
+  const desiredRotation = easedProgress * Math.PI * 2.4;
+  towerGroup.rotation.y += (desiredRotation - towerGroup.rotation.y) * 0.08;
+  towerGroup.rotation.y += 0.0015 + Math.sin(elapsed * 0.12) * 0.0006;
+  towerGroup.position.y = 1.2 + Math.sin(elapsed * 0.45) * 0.25;
   const { halo, orbiters } = towerGroup.userData;
   if (halo) {
     halo.rotation.z += 0.004;
-    halo.material.opacity = 0.25 + Math.sin(elapsed * 1.5) * 0.08;
+    halo.material.opacity = 0.2 + easedProgress * 0.25 + Math.sin(elapsed * 1.5) * 0.06;
   }
   if (orbiters) {
     orbiters.forEach((orbiter) => {
       const angle = elapsed * orbiter.speed + orbiter.offset;
-      orbiter.mesh.position.x = Math.cos(angle) * orbiter.radius;
-      orbiter.mesh.position.z = Math.sin(angle) * orbiter.radius;
-      orbiter.mesh.position.y += Math.sin(elapsed * 0.6 + orbiter.offset) * 0.01;
+      const radiusBoost = 1 + easedProgress * 0.3;
+      orbiter.mesh.position.x = Math.cos(angle) * orbiter.radius * radiusBoost;
+      orbiter.mesh.position.z = Math.sin(angle) * orbiter.radius * radiusBoost;
+      orbiter.mesh.position.y =
+        totalHeight * (0.25 + orbiter.radius * 0.01) +
+        Math.sin(elapsed * 0.6 + orbiter.offset) * 0.18;
     });
   }
   windowMeshes.forEach((data) => {
-    const intensity = data.baseIntensity + data.amplitude * Math.sin(elapsed * data.speed + data.phase);
+    const intensity =
+      data.baseIntensity +
+      data.amplitude * Math.sin(elapsed * data.speed + data.phase + easedProgress * 6.2);
     data.mesh.material.emissiveIntensity = intensity;
-    data.mesh.material.opacity = 0.55 + 0.25 * Math.sin(elapsed * data.speed * 1.4 + data.phase * 1.3);
+    data.mesh.material.opacity =
+      0.55 +
+      0.25 *
+        Math.sin(elapsed * data.speed * 1.4 + data.phase * 1.3 + easedProgress * 4.5);
   });
   renderer.render(scene, camera);
 }
