@@ -1,0 +1,14 @@
+:root {
+  --black: #0a0e14;
+  --dark-teal: #0d1b2a;
+  --gold: #d4af37;
+  --gold-light: #ffd700;
+  --gold-dark: #9a7c1f;
+  --amber: #ffbf00;
+  --orange: #ff6b35;
+  --teal: #4a9b8e;
+  --cyan: #64dfdf;
+  --white: #e8eaed;
+  --white-dim: #94a3b8;
+  --left: clamp(24px, 8vw, 120px);
+}
