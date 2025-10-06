@@ -87,6 +87,7 @@ html.card-open {
   flex: 0 0 clamp(260px, 24vw, 320px);
   height: clamp(360px, 50vh, 420px);
   perspective: 1800px;
+  transform-style: preserve-3d;
   transition:
     transform 0.45s ease,
     box-shadow 0.45s ease,
@@ -94,20 +95,22 @@ html.card-open {
     opacity 0.3s ease;
   border-radius: 18px;
   transform-origin: center;
+  overflow: visible;
+  background: rgba(6, 14, 22, 0.6);
 }
 
 .vault-card:not(.is-active):hover,
 .vault-card.is-hovered:not(.is-active) {
-  transform: translateY(-10px) scale(1.03);
+  transform: translateY(-12px) scale(1.04);
   box-shadow:
-    0 30px 60px rgba(0, 0, 0, 0.55),
-    0 0 25px rgba(255, 215, 0, 0.25);
+    0 32px 70px rgba(0, 0, 0, 0.55),
+    0 0 28px rgba(255, 215, 0, 0.25);
 }
 
 .vault-card.is-muted {
-  opacity: 0.35;
-  filter: blur(1px);
-  transform: scale(0.95);
+  opacity: 0.45;
+  filter: saturate(0.7) brightness(0.75);
+  transform: scale(0.94);
 }
 
 .vault-card-inner {
@@ -115,6 +118,7 @@ html.card-open {
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
+  transform: rotateY(0deg);
   transition: transform 0.75s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
@@ -128,12 +132,12 @@ html.card-open {
   padding: clamp(1.8rem, 3vw, 2.4rem);
   border-radius: 18px;
   backface-visibility: hidden;
-  background: radial-gradient(circle at 20% 20%, rgba(255, 215, 0, 0.12), transparent 55%),
-    linear-gradient(145deg, rgba(13, 27, 42, 0.92), rgba(3, 8, 16, 0.9));
-  border: 1px solid rgba(212, 175, 55, 0.2);
+  background: radial-gradient(circle at 18% 22%, rgba(255, 215, 0, 0.18), transparent 55%),
+    linear-gradient(155deg, rgba(17, 30, 46, 0.95), rgba(5, 12, 20, 0.9));
+  border: 1px solid rgba(212, 175, 55, 0.25);
   box-shadow:
-    inset 0 0 25px rgba(255, 215, 0, 0.05),
-    0 25px 40px rgba(0, 0, 0, 0.6);
+    inset 0 0 22px rgba(255, 215, 0, 0.08),
+    0 24px 46px rgba(0, 0, 0, 0.55);
 }
 
 .vault-face.vault-content {
@@ -142,41 +146,44 @@ html.card-open {
   justify-content: flex-start;
   gap: 1.2rem;
   text-align: left;
-  background: radial-gradient(circle at 80% 10%, rgba(255, 140, 0, 0.18), transparent 60%),
-    linear-gradient(165deg, rgba(7, 12, 20, 0.98), rgba(18, 32, 48, 0.92));
+  background: radial-gradient(circle at 78% 12%, rgba(255, 166, 81, 0.2), transparent 60%),
+    linear-gradient(175deg, rgba(9, 16, 24, 0.98), rgba(24, 38, 54, 0.92));
+  opacity: 0;
+  pointer-events: none;
 }
 
 .vault-lock {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.75rem;
-  margin-bottom: 1rem;
-  font-size: 2rem;
+  gap: 0.5rem;
+  margin-bottom: 1.2rem;
+  font-size: 2.4rem;
   color: var(--gold);
-  text-shadow: 0 0 15px rgba(255, 215, 0, 0.45);
+  text-shadow: 0 0 18px rgba(255, 215, 0, 0.45);
 }
 
-.lock-icon {
+.lock-icon,
+.vault-unlocked-icon {
   display: inline-flex;
   transition: transform 0.45s ease, opacity 0.45s ease;
+  line-height: 1;
 }
 
 .vault-unlocked-icon {
-  display: inline-flex;
   opacity: 0;
-  transform: scale(0.4) rotate(-25deg);
-  transition: transform 0.45s ease, opacity 0.45s ease;
+  transform: scale(0.4) rotate(-18deg);
 }
 
 .vault-card.is-unlocked .lock-icon {
-  transform: translateY(-16px);
+  transform: translateY(-18px);
   opacity: 0;
 }
 
 .vault-card.is-unlocked .vault-unlocked-icon {
   opacity: 1;
-  transform: scale(1);
+  transform: scale(1) rotate(0deg);
 }
 
 .vault-title {
@@ -271,14 +278,15 @@ html.card-open {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(1);
-  width: min(90vw, 520px);
+  width: min(92vw, 560px);
   height: auto;
-  max-height: min(90vh, 720px);
+  max-height: min(92vh, 760px);
   z-index: 950;
   flex: 0 0 auto;
   box-shadow:
-    0 40px 90px rgba(0, 0, 0, 0.65),
-    0 0 45px rgba(255, 215, 0, 0.4);
+    0 40px 100px rgba(0, 0, 0, 0.65),
+    0 0 55px rgba(255, 215, 0, 0.38);
+  border-radius: 22px;
 }
 
 .vault-card.is-active .vault-card-inner {
@@ -286,18 +294,22 @@ html.card-open {
   transform: rotateY(180deg);
 }
 
+.vault-card.is-active .vault-face.vault-locked {
+  opacity: 0;
+  pointer-events: none;
+}
+
 .vault-card.is-active .vault-face.vault-content {
+  opacity: 1;
+  pointer-events: auto;
   overflow-y: auto;
   padding: clamp(2rem, 3vw, 2.6rem);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .vault-card.is-active .vault-face.vault-content::-webkit-scrollbar {
-  width: 6px;
-}
-
-.vault-card.is-active .vault-face.vault-content::-webkit-scrollbar-thumb {
-  background: rgba(212, 175, 55, 0.35);
-  border-radius: 10px;
+  display: none;
 }
 
 /* Team cards */

@@ -21,8 +21,8 @@
   let rafId = 0;
 
   function applyTransforms() {
-    cursor.style.transform = `translate(${cursorX - 6}px, ${cursorY - 6}px) scale(${cursorScale})`;
-    follower.style.transform = `translate(${followerX - 25}px, ${followerY - 25}px) scale(${followerScale})`;
+    cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) translate3d(-50%, -50%, 0) scale(${cursorScale})`;
+    follower.style.transform = `translate3d(${followerX}px, ${followerY}px, 0) translate3d(-50%, -50%, 0) scale(${followerScale})`;
   }
 
   function updateCursor() {

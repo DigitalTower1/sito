@@ -6,10 +6,10 @@ let windowMeshes = [];
 const towerClock = new (window.THREE ? THREE.Clock : function () {})();
 let towerSections = [];
 const towerParams = {
-  levels: 42,
-  baseWidth: 5.6,
-  topWidth: 1.05,
-  floorHeight: 1.65,
+  levels: 54,
+  baseWidth: 6.4,
+  topWidth: 1.2,
+  floorHeight: 1.7,
 };
 function createCanvasTexture(drawFn) {
   const size = 128,
@@ -100,7 +100,7 @@ function init3DScene() {
     0.1,
     1000,
   );
-  camera.position.set(0, 14, 48);
+  camera.position.set(0, 24, 68);
   renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -120,11 +120,11 @@ function init3DScene() {
   rimLight.position.set(0, 40, -40);
   scene.add(rimLight);
   towerGroup = new THREE.Group();
-  towerGroup.scale.setScalar(1.35);
-  towerGroup.position.y = 1.6;
+  towerGroup.scale.setScalar(1.6);
+  towerGroup.position.y = 2.2;
   scene.add(towerGroup);
   const facadeTexture = createFacadeTexture();
-  facadeTexture.repeat.set(4, towerParams.levels * 0.8);
+  facadeTexture.repeat.set(4, towerParams.levels * 0.9);
   const metalTexture = createMetalTexture();
   metalTexture.repeat.set(2, 6);
   const neonTexture = createNeonTexture();
@@ -184,6 +184,7 @@ function init3DScene() {
   addBaseTerraces(baseWidth);
   addLowerPlaza(baseWidth);
   addSkyGardens(totalHeight, baseWidth);
+  addSkyBridges(totalHeight, baseWidth, topWidth);
   addLightSpines(totalHeight);
   addSkyDeck(totalHeight, topWidth);
   addHelipad(totalHeight, topWidth);
@@ -441,6 +442,67 @@ function addSkyGardens(totalHeight, baseWidth) {
   }
 }
 
+function addSkyBridges(totalHeight, baseWidth, topWidth) {
+  const torusMaterialBase = new THREE.MeshStandardMaterial({
+    color: 0x1d2a39,
+    metalness: 0.85,
+    roughness: 0.32,
+    emissive: new THREE.Color(0x30445c),
+    emissiveIntensity: 0.22,
+  });
+  const glowMaterialBase = new THREE.MeshBasicMaterial({
+    color: 0xffd27f,
+    transparent: true,
+    opacity: 0.24,
+    blending: THREE.AdditiveBlending,
+  });
+  const tiers = [0.28, 0.46, 0.64, 0.82];
+  tiers.forEach((ratio, index) => {
+    const height = totalHeight * ratio + 1.2 + index * 0.3;
+    const radius = (baseWidth + topWidth) * (0.6 + index * 0.09);
+    const walkway = new THREE.Mesh(
+      new THREE.TorusGeometry(radius, 0.14 + index * 0.03, 24, 72),
+      torusMaterialBase.clone(),
+    );
+    walkway.material.emissiveIntensity += index * 0.05;
+    walkway.rotation.x = Math.PI / 2;
+    walkway.position.y = height;
+    towerGroup.add(walkway);
+
+    const glow = new THREE.Mesh(
+      new THREE.TorusGeometry(radius + 0.35, 0.05, 16, 96),
+      glowMaterialBase.clone(),
+    );
+    glow.rotation.x = Math.PI / 2;
+    glow.position.y = height + 0.12;
+    glow.material.opacity = 0.2 + index * 0.04;
+    towerGroup.add(glow);
+
+    const strutMaterial = new THREE.MeshStandardMaterial({
+      color: 0x243344,
+      metalness: 0.82,
+      roughness: 0.38,
+      emissive: new THREE.Color(0x32485e),
+      emissiveIntensity: 0.18,
+    });
+    for (let i = 0; i < 6; i += 1) {
+      const angle = (Math.PI * 2 * i) / 6;
+      const strut = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.06, 0.06, totalHeight * 0.08, 12, 1, true),
+        strutMaterial.clone(),
+      );
+      strut.position.set(
+        Math.cos(angle) * radius,
+        height,
+        Math.sin(angle) * radius,
+      );
+      strut.rotation.z = Math.PI / 2;
+      strut.rotation.y = angle;
+      towerGroup.add(strut);
+    }
+  });
+}
+
 function addLightSpines(totalHeight) {
   const spineMaterial = new THREE.MeshBasicMaterial({
     color: 0xffd27f,
@@ -548,24 +610,24 @@ function animate3D() {
   const sectionCount = Math.max(1, (towerSections.length || 1) - 1);
   const sectionFloat = easedProgress * sectionCount;
   const progressSections = sectionCount > 0 ? Math.min(sectionFloat / sectionCount, 1) : easedProgress;
-  const focusRatio = Math.min(1, 0.22 + progressSections * 0.78);
+  const focusRatio = Math.min(1, 0.3 + progressSections * 0.85);
   const focusHeight = totalHeight * focusRatio;
-  const orbitalRadius = 32 - easedProgress * 22;
-  const baseAngle = easedProgress * Math.PI * 7.2 + Math.sin(elapsed * 0.22) * 0.08;
-  const zoomZ = 54 - easedProgress * 34;
-  const heightOffset = 8 + easedProgress * 18;
+  const orbitalRadius = 38 - easedProgress * 28;
+  const baseAngle = easedProgress * Math.PI * 7.8 + Math.sin(elapsed * 0.26) * 0.09;
+  const zoomZ = 72 - easedProgress * 52;
+  const heightOffset = 12 + easedProgress * 32;
   const targetPosition = new THREE.Vector3(
-    Math.sin(baseAngle) * orbitalRadius * 0.55,
+    Math.sin(baseAngle) * orbitalRadius * 0.62,
     focusHeight + heightOffset,
-    zoomZ + Math.sin(elapsed * 0.3) * 0.9,
+    zoomZ + Math.sin(elapsed * 0.28) * 1.1,
   );
-  camera.position.lerp(targetPosition, 0.07);
-  const lookAtY = focusHeight + Math.sin(elapsed * 0.18) * 0.4;
+  camera.position.lerp(targetPosition, 0.06);
+  const lookAtY = focusHeight + totalHeight * 0.05 + Math.sin(elapsed * 0.2) * 0.5;
   camera.lookAt(0, lookAtY, 0);
   const desiredRotation = easedProgress * Math.PI * 3.4;
   towerGroup.rotation.y += (desiredRotation - towerGroup.rotation.y) * 0.08;
   towerGroup.rotation.y += 0.0018 + Math.sin(elapsed * 0.18) * 0.0008;
-  towerGroup.position.y = 1.6 + Math.sin(elapsed * 0.35) * 0.28 + easedProgress * 0.65;
+  towerGroup.position.y = 2.2 + Math.sin(elapsed * 0.32) * 0.35 + easedProgress * 0.9;
   const { halo, orbiters } = towerGroup.userData;
   if (halo) {
     halo.rotation.z += 0.004;

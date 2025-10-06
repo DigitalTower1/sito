@@ -1,231 +1,99 @@
-/* PROGRESS BAR CENTRALE OTTIMIZZATA */
-.progress-bar-container {
-  position: fixed;
-  top: 0;
-  right: var(--progress-offset);
-  width: 6px;
-  height: 100vh;
-  z-index: 60;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.8s ease;
-}
-.progress-bar-container.visible {
-  opacity: 1;
-}
-.progress-bar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(74, 155, 142, 0.05) 0%,
-    rgba(74, 155, 142, 0.25) 18%,
-    rgba(212, 175, 55, 0.4) 44%,
-    rgba(255, 166, 81, 0.32) 72%,
-    rgba(255, 166, 81, 0.08) 100%
-  );
-  box-shadow:
-    0 0 12px rgba(212, 175, 55, 0.32),
-    0 0 24px rgba(255, 140, 0, 0.22);
-  transition:
-    height 0.12s linear,
-    filter 0.35s ease,
-    box-shadow 0.35s ease,
-    opacity 0.35s ease;
-  filter: blur(0.45px);
-  will-change: height;
-  animation: progressGlow 3.6s ease-in-out infinite;
-  opacity: calc(0.4 + var(--progress-ratio, 0) * 0.28);
-}
-@keyframes progressGlow {
-  0%,
-  100% {
-    box-shadow:
-      0 0 14px rgba(212, 175, 55, 0.5),
-      0 0 26px rgba(255, 140, 0, 0.28);
-  }
-  50% {
-    box-shadow:
-      0 0 22px rgba(255, 215, 0, 0.65),
-      0 0 36px rgba(255, 166, 81, 0.4);
-  }
-}
-.progress-bar.scroll-glow {
-  animation:
-    scrollSectionPulse 0.8s ease-out,
-    progressGlow 3s ease-in-out infinite;
-}
-.progress-bar.scroll-contact {
-  filter: blur(0.4px);
-  box-shadow:
-    0 0 22px rgba(255, 255, 255, 0.55),
-    0 0 45px rgba(255, 184, 0, 0.38);
-}
-.progress-bar::before {
-  content: "";
-  position: absolute;
-  bottom: -8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 12px;
-  height: 12px;
-  background: radial-gradient(circle, rgba(212, 175, 55, 0.7), transparent 70%);
-  border-radius: 50%;
-  box-shadow:
-    0 0 12px rgba(212, 175, 55, 0.65),
-    0 0 18px rgba(255, 140, 0, 0.35);
-  animation: dotPulse 2s ease-in-out infinite;
-}
-.progress-bar.scroll-glow::before {
-  animation:
-    dotPulse 2s ease-in-out infinite,
-    beamTip 0.8s ease-out;
-}
-@keyframes dotPulse {
-  0%,
-  100% {
-    transform: translateX(-50%) scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: translateX(-50%) scale(1.5);
-    opacity: 0.8;
-  }
-}
-@keyframes beamTip {
-  0% {
-    box-shadow:
-      0 0 12px rgba(255, 255, 255, 0.8),
-      0 0 28px rgba(255, 215, 0, 0.8);
-    transform: translateX(-50%) scale(1.2);
-  }
-  100% {
-    box-shadow:
-      0 0 8px rgba(255, 255, 255, 0.6),
-      0 0 18px rgba(255, 215, 0, 0.4);
-    transform: translateX(-50%) scale(1);
-  }
-}
-@keyframes scrollSectionPulse {
-  0% {
-    box-shadow:
-      0 0 25px rgba(212, 175, 55, 0.9),
-      0 0 40px rgba(255, 107, 53, 0.5);
-    width: 4px;
-    filter: blur(0.8px);
-  }
-  20% {
-    box-shadow:
-      0 0 50px rgba(255, 215, 0, 1),
-      0 0 90px rgba(255, 140, 0, 1),
-      0 0 130px rgba(255, 107, 53, 0.9);
-    width: 8px;
-    filter: blur(1.5px);
-  }
-  60% {
-    box-shadow:
-      0 0 50px rgba(255, 215, 0, 1),
-      0 0 90px rgba(255, 140, 0, 1),
-      0 0 130px rgba(255, 107, 53, 0.9);
-    width: 8px;
-    filter: blur(1.5px);
-  }
-  100% {
-    box-shadow:
-      0 0 25px rgba(212, 175, 55, 0.9),
-      0 0 40px rgba(255, 107, 53, 0.5);
-    width: 4px;
-    filter: blur(0.8px);
-  }
-}
+/* Scroll indicator controls */
 .scroll-indicator {
-  position: absolute;
-  bottom: 2rem;
-  right: calc(var(--progress-offset) - 3px);
-  transform: translateX(50%);
-  display: flex;
+  position: static;
+  display: inline-flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 3.5rem auto 0;
   opacity: 0;
-  transition: opacity 0.5s;
-  z-index: 30;
-  cursor: pointer;
   pointer-events: auto;
+  cursor: pointer;
+  transform: translateY(12px);
+  transition: opacity 0.45s ease, transform 0.45s ease, filter 0.45s ease;
+  align-self: center;
 }
+
 section.visible .scroll-indicator {
-  opacity: 0.8;
+  opacity: 0.9;
+  transform: translateY(0);
 }
+
 .scroll-indicator:hover {
-  opacity: 1;
+  filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.55));
 }
-.scroll-indicator.pulse {
-  animation: scrollPulse 0.9s ease-out;
-}
-@keyframes scrollPulse {
-  0% {
-    transform: scale(1);
-    filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.3));
-  }
-  50% {
-    transform: scale(1.08);
-    filter: drop-shadow(0 0 16px rgba(255, 215, 0, 0.6));
-  }
-  100% {
-    transform: scale(1);
-    filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.3));
-  }
-}
+
 .scroll-text {
-  font-size: 0.7rem;
-  letter-spacing: 0.3em;
+  font-size: 0.72rem;
+  letter-spacing: 0.34em;
   color: var(--gold);
   text-transform: uppercase;
   font-weight: 600;
-  text-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
-  animation: textFloat 3s ease-in-out infinite;
+  text-shadow: 0 0 12px rgba(212, 175, 55, 0.45);
+  animation: textFloat 3.2s ease-in-out infinite;
 }
+
 @keyframes textFloat {
   0%,
   100% {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-5px);
+    transform: translateY(-6px);
   }
 }
+
 .scroll-icon {
-  width: 24px;
-  height: 40px;
+  width: 26px;
+  height: 46px;
   border: 2px solid var(--gold);
-  border-radius: 15px;
+  border-radius: 18px;
   position: relative;
-  transition: all 0.3s;
-  box-shadow: 0 0 8px rgba(212, 175, 55, 0.35);
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.35);
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
+
 .scroll-icon::before {
   content: "";
   position: absolute;
-  top: 6px;
+  top: 8px;
   left: 50%;
+  width: 4px;
+  height: 10px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, rgba(255, 215, 0, 0.9), rgba(255, 140, 0, 0.65));
   transform: translateX(-50%);
-  width: 3px;
-  height: 6px;
-  background: var(--gold);
-  border-radius: 3px;
-  animation: scrollDot 2s ease-in-out infinite;
-  box-shadow: 0 0 5px var(--gold);
+  animation: scrollDot 2.2s ease-in-out infinite;
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
 }
+
+.scroll-indicator:hover .scroll-icon {
+  box-shadow: 0 0 16px rgba(255, 215, 0, 0.65);
+}
+
 @keyframes scrollDot {
   0% {
-    top: 6px;
+    opacity: 0;
+    transform: translate(-50%, -6px);
+  }
+  40% {
     opacity: 1;
+    transform: translate(-50%, 6px);
+  }
+  80% {
+    opacity: 0;
+    transform: translate(-50%, 16px);
   }
   100% {
-    top: 26px;
     opacity: 0;
+    transform: translate(-50%, 16px);
+  }
+}
+
+@media (max-width: 768px) {
+  .scroll-indicator {
+    margin-top: 2.5rem;
   }
 }

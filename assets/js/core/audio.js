@@ -85,14 +85,14 @@
     osc.frequency.linearRampToValueAtTime(180, now + 0.28);
 
     gain.gain.setValueAtTime(0.0001, now);
-    gain.gain.exponentialRampToValueAtTime(0.06, now + 0.05);
+    gain.gain.exponentialRampToValueAtTime(0.035, now + 0.05);
     gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.3);
 
     const noise = ctx.createBufferSource();
     noise.buffer = createNoiseBuffer(ctx, 0.18);
     const noiseGain = ctx.createGain();
     noiseGain.gain.setValueAtTime(0.0001, now);
-    noiseGain.gain.linearRampToValueAtTime(0.03, now + 0.04);
+    noiseGain.gain.linearRampToValueAtTime(0.018, now + 0.04);
     noiseGain.gain.linearRampToValueAtTime(0.0001, now + 0.2);
 
     osc.connect(gain);
@@ -112,7 +112,7 @@
       frequencyStart: 520,
       frequencyEnd: 680,
       duration: 0.25,
-      gainPeak: 0.035,
+      gainPeak: 0.02,
       gainEnd: 0.0001,
     });
   }
@@ -123,7 +123,7 @@
       frequencyStart: 360,
       frequencyEnd: 220,
       duration: 0.3,
-      gainPeak: 0.045,
+      gainPeak: 0.028,
     });
   }
 
@@ -133,33 +133,7 @@
       frequencyStart: open ? 320 : 420,
       frequencyEnd: open ? 520 : 240,
       duration: 0.28,
-      gainPeak: 0.06,
-    });
-  }
-
-  function playIndicatorPulse() {
-    const ctx = getContext();
-    if (!ctx) {
-      return;
-    }
-    const now = ctx.currentTime;
-    const noise = ctx.createBufferSource();
-    noise.buffer = createNoiseBuffer(ctx, 0.18);
-    const gain = ctx.createGain();
-    gain.gain.setValueAtTime(0.0001, now);
-    gain.gain.linearRampToValueAtTime(0.04, now + 0.05);
-    gain.gain.linearRampToValueAtTime(0.0001, now + 0.2);
-    noise.connect(gain);
-    gain.connect(ctx.destination);
-    noise.start(now);
-    noise.stop(now + 0.21);
-
-    playTone({
-      type: "sine",
-      frequencyStart: 700,
-      frequencyEnd: 540,
-      duration: 0.22,
-      gainPeak: 0.045,
+      gainPeak: 0.04,
     });
   }
 
@@ -179,9 +153,6 @@
         break;
       case "menu-close":
         playMenu(false);
-        break;
-      case "indicator":
-        playIndicatorPulse();
         break;
       default:
         break;

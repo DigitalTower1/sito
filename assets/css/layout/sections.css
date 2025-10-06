@@ -1,10 +1,10 @@
 section {
-  min-height: 100vh;
+  min-height: 105vh;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   position: relative;
-  padding: 6.5rem var(--left) 8rem 5%;
+  padding: 7.5rem var(--left) 11rem 5%;
   overflow: visible;
   opacity: 0;
   transform: translateY(60px);
@@ -56,9 +56,6 @@ section.visible {
   );
   mix-blend-mode: luminosity;
   border-radius: 20px;
-}
-#hero .section-bg {
-  display: none;
 }
 #about .section-bg {
   background-image: url("https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=1600&auto=format&fit=crop&q=80");

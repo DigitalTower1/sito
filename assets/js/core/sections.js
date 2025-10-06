@@ -1,177 +1,96 @@
 (() => {
   const sections = Array.from(document.querySelectorAll("section"));
   const scrollIndicators = Array.from(document.querySelectorAll(".scroll-indicator"));
-  const indicatorCooldown = new WeakMap();
   const mainNav = document.getElementById("mainNav");
-  const progressBar = document.getElementById("progressBar");
-  const progressBarContainer = document.getElementById("progressBarContainer");
   const heroSection = document.getElementById("hero");
   const contactSection = document.getElementById("contact");
-  const audio = window.uiSound || null;
 
-  let lastSection = null;
-  let hasScrolled = false;
-  let isScrolling = false;
+  let ticking = false;
 
-  function updateProgressBar() {
-    if (!progressBar || !progressBarContainer) {
+  function clamp(value, min, max) {
+    return Math.min(Math.max(value, min), max);
+  }
+
+  function updateNavState() {
+    if (!mainNav) {
       return;
     }
-
-    const scrollY = window.scrollY;
-    const footer = document.querySelector("footer");
-
-    if (!hasScrolled && scrollY > 50) {
-      hasScrolled = true;
-      progressBarContainer.classList.add("visible");
+    if (window.scrollY > 80) {
+      mainNav.classList.add("scrolled");
+    } else {
+      mainNav.classList.remove("scrolled");
     }
+  }
 
-    if (!hasScrolled) {
-      return;
-    }
-
-    const navHeight = mainNav ? mainNav.getBoundingClientRect().height : 0;
-    const footerTop = footer
-      ? footer.getBoundingClientRect().top + scrollY
-      : document.documentElement.scrollHeight;
-
-    const maxHeight = Math.max(0, footerTop - navHeight - 80);
+  function computeProgress() {
     const docHeight = Math.max(
+      document.documentElement ? document.documentElement.scrollHeight : 0,
+      document.body ? document.body.scrollHeight : 0,
+      window.innerHeight,
       1,
-      document.documentElement.scrollHeight - window.innerHeight,
     );
-    const heroStart = heroSection ? heroSection.offsetTop : 0;
-    const contactEnd = contactSection
-      ? contactSection.offsetTop + contactSection.offsetHeight - window.innerHeight
+    const heroTop = heroSection ? heroSection.offsetTop : 0;
+    const contactBottom = contactSection
+      ? contactSection.offsetTop + contactSection.offsetHeight
       : docHeight;
-    const range = Math.max(1, contactEnd - heroStart);
-    const rawProgress = (scrollY - heroStart) / range;
-    const scrollPercent = Math.max(0, Math.min(1, rawProgress));
-    const easedPercent = Math.pow(scrollPercent, 0.92);
-    let progressHeight = Math.min(maxHeight, easedPercent * maxHeight);
+    const range = Math.max(1, contactBottom - heroTop);
+    const viewportCenter = window.scrollY + window.innerHeight * 0.5;
+    const rawProgress = (viewportCenter - heroTop) / range;
+    window.__towerScrollProgress = clamp(rawProgress, 0, 1);
+  }
 
-    if (scrollIndicators.length) {
-      let highestVisible = 0;
-      let upperLimit = maxHeight;
-      let cappedFuture = false;
-      scrollIndicators.forEach((indicator) => {
-        const rect = indicator.getBoundingClientRect();
-        const mid = rect.top + rect.height / 2;
-        const clampedMid = Math.max(0, Math.min(maxHeight, mid));
-
-        if (rect.bottom <= 0) {
-          highestVisible = Math.max(highestVisible, clampedMid);
-          return;
-        }
-
-        if (rect.top <= window.innerHeight * 0.98) {
-          highestVisible = Math.max(highestVisible, clampedMid);
-        } else if (!cappedFuture) {
-          upperLimit = Math.min(upperLimit, Math.max(clampedMid, 0));
-          cappedFuture = true;
-        }
-      });
-
-      if (upperLimit < highestVisible) {
-        upperLimit = highestVisible;
-      }
-
-      if (highestVisible > 0) {
-        progressHeight = Math.max(progressHeight, highestVisible);
-      }
-
-      progressHeight = Math.min(progressHeight, upperLimit);
-    }
-
-    progressHeight = Math.max(0, Math.min(maxHeight, progressHeight));
-
-    progressBar.style.height = `${progressHeight}px`;
-    progressBar.style.setProperty("--progress-ratio", easedPercent.toFixed(3));
-    window.__towerScrollProgress = easedPercent;
-
-    let currentSection = null;
-    sections.forEach((section) => {
-      const rect = section.getBoundingClientRect();
-      const center = rect.top + rect.height * 0.5;
-      if (center > 0 && center < window.innerHeight) {
-        currentSection = section;
-      }
-    });
-
-    if (currentSection && currentSection !== lastSection) {
-      lastSection = currentSection;
-      progressBar.classList.add("scroll-glow");
-      window.setTimeout(() => {
-        progressBar.classList.remove("scroll-glow");
-      }, 800);
-    }
-
-    if (progressHeight <= 0) {
-      return;
-    }
-
-    const barRect = progressBar.getBoundingClientRect();
-    const tipY = barRect.bottom;
-
+  function updateIndicators() {
     scrollIndicators.forEach((indicator) => {
-      const rect = indicator.getBoundingClientRect();
-      const indicatorMid = rect.top + rect.height / 2;
-
-      if (indicatorMid < 0 || indicatorMid > window.innerHeight) {
-        return;
-      }
-      if (Math.abs(indicatorMid - tipY) > 36) {
-        return;
-      }
-
-      const now = performance.now();
-      const lastTrigger = indicatorCooldown.get(indicator) || 0;
-      if (now - lastTrigger < 900) {
-        return;
-      }
-
-      indicatorCooldown.set(indicator, now);
-      indicator.classList.add("pulse");
-      progressBar.classList.add("scroll-contact", "scroll-glow");
-
-      window.setTimeout(() => {
-        indicator.classList.remove("pulse");
-      }, 900);
-      window.setTimeout(() => {
-        progressBar.classList.remove("scroll-contact");
-      }, 450);
-      window.setTimeout(() => {
-        progressBar.classList.remove("scroll-glow");
-      }, 750);
-      if (audio) {
-        audio.play("indicator");
-      }
+      const section = indicator.closest("section");
+      const isActive = section ? section.classList.contains("visible") : false;
+      indicator.classList.toggle("is-visible", isActive);
     });
   }
 
   function updateSections() {
-    updateProgressBar();
+    const viewportHeight = window.innerHeight || 1;
     sections.forEach((section) => {
       const rect = section.getBoundingClientRect();
       const visibleHeight = Math.max(
         0,
-        Math.min(window.innerHeight, rect.top + rect.height) - Math.max(0, rect.top),
+        Math.min(viewportHeight, rect.top + rect.height) - Math.max(0, rect.top),
       );
-      const visibleRatio = visibleHeight / window.innerHeight;
-      if (visibleRatio > 0.3) {
+      const ratio = visibleHeight / viewportHeight;
+      if (ratio > 0.28) {
         section.classList.add("visible");
       } else {
         section.classList.remove("visible");
       }
     });
+    updateIndicators();
+    computeProgress();
+  }
+
+  function requestUpdate() {
+    if (ticking) {
+      return;
+    }
+    ticking = true;
+    window.requestAnimationFrame(() => {
+      updateSections();
+      updateNavState();
+      ticking = false;
+    });
+  }
+
+  function handleResize() {
+    updateSections();
+    updateNavState();
   }
 
   function scrollToSection(id) {
     const section = document.getElementById(id);
-    if (section) {
-      const offset = section.getBoundingClientRect().top + window.pageYOffset - 100;
-      window.scrollTo({ top: offset, behavior: "smooth" });
+    if (!section) {
+      return;
     }
+    const navHeight = mainNav ? mainNav.getBoundingClientRect().height : 0;
+    const offset = section.getBoundingClientRect().top + window.pageYOffset - (navHeight + 40);
+    window.scrollTo({ top: offset, behavior: "smooth" });
     if (typeof window.closeMobileMenu === "function") {
       window.closeMobileMenu();
     }
@@ -204,45 +123,15 @@
   }
 
   function initSections() {
-    if (sections[0]) {
+    window.__towerScrollProgress = 0;
+    if (sections.length) {
       sections[0].classList.add("visible");
     }
-    if (progressBarContainer && !progressBarContainer.classList.contains("visible")) {
-      progressBarContainer.classList.add("visible");
-    }
-    hasScrolled = true;
     updateSections();
+    updateNavState();
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", handleResize, { passive: true });
   }
-
-  window.addEventListener(
-    "scroll",
-    () => {
-      if (!isScrolling) {
-        window.requestAnimationFrame(() => {
-          updateSections();
-          isScrolling = false;
-        });
-        isScrolling = true;
-      }
-
-      if (mainNav) {
-        if (window.scrollY > 80) {
-          mainNav.classList.add("scrolled");
-        } else {
-          mainNav.classList.remove("scrolled");
-        }
-      }
-    },
-    { passive: true },
-  );
-
-  window.addEventListener(
-    "resize",
-    () => {
-      updateSections();
-    },
-    { passive: true },
-  );
 
   window.initSections = initSections;
   window.scrollToSection = scrollToSection;
