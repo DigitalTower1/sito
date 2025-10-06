@@ -7,7 +7,7 @@
   const lightGlow1 = document.getElementById("lightGlow1");
   const lightGlow2 = document.getElementById("lightGlow2");
 
-  const message = "Scaliamo insieme la torre del successo";
+  const message = "SCALIAMO INSIEME LA TORRE DEL SUCCESSO";
 
   function buildLoaderText() {
     if (!loaderText || !message) {

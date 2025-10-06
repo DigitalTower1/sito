@@ -7,11 +7,12 @@ const towerClock = new (window.THREE ? THREE.Clock : function () {})();
 let towerSections = [];
 const reusableVector = window.THREE ? new THREE.Vector3() : null;
 const towerParams = {
-  levels: 62,
-  baseWidth: 7.6,
-  topWidth: 1.35,
-  floorHeight: 1.72,
+  levels: 72,
+  baseWidth: 9.4,
+  topWidth: 2.2,
+  floorHeight: 1.78,
 };
+const lerp = (a, b, t) => a + (b - a) * t;
 function createCanvasTexture(drawFn) {
   const size = 128,
     canvas = document.createElement("canvas");
@@ -115,14 +116,14 @@ function init3DScene() {
   windowMeshes = [];
   const sceneBackground = new THREE.Color(0x04070c);
   scene = new THREE.Scene();
-  scene.fog = new THREE.Fog(sceneBackground, 80, 160);
+  scene.fog = new THREE.Fog(sceneBackground, 90, 200);
   camera = new THREE.PerspectiveCamera(
     45,
     window.innerWidth / window.innerHeight,
     0.1,
     1000,
   );
-  camera.position.set(0, 24, 68);
+  camera.position.set(0, 34, 86);
   renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -143,11 +144,11 @@ function init3DScene() {
   scene.add(rimLight);
   towerGroup = new THREE.Group();
   towerGroup.userData = { halo: null, orbiters: [], panels: [], pods: [] };
-  towerGroup.scale.setScalar(1.85);
-  towerGroup.position.y = 2.6;
+  towerGroup.scale.setScalar(2.3);
+  towerGroup.position.y = 3.4;
   scene.add(towerGroup);
   const facadeTexture = createFacadeTexture();
-  facadeTexture.repeat.set(4, towerParams.levels * 0.9);
+  facadeTexture.repeat.set(5.2, towerParams.levels * 0.95);
   const metalTexture = createMetalTexture();
   metalTexture.repeat.set(2, 6);
   const neonTexture = createNeonTexture();
@@ -179,8 +180,8 @@ function init3DScene() {
   const totalHeight = levels * floorHeight;
   for (let level = 0; level < levels; level++) {
     const t = level / levels;
-    const width = baseWidth - (baseWidth - topWidth) * Math.pow(t, 1.3);
-    const depth = width * 0.68;
+    const width = baseWidth - (baseWidth - topWidth) * Math.pow(t, 1.32);
+    const depth = width * 0.82;
     const floorGeometry = new THREE.BoxGeometry(width, floorHeight, depth);
     const floor = new THREE.Mesh(floorGeometry, mainMaterial.clone());
     floor.material.map = facadeTexture.clone();
@@ -214,6 +215,7 @@ function init3DScene() {
   addObservationPods(totalHeight, baseWidth);
   addMediaPanels(baseWidth, totalHeight);
   addAntennaArray(totalHeight, topWidth);
+  addSupportBeams(totalHeight, baseWidth, topWidth);
 
   const crownMaterial = new THREE.MeshStandardMaterial({
     map: neonTexture,
@@ -399,6 +401,50 @@ function addVerticalFins(totalHeight, baseWidth, topWidth) {
     );
     lattice.position.y = totalHeight * (0.32 + tier * 0.2);
     towerGroup.add(lattice);
+  }
+}
+
+function addSupportBeams(totalHeight, baseWidth, topWidth) {
+  const beamMaterial = new THREE.MeshStandardMaterial({
+    color: 0x141f2c,
+    metalness: 0.78,
+    roughness: 0.42,
+    emissive: new THREE.Color(0x213349),
+    emissiveIntensity: 0.22,
+  });
+  const offsets = [
+    [1, 1],
+    [-1, 1],
+    [1, -1],
+    [-1, -1],
+  ];
+  offsets.forEach(([xSign, zSign]) => {
+    const beam = new THREE.Mesh(
+      new THREE.BoxGeometry(baseWidth * 0.24, totalHeight + 6.5, baseWidth * 0.24),
+      beamMaterial.clone(),
+    );
+    const x = (baseWidth * 0.58) * xSign;
+    const z = (baseWidth * 0.42) * zSign;
+    beam.position.set(x, totalHeight / 2, z);
+    towerGroup.add(beam);
+  });
+
+  const ringMaterial = new THREE.MeshStandardMaterial({
+    color: 0x1d2a3c,
+    metalness: 0.65,
+    roughness: 0.45,
+    transparent: true,
+    opacity: 0.55,
+  });
+  for (let level = 1; level <= 6; level += 1) {
+    const radius = baseWidth * (0.78 + level * 0.04);
+    const ring = new THREE.Mesh(
+      new THREE.TorusGeometry(radius, topWidth * 0.12, 18, 64),
+      ringMaterial.clone(),
+    );
+    ring.rotation.x = Math.PI / 2;
+    ring.position.y = (totalHeight / 7) * level;
+    towerGroup.add(ring);
   }
 }
 function addBaseTerraces(baseWidth) {
@@ -757,28 +803,27 @@ function animate3D() {
   const sectionCount = Math.max(1, (towerSections.length || 1) - 1);
   const sectionFloat = easedProgress * sectionCount;
   const progressSections = sectionCount > 0 ? Math.min(sectionFloat / sectionCount, 1) : easedProgress;
-  const focusRatio = Math.min(1, 0.22 + progressSections * 1.05);
+  const focusRatio = Math.min(1, 0.28 + progressSections * 0.92);
   const focusHeight = totalHeight * focusRatio;
-  const orbitalRadius = 44 - easedProgress * 30;
-  const baseAngle = easedProgress * Math.PI * 8.4 + Math.sin(elapsed * 0.22) * 0.08;
-  const zoomZ = 78 - easedProgress * 60;
-  const heightOffset = 14 + easedProgress * 32;
-  const targetX = Math.sin(baseAngle) * orbitalRadius * 0.58;
+  const orbitalRadius = 42 - easedProgress * 26;
+  const baseAngle = easedProgress * Math.PI * 1.6 + Math.sin(elapsed * 0.18) * 0.05;
+  const zoomZ = 86 - easedProgress * 72;
+  const heightOffset = 18 + easedProgress * 44;
+  const targetX = Math.sin(baseAngle) * orbitalRadius * 0.42;
   const targetY = focusHeight + heightOffset;
-  const targetZ = zoomZ + Math.sin(elapsed * 0.3) * 1.2;
+  const targetZ = zoomZ;
   if (reusableVector) {
     reusableVector.set(targetX, targetY, targetZ);
     camera.position.lerp(reusableVector, 0.06);
   } else {
     camera.position.lerp(new THREE.Vector3(targetX, targetY, targetZ), 0.06);
   }
-  const lookAtY = focusHeight + totalHeight * 0.06 + Math.sin(elapsed * 0.2) * 0.45;
+  const lookAtY = lerp(totalHeight * 0.35, totalHeight + 10, easedProgress);
   camera.lookAt(0, lookAtY, 0);
-  const desiredRotation = easedProgress * Math.PI * 4.4;
-  towerGroup.rotation.y += (desiredRotation - towerGroup.rotation.y) * 0.06;
-  towerGroup.rotation.y += 0.002 + Math.sin(elapsed * 0.22) * 0.0009;
-  towerGroup.position.y = 2.6 + Math.sin(elapsed * 0.28) * 0.35 + easedProgress * 1.2;
-  const desiredFov = 42 - easedProgress * 8;
+  const desiredRotation = baseAngle;
+  towerGroup.rotation.y += (desiredRotation - towerGroup.rotation.y) * 0.08;
+  towerGroup.position.y = 3.4 + Math.sin(elapsed * 0.24) * 0.3 + easedProgress * 1.6;
+  const desiredFov = 40 - easedProgress * 10;
   if (typeof camera.fov === "number") {
     camera.fov += (desiredFov - camera.fov) * 0.08;
     camera.updateProjectionMatrix();

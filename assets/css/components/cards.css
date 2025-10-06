@@ -2,7 +2,7 @@
 .slider-container {
   position: relative;
   margin-top: 3rem;
-  padding-bottom: 0.5rem;
+  padding: 1.25rem 0 0.75rem;
   overflow: visible;
 }
 
@@ -10,6 +10,7 @@
   display: flex;
   gap: clamp(1.5rem, 3vw, 2.5rem);
   overflow-x: auto;
+  overflow-y: visible;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   padding-bottom: 0.5rem;
@@ -60,7 +61,7 @@
 #cardOverlay.card-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(2, 6, 12, 0.78);
+  background: rgba(2, 6, 12, 0.68);
   backdrop-filter: blur(6px);
   opacity: 0;
   visibility: hidden;
@@ -117,7 +118,7 @@ html.card-open {
   height: 100%;
   transform-style: preserve-3d;
   transform: rotateY(0deg);
-  transition: transform 0.75s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: transform 0.65s cubic-bezier(0.19, 1, 0.22, 1);
   will-change: transform;
 }
 
@@ -154,28 +155,29 @@ html.card-open {
     linear-gradient(175deg, rgba(9, 16, 24, 0.98), rgba(24, 38, 54, 0.92));
   opacity: 0;
   pointer-events: none;
+  transition: opacity 0.4s ease;
 }
 
 .vault-lock {
+  position: relative;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  margin-bottom: 1.2rem;
-  font-size: 2.4rem;
+  width: 4.2rem;
+  height: 4.2rem;
+  margin-bottom: 1.4rem;
   color: var(--gold);
   text-shadow: 0 0 18px rgba(255, 215, 0, 0.45);
-  width: 100%;
 }
 
 .lock-icon,
 .vault-unlocked-icon {
-  display: inline-flex;
+  position: absolute;
+  inset: 0;
+  display: flex;
   align-items: center;
   justify-content: center;
-  width: 3.2rem;
-  height: 3.2rem;
+  font-size: 2.5rem;
   transition: transform 0.45s ease, opacity 0.45s ease;
   line-height: 1;
 }
@@ -286,16 +288,16 @@ html.card-open {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(1);
-  width: min(94vw, 640px);
-  height: auto;
-  max-height: min(94vh, 780px);
+  transform: translate(-50%, -50%) scale(1.05);
+  width: min(92vw, 660px);
+  height: min(88vh, 760px);
   z-index: 950;
   flex: 0 0 auto;
   box-shadow:
-    0 40px 100px rgba(0, 0, 0, 0.65),
+    0 40px 120px rgba(0, 0, 0, 0.65),
     0 0 55px rgba(255, 215, 0, 0.38);
   border-radius: 22px;
+  overflow: hidden;
 }
 
 .vault-card.is-active .vault-card-inner {

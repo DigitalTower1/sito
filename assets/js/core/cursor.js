@@ -26,10 +26,10 @@
   }
 
   function updateCursor() {
-    cursorX += (mouseX - cursorX) * 0.35;
-    cursorY += (mouseY - cursorY) * 0.35;
-    followerX += (mouseX - followerX) * 0.12;
-    followerY += (mouseY - followerY) * 0.12;
+    cursorX += (mouseX - cursorX) * 0.6;
+    cursorY += (mouseY - cursorY) * 0.6;
+    followerX += (mouseX - followerX) * 0.18;
+    followerY += (mouseY - followerY) * 0.18;
 
     applyTransforms();
     rafId = window.requestAnimationFrame(updateCursor);
@@ -45,21 +45,42 @@
     followerScale = 1;
   }
 
-  document.addEventListener(
-    "mousemove",
-    (event) => {
-      mouseX = event.clientX;
-      mouseY = event.clientY;
-      if (!rafId) {
+  function startLoop() {
+    if (!rafId) {
+      rafId = window.requestAnimationFrame(updateCursor);
+    }
+  }
+
+  function handlePointerMove(event) {
+    if (event.pointerType && event.pointerType !== "mouse") {
+      return;
+    }
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+    cursorX = mouseX;
+    cursorY = mouseY;
+    followerX += (mouseX - followerX) * 0.35;
+    followerY += (mouseY - followerY) * 0.35;
+    startLoop();
+  }
+
+  if (window.PointerEvent) {
+    document.addEventListener("pointermove", handlePointerMove, { passive: true });
+  } else {
+    document.addEventListener(
+      "mousemove",
+      (event) => {
+        mouseX = event.clientX;
+        mouseY = event.clientY;
         cursorX = mouseX;
         cursorY = mouseY;
         followerX = mouseX;
         followerY = mouseY;
-        rafId = window.requestAnimationFrame(updateCursor);
-      }
-    },
-    { passive: true },
-  );
+        startLoop();
+      },
+      { passive: true },
+    );
+  }
 
   const interactiveSelectors =
     "a, button, .vault-card, .cta-button, .form-submit, .service-card, .team-card, .testimonial-card, .blog-card, .carousel-arrow";
@@ -76,5 +97,5 @@
   });
 
   applyTransforms();
-  updateCursor();
+  startLoop();
 })();
