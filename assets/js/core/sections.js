@@ -24,6 +24,10 @@ function updateProgressBar() {
     scrollPercent = docHeight > 0 ? Math.max(0, Math.min(1, scrollY / docHeight)) : 0;
   const progressHeight = Math.min(maxHeight, scrollPercent * maxHeight);
   progressBar.style.height = `${progressHeight}px`;
+    maxHeight = footerTop - navHeight - 80,
+    docHeight = document.documentElement.scrollHeight - window.innerHeight,
+    scrollPercent = Math.max(0, Math.min(1, scrollY / docHeight));
+  progressBar.style.height = `${scrollPercent * maxHeight}px`;
   let currentSection = null;
   sections.forEach((s) => {
     const rect = s.getBoundingClientRect(),
@@ -62,6 +66,11 @@ function updateProgressBar() {
         progressBar.classList.remove("scroll-glow");
       }, 750);
     });
+  }
+      progressBar.classList.add("section-pulse"),
+      setTimeout(() => {
+        progressBar.classList.remove("section-pulse");
+      }, 800));
   }
 }
 
