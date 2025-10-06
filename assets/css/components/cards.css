@@ -2,7 +2,7 @@
 .slider-container {
   position: relative;
   margin-top: 3rem;
-  padding: 1.25rem 0 0.75rem;
+  padding: 2.5rem 0 1.25rem;
   overflow: visible;
 }
 
@@ -61,8 +61,8 @@
 #cardOverlay.card-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(2, 6, 12, 0.68);
-  backdrop-filter: blur(6px);
+  background: rgba(2, 6, 12, 0.12);
+  backdrop-filter: blur(2px);
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.35s ease, visibility 0.35s ease;
@@ -100,7 +100,7 @@ html.card-open {
 
 .vault-card:not(.is-active):hover,
 .vault-card.is-hovered:not(.is-active) {
-  transform: translateY(-12px) scale(1.03);
+  transform: scale(1.04);
   box-shadow:
     0 32px 70px rgba(0, 0, 0, 0.55),
     0 0 28px rgba(255, 215, 0, 0.25);
@@ -298,6 +298,7 @@ html.card-open {
     0 0 55px rgba(255, 215, 0, 0.38);
   border-radius: 22px;
   overflow: hidden;
+  perspective: 2200px;
 }
 
 .vault-card.is-active .vault-card-inner {
@@ -312,6 +313,7 @@ html.card-open {
 
 .vault-card.is-active .vault-face.vault-content {
   opacity: 1;
+  filter: brightness(1);
   pointer-events: auto;
   overflow-y: auto;
   padding: clamp(2rem, 3vw, 2.6rem);

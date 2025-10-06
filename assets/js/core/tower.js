@@ -7,10 +7,10 @@ const towerClock = new (window.THREE ? THREE.Clock : function () {})();
 let towerSections = [];
 const reusableVector = window.THREE ? new THREE.Vector3() : null;
 const towerParams = {
-  levels: 72,
-  baseWidth: 9.4,
-  topWidth: 2.2,
-  floorHeight: 1.78,
+  levels: 84,
+  baseWidth: 12.2,
+  topWidth: 4.6,
+  floorHeight: 1.85,
 };
 const lerp = (a, b, t) => a + (b - a) * t;
 function createCanvasTexture(drawFn) {
@@ -123,7 +123,7 @@ function init3DScene() {
     0.1,
     1000,
   );
-  camera.position.set(0, 34, 86);
+  camera.position.set(18, 56, 108);
   renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -144,11 +144,11 @@ function init3DScene() {
   scene.add(rimLight);
   towerGroup = new THREE.Group();
   towerGroup.userData = { halo: null, orbiters: [], panels: [], pods: [] };
-  towerGroup.scale.setScalar(2.3);
-  towerGroup.position.y = 3.4;
+  towerGroup.scale.setScalar(2.85);
+  towerGroup.position.y = 0;
   scene.add(towerGroup);
   const facadeTexture = createFacadeTexture();
-  facadeTexture.repeat.set(5.2, towerParams.levels * 0.95);
+  facadeTexture.repeat.set(6.4, towerParams.levels * 1.05);
   const metalTexture = createMetalTexture();
   metalTexture.repeat.set(2, 6);
   const neonTexture = createNeonTexture();
@@ -180,8 +180,8 @@ function init3DScene() {
   const totalHeight = levels * floorHeight;
   for (let level = 0; level < levels; level++) {
     const t = level / levels;
-    const width = baseWidth - (baseWidth - topWidth) * Math.pow(t, 1.32);
-    const depth = width * 0.82;
+    const width = baseWidth - (baseWidth - topWidth) * Math.pow(t, 1.2);
+    const depth = width * 0.94;
     const floorGeometry = new THREE.BoxGeometry(width, floorHeight, depth);
     const floor = new THREE.Mesh(floorGeometry, mainMaterial.clone());
     floor.material.map = facadeTexture.clone();
@@ -194,6 +194,14 @@ function init3DScene() {
     );
     glassLayer.position.y = floor.position.y;
     towerGroup.add(glassLayer);
+    if (level % 4 === 0) {
+      const core = new THREE.Mesh(
+        new THREE.BoxGeometry(width * 0.62, floorHeight * 0.95, depth * 0.62),
+        detailMaterial.clone(),
+      );
+      core.position.y = floor.position.y;
+      towerGroup.add(core);
+    }
     if (level % 3 === 0) {
       const brace = new THREE.Mesh(
         new THREE.BoxGeometry(width * 1.05, 0.12, depth * 1.05),
@@ -798,66 +806,53 @@ function animate3D() {
     typeof window.__towerScrollProgress === "number"
       ? window.__towerScrollProgress
       : Math.min(scrollY / maxScroll, 1);
-  const easedProgress = Math.pow(scrollProgress, 0.9);
+  const easedProgress = Math.pow(scrollProgress, 0.92);
   const totalHeight = towerParams.levels * towerParams.floorHeight;
-  const sectionCount = Math.max(1, (towerSections.length || 1) - 1);
-  const sectionFloat = easedProgress * sectionCount;
-  const progressSections = sectionCount > 0 ? Math.min(sectionFloat / sectionCount, 1) : easedProgress;
-  const focusRatio = Math.min(1, 0.28 + progressSections * 0.92);
-  const focusHeight = totalHeight * focusRatio;
-  const orbitalRadius = 42 - easedProgress * 26;
-  const baseAngle = easedProgress * Math.PI * 1.6 + Math.sin(elapsed * 0.18) * 0.05;
-  const zoomZ = 86 - easedProgress * 72;
-  const heightOffset = 18 + easedProgress * 44;
-  const targetX = Math.sin(baseAngle) * orbitalRadius * 0.42;
-  const targetY = focusHeight + heightOffset;
-  const targetZ = zoomZ;
+  const scaleFactor = towerGroup ? towerGroup.scale.y : 1;
+  const scaledHeight = totalHeight * scaleFactor;
+  const focusY = lerp(scaledHeight * 0.25, scaledHeight + 64, easedProgress);
+  const targetX = 18;
+  const targetY = lerp(56, scaledHeight + 140, easedProgress);
+  const targetZ = lerp(118, 60, easedProgress);
   if (reusableVector) {
     reusableVector.set(targetX, targetY, targetZ);
-    camera.position.lerp(reusableVector, 0.06);
+    camera.position.lerp(reusableVector, 0.08);
   } else {
-    camera.position.lerp(new THREE.Vector3(targetX, targetY, targetZ), 0.06);
+    camera.position.lerp(new THREE.Vector3(targetX, targetY, targetZ), 0.08);
   }
-  const lookAtY = lerp(totalHeight * 0.35, totalHeight + 10, easedProgress);
-  camera.lookAt(0, lookAtY, 0);
-  const desiredRotation = baseAngle;
-  towerGroup.rotation.y += (desiredRotation - towerGroup.rotation.y) * 0.08;
-  towerGroup.position.y = 3.4 + Math.sin(elapsed * 0.24) * 0.3 + easedProgress * 1.6;
-  const desiredFov = 40 - easedProgress * 10;
+  camera.lookAt(0, focusY, 0);
+  if (towerGroup) {
+    towerGroup.rotation.y += (0 - towerGroup.rotation.y) * 0.12;
+    towerGroup.position.y = 0;
+  }
+  const desiredFov = lerp(42, 34, easedProgress);
   if (typeof camera.fov === "number") {
     camera.fov += (desiredFov - camera.fov) * 0.08;
     camera.updateProjectionMatrix();
   }
   const { halo, orbiters, panels = [], pods = [] } = towerGroup.userData || {};
   if (halo) {
-    halo.rotation.z += 0.004;
-    halo.material.opacity = 0.2 + easedProgress * 0.25 + Math.sin(elapsed * 1.5) * 0.06;
+    halo.rotation.z = 0;
+    halo.material.opacity = 0.28 + easedProgress * 0.32;
   }
   if (orbiters) {
     orbiters.forEach((orbiter) => {
-      const angle = elapsed * orbiter.speed + orbiter.offset;
-      const radiusBoost = 1 + focusRatio * 0.35;
-      orbiter.mesh.position.x = Math.cos(angle) * orbiter.radius * radiusBoost;
-      orbiter.mesh.position.z = Math.sin(angle) * orbiter.radius * radiusBoost;
-      orbiter.mesh.position.y =
-        totalHeight * (0.25 + orbiter.radius * 0.01) +
-        Math.sin(elapsed * 0.6 + orbiter.offset) * 0.18;
+      const baseAngle = orbiter.offset || 0;
+      const radius = orbiter.radius || 5;
+      const baseHeight = totalHeight * (0.22 + orbiter.radius * 0.01);
+      orbiter.mesh.position.x = Math.cos(baseAngle) * radius;
+      orbiter.mesh.position.z = Math.sin(baseAngle) * radius;
+      orbiter.mesh.position.y = baseHeight;
     });
   }
-  panels.forEach((panel, index) => {
+  panels.forEach((panel) => {
     const data = panel.userData || {};
-    const base = data.angleOffset || 0;
+    const baseAngle = data.angleOffset || 0;
     const radius = data.radius || 1;
     const height = data.height || panel.position.y;
-    const wobble = Math.sin(elapsed * 0.6 + index) * 0.1;
-    const angle = base + easedProgress * 0.9 + wobble * 0.1;
-    const radiusBoost = radius * (1 + Math.sin(elapsed * 0.4 + index) * 0.015);
-    panel.position.x = Math.cos(angle) * radiusBoost;
-    panel.position.z = Math.sin(angle) * radiusBoost;
-    panel.position.y = height + Math.sin(elapsed * 0.5 + index) * 0.05;
-    if (panel.material) {
-      panel.material.opacity = 0.65 + 0.2 * Math.sin(elapsed * 1.4 + index);
-    }
+    panel.position.x = Math.cos(baseAngle) * radius;
+    panel.position.z = Math.sin(baseAngle) * radius;
+    panel.position.y = height;
     if (reusableVector) {
       reusableVector.set(0, height, 0);
       panel.lookAt(reusableVector);
@@ -865,17 +860,15 @@ function animate3D() {
       panel.lookAt(new THREE.Vector3(0, height, 0));
     }
   });
-  pods.forEach((pod, index) => {
+  pods.forEach((pod) => {
     const data = pod.userData || {};
     const radius = data.radius || 1;
     const baseHeight = data.baseHeight || pod.position.y;
-    const baseAngleOffset = data.angleOffset || 0;
-    const orbitAngle = baseAngleOffset + elapsed * 0.18 + easedProgress * 1.1;
-    const verticalOffset = Math.sin(elapsed * 0.8 + index) * 0.22;
-    pod.position.x = Math.cos(orbitAngle) * radius;
-    pod.position.y = baseHeight + verticalOffset;
-    pod.position.z = Math.sin(orbitAngle) * radius;
-    pod.lookAt(0, baseHeight + verticalOffset, 0);
+    const baseAngle = data.angleOffset || 0;
+    pod.position.x = Math.cos(baseAngle) * radius;
+    pod.position.y = baseHeight;
+    pod.position.z = Math.sin(baseAngle) * radius;
+    pod.lookAt(0, baseHeight, 0);
   });
   windowMeshes.forEach((data) => {
     const intensity =
