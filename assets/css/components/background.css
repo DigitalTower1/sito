@@ -31,9 +31,9 @@
   pointer-events: none;
   z-index: 1;
   overflow: hidden;
-  opacity: calc(0.1 + var(--cloud-progress) * 0.4);
+  opacity: calc(0.18 + var(--cloud-progress) * 0.35);
   transition: opacity 0.6s ease;
-  mix-blend-mode: screen;
+  perspective: 1400px;
 }
 
 .cloud-layer .cloud {
@@ -41,25 +41,45 @@
   width: clamp(220px, 32vw, 420px);
   height: clamp(120px, 18vw, 240px);
   border-radius: 50%;
+  background:
+    radial-gradient(circle at 28% 32%, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.65) 48%, transparent 78%),
+    radial-gradient(circle at 72% 38%, rgba(233, 243, 255, 0.9), rgba(206, 224, 255, 0.55) 55%, transparent 86%),
+    radial-gradient(circle at 50% 68%, rgba(192, 210, 240, 0.75), rgba(152, 176, 215, 0.45) 65%, transparent 95%);
+  box-shadow: 0 26px 58px rgba(5, 15, 30, 0.38);
   animation: cloudFloat var(--cloud-speed, 72s) ease-in-out infinite;
   will-change: transform;
+  transform-style: preserve-3d;
 }
 
 .cloud-layer .cloud::before {
   content: "";
   position: absolute;
-  inset: -20% -10%;
+  inset: -22% -18% -14% -18%;
   border-radius: 50%;
   background:
-    radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.7), transparent 70%),
-    radial-gradient(circle at 70% 60%, rgba(200, 220, 255, 0.55), transparent 75%),
-    radial-gradient(circle at 50% 50%, rgba(180, 210, 240, 0.45), transparent 80%);
-  filter: blur(22px);
-  opacity: calc(0.18 + var(--cloud-progress) * 0.5);
-  transform: scale(calc(1 + var(--cloud-progress) * var(--cloud-grow, 0.4)));
+    radial-gradient(circle at 35% 40%, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.55) 58%, transparent 82%),
+    radial-gradient(circle at 68% 30%, rgba(236, 244, 255, 0.9), rgba(236, 244, 255, 0.42) 60%, transparent 88%),
+    radial-gradient(circle at 52% 78%, rgba(202, 220, 248, 0.7), rgba(182, 204, 238, 0.4) 70%, transparent 90%);
+  transform: translate3d(0, 0, 42px) scale(calc(1 + var(--cloud-progress) * var(--cloud-grow, 0.4)));
+  opacity: calc(0.68 + var(--cloud-progress) * 0.25);
   transition:
     opacity 0.6s ease,
     transform 0.6s ease;
+}
+
+.cloud-layer .cloud::after {
+  content: "";
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  bottom: -24%;
+  height: 42%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(8, 14, 24, 0.45), transparent 65%);
+  filter: blur(10px);
+  opacity: calc(0.28 + var(--cloud-progress) * 0.22);
+  transform: translate3d(0, 16px, -48px) scale(1.15, 0.85);
+  transition: opacity 0.6s ease;
 }
 
 .cloud-layer .cloud.cloud--1 {
