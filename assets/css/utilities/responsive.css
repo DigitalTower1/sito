@@ -1,0 +1,78 @@
+@media (max-width: 1024px) {
+  .nav-menu {
+    display: none;
+  }
+  .vault-card,
+  .testimonial-card,
+  .blog-card,
+  .team-card {
+    min-width: 280px;
+    max-width: 280px;
+  }
+  .vault-card {
+    height: 380px;
+  }
+  #tower3DContainer {
+    opacity: 0.4 !important;
+    width: clamp(280px, 50vw, 400px);
+  }
+  .sub-footer {
+    grid-template-columns: 1fr 1fr;
+  }
+  .cursor,
+  .cursor-follower {
+    display: none;
+  }
+}
+@media (max-width: 768px) {
+  nav {
+    padding: 1rem 5%;
+  }
+  section {
+    padding: 5rem 5%;
+  }
+  .section-content {
+    padding: 2.5rem 1.5rem;
+  }
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  .vault-card,
+  .testimonial-card,
+  .blog-card,
+  .team-card {
+    min-width: 260px;
+    max-width: 260px;
+  }
+  .vault-card {
+    height: 360px;
+  }
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+  .sub-footer {
+    grid-template-columns: 1fr;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+  .hero-title {
+    font-size: clamp(2.5rem, 7vw, 5rem);
+  }
+}
+@media (max-width: 480px) {
+  .section-content {
+    padding: 2rem 1rem;
+  }
+  .vault-card,
+  .testimonial-card,
+  .blog-card,
+  .team-card {
+    min-width: 240px;
+    max-width: 240px;
+  }
+  .mobile-menu {
+    max-width: 100%;
+  }
+}
