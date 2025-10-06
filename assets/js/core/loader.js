@@ -2,11 +2,12 @@
   const loaderText = document.getElementById("loaderText");
   const loaderBar = document.getElementById("loaderBar");
   const loader = document.getElementById("loader");
+  const loaderProgress = document.getElementById("loaderProgress");
   const mainNav = document.getElementById("mainNav");
   const lightGlow1 = document.getElementById("lightGlow1");
   const lightGlow2 = document.getElementById("lightGlow2");
 
-  const message = "SCALIAMO INSIEME LA TORRE DEL SUCCESSO";
+  const message = "Scaliamo insieme la torre del successo";
 
   function buildLoaderText() {
     if (!loaderText || !message) {
@@ -46,6 +47,9 @@
 
   function revealSite() {
     if (loader) {
+      if (loaderProgress) {
+        loaderProgress.textContent = "100%";
+      }
       loader.classList.add("hidden");
     }
     window.setTimeout(() => {
@@ -64,8 +68,11 @@
 
     let progress = 0;
     const interval = window.setInterval(() => {
-      progress = Math.min(100, progress + Math.random() * 8);
+      progress = Math.min(100, progress + 3 + Math.random() * 7);
       loaderBar.style.width = `${progress}%`;
+      if (loaderProgress) {
+        loaderProgress.textContent = `${Math.round(progress)}%`;
+      }
 
       if (progress >= 100) {
         window.clearInterval(interval);

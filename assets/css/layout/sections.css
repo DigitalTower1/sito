@@ -1,10 +1,10 @@
 section {
-  min-height: 105vh;
+  min-height: 112vh;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   position: relative;
-  padding: 7.5rem var(--left) 11rem 5%;
+  padding: 9rem var(--left) 12.5rem 5%;
   overflow: visible;
   opacity: 0;
   transform: translateY(60px);
@@ -18,12 +18,12 @@ section.visible {
   transform: translateY(0);
 }
 .section-content {
-  max-width: 900px;
+  max-width: min(100%, 1040px);
   width: 100%;
   text-align: left;
   z-index: 20;
   position: relative;
-  padding: 3rem;
+  padding: 3.5rem;
   border-radius: 15px;
 }
 .section-bg {
@@ -31,9 +31,9 @@ section.visible {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 70%;
-  max-width: 900px;
-  height: 80%;
+  width: 78%;
+  max-width: 1040px;
+  height: 82%;
   z-index: -1;
   background-size: cover;
   background-position: center;
@@ -168,7 +168,6 @@ section.visible .section-text {
   background-size: 300% 100%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-transform: uppercase;
   letter-spacing: -0.03em;
   filter: drop-shadow(0 3px 20px rgba(255, 107, 53, 0.6));
   animation: heroFloat 4s ease-in-out infinite;

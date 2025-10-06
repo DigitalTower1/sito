@@ -10,12 +10,12 @@
     return;
   }
 
-  let mouseX = -50;
-  let mouseY = -50;
-  let cursorX = -50;
-  let cursorY = -50;
-  let followerX = -50;
-  let followerY = -50;
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let cursorX = mouseX;
+  let cursorY = mouseY;
+  let followerX = mouseX;
+  let followerY = mouseY;
   let cursorScale = 1;
   let followerScale = 1;
   let rafId = 0;
@@ -26,10 +26,10 @@
   }
 
   function updateCursor() {
-    cursorX += (mouseX - cursorX) * 0.12;
-    cursorY += (mouseY - cursorY) * 0.12;
-    followerX += (mouseX - followerX) * 0.06;
-    followerY += (mouseY - followerY) * 0.06;
+    cursorX += (mouseX - cursorX) * 0.35;
+    cursorY += (mouseY - cursorY) * 0.35;
+    followerX += (mouseX - followerX) * 0.12;
+    followerY += (mouseY - followerY) * 0.12;
 
     applyTransforms();
     rafId = window.requestAnimationFrame(updateCursor);
@@ -51,6 +51,10 @@
       mouseX = event.clientX;
       mouseY = event.clientY;
       if (!rafId) {
+        cursorX = mouseX;
+        cursorY = mouseY;
+        followerX = mouseX;
+        followerY = mouseY;
         rafId = window.requestAnimationFrame(updateCursor);
       }
     },

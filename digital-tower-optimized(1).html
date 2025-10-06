@@ -41,7 +41,10 @@
     <link rel="stylesheet" href="assets/css/components/background.css" />
     <link rel="stylesheet" href="assets/css/components/cursor.css" />
     <link rel="stylesheet" href="assets/css/layout/navigation.css" />
-    <link rel="stylesheet" href="assets/css/components/progress.css" />
+    <link
+      rel="stylesheet"
+      href="assets/css/components/scroll-indicators.css"
+    />
     <link rel="stylesheet" href="assets/css/layout/sections.css" />
     <link rel="stylesheet" href="assets/css/components/cards.css" />
     <link rel="stylesheet" href="assets/css/components/forms.css" />
@@ -124,6 +127,7 @@
         </g>
       </svg>
       <div class="loader-text" id="loaderText"></div>
+      <div class="loader-progress" id="loaderProgress">0%</div>
       <div class="loader-bar-wrap">
         <div class="loader-bar" id="loaderBar"></div>
       </div>
@@ -188,7 +192,7 @@
           <a
             href="javascript:void(0)"
             onclick="scrollToSection('contact')"
-            class="nav-cta"
+            class="nav-cta button-glow"
             >CONSULENZA</a
           >
         </li>
@@ -265,7 +269,7 @@
           <a
             href="javascript:void(0)"
             onclick="scrollToSection('contact');closeMobileMenu()"
-            class="nav-cta"
+            class="nav-cta button-glow"
             >CONSULENZA</a
           >
         </li>
@@ -289,7 +293,7 @@
     <section class="hero" id="hero">
       <div class="section-content">
         <h1 class="hero-title">
-          RENDIAMO LA TUA VISIONE UNA REALTÀ TANGIBILE
+          Rendiamo la tua visione una realtà tangibile
         </h1>
         <p class="section-text">
           Qui inizia il viaggio che trasforma intuizioni coraggiose in traguardi
@@ -304,7 +308,12 @@
         >
       </div>
     </section>
-    <div class="scroll-indicator" onclick="scrollToSection('about')">
+    <div
+      class="scroll-indicator"
+      onclick="scrollToSection('about')"
+      role="button"
+      aria-label="Scorri verso Chi Siamo"
+    >
       <span class="scroll-text">Scroll</span>
       <div class="scroll-icon"></div>
     </div>
@@ -322,7 +331,12 @@
         </p>
       </div>
     </section>
-    <div class="scroll-indicator" onclick="scrollToSection('mission')">
+    <div
+      class="scroll-indicator"
+      onclick="scrollToSection('mission')"
+      role="button"
+      aria-label="Scorri verso La Missione"
+    >
       <span class="scroll-text">Scroll</span>
       <div class="scroll-icon"></div>
     </div>
@@ -341,7 +355,12 @@
         </p>
       </div>
     </section>
-    <div class="scroll-indicator" onclick="scrollToSection('vision')">
+    <div
+      class="scroll-indicator"
+      onclick="scrollToSection('vision')"
+      role="button"
+      aria-label="Scorri verso La Visione"
+    >
       <span class="scroll-text">Scroll</span>
       <div class="scroll-icon"></div>
     </div>
@@ -360,7 +379,12 @@
         </p>
       </div>
     </section>
-    <div class="scroll-indicator" onclick="scrollToSection('values')">
+    <div
+      class="scroll-indicator"
+      onclick="scrollToSection('values')"
+      role="button"
+      aria-label="Scorri verso I Nostri Valori"
+    >
       <span class="scroll-text">Scroll</span>
       <div class="scroll-icon"></div>
     </div>
@@ -626,7 +650,12 @@
         </div>
       </div>
     </section>
-    <div class="scroll-indicator" onclick="scrollToSection('team')">
+    <div
+      class="scroll-indicator"
+      onclick="scrollToSection('team')"
+      role="button"
+      aria-label="Scorri verso Il Team"
+    >
       <span class="scroll-text">Scroll</span>
       <div class="scroll-icon"></div>
     </div>
@@ -804,7 +833,12 @@
         </div>
       </div>
     </section>
-    <div class="scroll-indicator" onclick="scrollToSection('testimonials')">
+    <div
+      class="scroll-indicator"
+      onclick="scrollToSection('testimonials')"
+      role="button"
+      aria-label="Scorri verso le Testimonianze"
+    >
       <span class="scroll-text">Scroll</span>
       <div class="scroll-icon"></div>
     </div>
@@ -829,7 +863,7 @@
               <p class="testimonial-meta">Co-founder · Atelier Aurora · Milano</p>
             </article>
             <article class="testimonial-card">
-              <img src="https://images.unsplash.com/photo-1545963326-240c63a270d8?w=200&auto=format&fit=crop&q=80" alt="ritratto di Lorenzo De Luca" class="testimonial-photo" />
+              <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&auto=format&fit=crop&q=80" alt="ritratto di Lorenzo De Luca" class="testimonial-photo" />
               <blockquote>“Un partner affidabile che unisce creatività e numeri: ora il nostro e-commerce parla davvero ai clienti giusti.”</blockquote>
               <p class="testimonial-name">Lorenzo De Luca</p>
               <p class="testimonial-meta">CEO · Vinitaly Boutique · Verona</p>
@@ -871,7 +905,7 @@
               <p class="testimonial-meta">Founder · Greco Consulting · Roma</p>
             </article>
             <article class="testimonial-card">
-              <img src="https://images.unsplash.com/photo-1522092787785-85198b5a1c89?w=200&auto=format&fit=crop&q=80" alt="ritratto di Irene Salvatori" class="testimonial-photo" />
+              <img src="https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?w=200&auto=format&fit=crop&q=80" alt="ritratto di Irene Salvatori" class="testimonial-photo" />
               <blockquote>“Team attento, disponibile, concreto. Abbiamo ridotto il costo lead del 36% mantenendo alta la qualità.”</blockquote>
               <p class="testimonial-name">Irene Salvatori</p>
               <p class="testimonial-meta">CMO · Salvatori Travel · Genova</p>
@@ -894,7 +928,12 @@
         </div>
       </div>
     </section>
-    <div class="scroll-indicator" onclick="scrollToSection('blog')">
+    <div
+      class="scroll-indicator"
+      onclick="scrollToSection('blog')"
+      role="button"
+      aria-label="Scorri verso il Blog"
+    >
       <span class="scroll-text">Scroll</span>
       <div class="scroll-icon"></div>
     </div>
@@ -1004,7 +1043,12 @@
         </div>
       </div>
     </section>
-    <div class="scroll-indicator" onclick="scrollToSection('contact')">
+    <div
+      class="scroll-indicator"
+      onclick="scrollToSection('contact')"
+      role="button"
+      aria-label="Scorri verso i Contatti"
+    >
       <span class="scroll-text">Scroll</span>
       <div class="scroll-icon"></div>
     </div>
@@ -1162,7 +1206,9 @@
               placeholder="La tua email"
               required
             />
-            <button type="submit" class="newsletter-btn">Iscriviti</button>
+            <button type="submit" class="newsletter-btn button-glow">
+              Iscriviti
+            </button>
           </form>
         </div>
       </div>

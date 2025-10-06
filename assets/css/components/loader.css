@@ -51,7 +51,6 @@
   letter-spacing: 0.25em;
   color: var(--gold);
   margin-bottom: 2rem;
-  text-transform: uppercase;
   text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
   text-align: center;
 }
@@ -60,6 +59,15 @@
   opacity: 0;
   animation: fadeIn 0.5s forwards;
   animation-delay: calc(var(--i) * 0.05s);
+}
+.loader-progress {
+  font-size: clamp(1.1rem, 3vw, 1.6rem);
+  font-weight: 700;
+  color: rgba(255, 215, 0, 0.9);
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  text-shadow: 0 0 12px rgba(212, 175, 55, 0.6);
 }
 @keyframes fadeIn {
   to {

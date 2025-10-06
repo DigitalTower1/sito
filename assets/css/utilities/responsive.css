@@ -2,6 +2,9 @@
   .nav-menu {
     display: none;
   }
+  section {
+    min-height: auto;
+  }
   .vault-card,
   .testimonial-card,
   .blog-card,
@@ -33,6 +36,10 @@
   }
   .section-content {
     padding: 2.5rem 1.5rem;
+  }
+  .mobile-menu .nav-cta {
+    width: 100%;
+    justify-content: center;
   }
   .form-row {
     grid-template-columns: 1fr;
