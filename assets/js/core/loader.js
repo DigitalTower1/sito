@@ -9,6 +9,10 @@ text.split("").forEach((c, i) => {
 });
 
 let progress = 0,
+  scene,
+  camera,
+  renderer,
+  towerGroup,
   isScrolling = !1,
   hasScrolled = !1;
 const loaderBar = document.getElementById("loaderBar"),
