@@ -3,7 +3,7 @@
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: min(100vw, 1200px);
+  width: min(100vw, 1400px);
   height: 100vh;
   z-index: 0;
   pointer-events: none;
@@ -45,4 +45,133 @@
 }
 .light-glow.active {
   opacity: 1;
+}
+
+.tower-atmosphere {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  display: block;
+}
+
+.tower-halo,
+.tower-reflection,
+.tower-glimmer {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.tower-halo {
+  bottom: 18vh;
+  width: clamp(420px, 48vw, 720px);
+  height: clamp(420px, 48vw, 720px);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 214, 153, 0.18), transparent 65%);
+  filter: blur(120px);
+  opacity: 0.35;
+  animation: haloPulse 12s ease-in-out infinite;
+}
+
+.tower-halo--core {
+  bottom: 22vh;
+  width: clamp(320px, 38vw, 560px);
+  height: clamp(320px, 38vw, 560px);
+  background: radial-gradient(circle, rgba(255, 220, 180, 0.35), transparent 70%);
+  filter: blur(90px);
+  opacity: 0.45;
+}
+
+.tower-halo--ring {
+  background: radial-gradient(circle, rgba(116, 209, 255, 0.18), transparent 68%);
+  animation-delay: -4s;
+}
+
+.tower-reflection {
+  bottom: 6vh;
+  width: clamp(520px, 56vw, 880px);
+  height: clamp(120px, 12vw, 220px);
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(10, 24, 42, 0.65), transparent 70%);
+  filter: blur(40px);
+  opacity: 0.45;
+  mix-blend-mode: soft-light;
+}
+
+.tower-reflection--ground {
+  bottom: 4vh;
+  background: radial-gradient(ellipse at center, rgba(10, 24, 42, 0.75), transparent 75%);
+  filter: blur(55px);
+}
+
+.tower-reflection--streak {
+  bottom: 28vh;
+  width: clamp(80px, 10vw, 120px);
+  height: clamp(360px, 52vh, 540px);
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255, 212, 120, 0.65), transparent 80%);
+  filter: blur(26px);
+  opacity: 0.35;
+  animation: glowSweep 9s ease-in-out infinite;
+}
+
+.tower-glimmer {
+  bottom: 30vh;
+  width: clamp(12px, 1vw, 18px);
+  height: clamp(220px, 30vh, 360px);
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.45), transparent 90%);
+  filter: blur(10px);
+  opacity: 0.18;
+  animation: glimmerDance 6s ease-in-out infinite;
+}
+
+.tower-glimmer--left {
+  left: calc(50% - clamp(120px, 14vw, 220px));
+  animation-delay: -1.5s;
+}
+
+.tower-glimmer--right {
+  left: calc(50% + clamp(120px, 14vw, 220px));
+  animation-delay: -3.5s;
+}
+
+@keyframes haloPulse {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: translateX(-50%) scale(0.92);
+  }
+  50% {
+    opacity: 0.45;
+    transform: translateX(-50%) scale(1.06);
+  }
+}
+
+@keyframes glowSweep {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: translate(-50%, -5%) scaleY(0.85);
+  }
+  45%,
+  55% {
+    opacity: 0.5;
+    transform: translate(-50%, 5%) scaleY(1.05);
+  }
+}
+
+@keyframes glimmerDance {
+  0%,
+  100% {
+    opacity: 0.1;
+    transform: translateX(-50%) scaleY(0.85);
+  }
+  50% {
+    opacity: 0.22;
+    transform: translateX(-50%) scaleY(1.08);
+  }
 }

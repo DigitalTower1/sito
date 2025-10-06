@@ -71,11 +71,6 @@
         skipNextClick = false;
         return;
       }
-      if (event.target.closest(".vault-close")) {
-        event.preventDefault();
-        closeCard(card);
-        return;
-      }
       if (event.target.closest("a")) {
         return;
       }
