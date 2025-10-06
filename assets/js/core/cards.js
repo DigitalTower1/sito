@@ -131,7 +131,13 @@
     }
     card.setAttribute("aria-expanded", "false");
 
+    let skipNextClick = false;
+
     card.addEventListener("click", (event) => {
+      if (skipNextClick) {
+        skipNextClick = false;
+        return;
+      }
       onCardClick(card, event);
     });
 
@@ -139,6 +145,7 @@
       "pointerdown",
       (event) => {
         if (event.pointerType === "touch") {
+          skipNextClick = true;
           onCardClick(card, event);
         }
       },
