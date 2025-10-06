@@ -1,0 +1,90 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+body {
+  font-family: Montserrat, sans-serif;
+  background: #000;
+  color: var(--white);
+  overflow-x: hidden;
+  cursor: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.button-glow {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.85rem 1.8rem;
+  border-radius: 6px;
+  background: linear-gradient(135deg, var(--orange), var(--gold));
+  color: #0b101a;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.78rem;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+  overflow: hidden;
+  box-shadow:
+    0 10px 24px rgba(255, 107, 53, 0.38),
+    0 0 18px rgba(255, 215, 0, 0.3);
+}
+
+.button-glow::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  background: linear-gradient(135deg, var(--orange), var(--gold));
+  filter: blur(18px);
+  opacity: 0.6;
+  z-index: -1;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  animation: buttonGlowPulse 3s ease-in-out infinite;
+}
+
+.button-glow:hover,
+.button-glow:focus-visible {
+  transform: translateY(-2px);
+  box-shadow:
+    0 16px 32px rgba(255, 107, 53, 0.55),
+    0 0 28px rgba(255, 215, 0, 0.4);
+}
+
+.button-glow:hover::before,
+.button-glow:focus-visible::before {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.button-glow:focus-visible {
+  outline: 2px solid rgba(255, 215, 0, 0.65);
+  outline-offset: 4px;
+}
+
+@keyframes buttonGlowPulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+}
+@media (max-width: 1024px) {
+  body {
+    cursor: auto;
+  }
+}
