@@ -247,6 +247,17 @@ section.visible .section-text {
   width: 500px;
   height: 500px;
 }
+
+.blog-section-actions {
+  margin-top: clamp(1.8rem, 3vw, 2.4rem);
+  display: flex;
+  justify-content: center;
+}
+
+.blog-section-actions .button-glow {
+  min-width: 220px;
+  text-align: center;
+}
 .services-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));

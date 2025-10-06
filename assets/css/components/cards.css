@@ -2,7 +2,7 @@
 .slider-container {
   position: relative;
   margin-top: 3rem;
-  padding: 3rem 1.5rem 1.5rem 2.2rem;
+  padding: clamp(4rem, 6vw, 5rem) 1.5rem 1.8rem clamp(2.2rem, 4vw, 2.8rem);
   overflow: visible;
 }
 
@@ -78,9 +78,9 @@
   position: relative;
   flex: 0 0 clamp(260px, 24vw, 320px);
   height: clamp(360px, 52vh, 440px);
-  margin-block-start: clamp(3.6rem, 5.4vw, 4.8rem);
-  margin-inline-start: clamp(2.8rem, 5vw, 3.8rem);
-  margin-block-end: clamp(2.2rem, 3.6vw, 3rem);
+  margin-block-start: clamp(4.4rem, 6.2vw, 5.4rem);
+  margin-inline-start: clamp(3.4rem, 5.6vw, 4.2rem);
+  margin-block-end: clamp(2.4rem, 3.8vw, 3.2rem);
   perspective: 1600px;
   transform-style: preserve-3d;
   transition:
@@ -132,13 +132,11 @@
   -webkit-backface-visibility: hidden;
   overflow: hidden;
   background:
-    radial-gradient(circle at 18% 22%, rgba(255, 215, 0, 0.25), rgba(255, 215, 0, 0.05) 65%),
-    linear-gradient(155deg, rgba(17, 30, 46, 0.98), rgba(5, 12, 20, 0.98)),
-    linear-gradient(0deg, rgba(7, 12, 20, 0.98), rgba(7, 12, 20, 0.98));
-  background-blend-mode: screen, normal;
-  border: 1px solid rgba(212, 175, 55, 0.25);
+    radial-gradient(circle at 22% 18%, rgba(255, 213, 120, 0.28), transparent 65%),
+    linear-gradient(155deg, rgba(16, 29, 44, 0.98), rgba(6, 12, 20, 0.98));
+  border: 1px solid rgba(212, 175, 55, 0.28);
   box-shadow:
-    inset 0 0 22px rgba(255, 215, 0, 0.08),
+    inset 0 0 22px rgba(255, 215, 0, 0.12),
     0 24px 46px rgba(0, 0, 0, 0.55);
 }
 
@@ -148,6 +146,9 @@
   opacity: 1;
   visibility: visible;
   transition: opacity 0.35s ease, visibility 0.35s ease;
+  background:
+    radial-gradient(circle at 22% 18%, rgba(255, 213, 120, 0.32), transparent 60%),
+    linear-gradient(160deg, rgba(20, 36, 54, 0.98), rgba(8, 13, 21, 0.98));
 }
 
 .vault-face.vault-content {
@@ -157,13 +158,10 @@
   gap: 1.2rem;
   text-align: left;
   background:
-    radial-gradient(circle at 78% 12%, rgba(255, 210, 150, 0.35), rgba(24, 40, 58, 0.18) 70%),
-    linear-gradient(172deg, rgba(12, 24, 38, 0.98), rgba(28, 48, 70, 0.98)),
-    linear-gradient(0deg, rgba(7, 12, 20, 0.98), rgba(7, 12, 20, 0.98));
+    radial-gradient(circle at 78% 12%, rgba(90, 200, 255, 0.2), transparent 70%),
+    linear-gradient(172deg, rgba(12, 24, 38, 0.98), rgba(22, 36, 52, 0.98));
   pointer-events: none;
-  overflow-y: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  overflow: hidden;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.35s ease, visibility 0.35s ease;
@@ -297,7 +295,6 @@
   pointer-events: none;
   opacity: 0;
   visibility: hidden;
-  transform: rotateY(180deg);
 }
 
 .vault-card.is-active .vault-face.vault-content {

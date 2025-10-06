@@ -15,6 +15,36 @@ body {
   overflow-x: hidden;
   cursor: none;
   -webkit-font-smoothing: antialiased;
+  position: relative;
+  min-height: 100vh;
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::before {
+  background:
+    radial-gradient(circle at 10% 15%, rgba(55, 140, 175, 0.25), transparent 55%),
+    radial-gradient(circle at 80% 12%, rgba(255, 147, 80, 0.18), transparent 62%),
+    radial-gradient(circle at 50% 75%, rgba(22, 44, 62, 0.65), transparent 85%);
+  mix-blend-mode: screen;
+  opacity: 0.4;
+}
+
+body::after {
+  background:
+    linear-gradient(110deg, rgba(11, 22, 32, 0.7), rgba(6, 12, 20, 0.92)),
+    linear-gradient(200deg, rgba(58, 172, 189, 0.12), transparent 60%),
+    linear-gradient(20deg, rgba(255, 118, 60, 0.1), transparent 55%);
+  mix-blend-mode: overlay;
+  opacity: 0.4;
+  filter: saturate(1.1);
 }
 
 .visually-hidden {
@@ -51,6 +81,40 @@ body {
   box-shadow:
     0 10px 24px rgba(255, 107, 53, 0.38),
     0 0 18px rgba(255, 215, 0, 0.3);
+}
+
+.button-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.85rem 1.8rem;
+  border-radius: 8px;
+  border: 1px solid rgba(116, 209, 255, 0.35);
+  background: rgba(9, 16, 26, 0.65);
+  color: rgba(232, 238, 244, 0.92);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  cursor: pointer;
+}
+
+.button-outline:hover,
+.button-outline:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(255, 215, 0, 0.6);
+  box-shadow:
+    0 12px 26px rgba(0, 0, 0, 0.5),
+    0 0 18px rgba(116, 209, 255, 0.3);
+  color: #fff;
+}
+
+.button-outline:focus-visible {
+  outline: 2px solid rgba(116, 209, 255, 0.65);
+  outline-offset: 4px;
 }
 
 .button-glow::before {
