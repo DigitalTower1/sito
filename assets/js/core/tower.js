@@ -8,8 +8,8 @@ let towerSections = [];
 const reusableVector = window.THREE ? new THREE.Vector3() : null;
 const towerParams = {
   levels: 84,
-  baseWidth: 12.2,
-  topWidth: 4.6,
+  baseWidth: 14.8,
+  topWidth: 5.6,
   floorHeight: 1.85,
 };
 const lerp = (a, b, t) => a + (b - a) * t;
@@ -123,7 +123,7 @@ function init3DScene() {
     0.1,
     1000,
   );
-  camera.position.set(18, 56, 108);
+  camera.position.set(10, 68, 140);
   renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -144,8 +144,8 @@ function init3DScene() {
   scene.add(rimLight);
   towerGroup = new THREE.Group();
   towerGroup.userData = { halo: null, orbiters: [], panels: [], pods: [] };
-  towerGroup.scale.setScalar(2.85);
-  towerGroup.position.y = 0;
+  towerGroup.scale.setScalar(3.25);
+  towerGroup.position.y = 3;
   scene.add(towerGroup);
   const facadeTexture = createFacadeTexture();
   facadeTexture.repeat.set(6.4, towerParams.levels * 1.05);
@@ -810,10 +810,10 @@ function animate3D() {
   const totalHeight = towerParams.levels * towerParams.floorHeight;
   const scaleFactor = towerGroup ? towerGroup.scale.y : 1;
   const scaledHeight = totalHeight * scaleFactor;
-  const focusY = lerp(scaledHeight * 0.25, scaledHeight + 64, easedProgress);
-  const targetX = 18;
-  const targetY = lerp(56, scaledHeight + 140, easedProgress);
-  const targetZ = lerp(118, 60, easedProgress);
+  const focusY = lerp(scaledHeight * 0.35, scaledHeight + 48, easedProgress);
+  const targetX = lerp(10, 2.5, easedProgress);
+  const targetY = lerp(72, scaledHeight + 128, easedProgress);
+  const targetZ = lerp(140, 78, easedProgress);
   if (reusableVector) {
     reusableVector.set(targetX, targetY, targetZ);
     camera.position.lerp(reusableVector, 0.08);
@@ -822,10 +822,11 @@ function animate3D() {
   }
   camera.lookAt(0, focusY, 0);
   if (towerGroup) {
-    towerGroup.rotation.y += (0 - towerGroup.rotation.y) * 0.12;
-    towerGroup.position.y = 0;
+    const rotationTarget = lerp(0.18, 0.06, easedProgress);
+    towerGroup.rotation.y += (rotationTarget - towerGroup.rotation.y) * 0.08;
+    towerGroup.position.y = lerp(3, 6, easedProgress);
   }
-  const desiredFov = lerp(42, 34, easedProgress);
+  const desiredFov = lerp(44, 32, easedProgress);
   if (typeof camera.fov === "number") {
     camera.fov += (desiredFov - camera.fov) * 0.08;
     camera.updateProjectionMatrix();

@@ -2,7 +2,7 @@
 .slider-container {
   position: relative;
   margin-top: 3rem;
-  padding: 2.5rem 0 1.25rem;
+  padding: 3rem 1.5rem 1.5rem 2.2rem;
   overflow: visible;
 }
 
@@ -13,7 +13,7 @@
   overflow-y: visible;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
-  padding-bottom: 0.5rem;
+  padding: 1.5rem 0 0.5rem 0.5rem;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -61,8 +61,8 @@
 #cardOverlay.card-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(2, 6, 12, 0.12);
-  backdrop-filter: blur(2px);
+  background: rgba(4, 8, 14, 0.18);
+  backdrop-filter: blur(4px);
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.35s ease, visibility 0.35s ease;
@@ -84,6 +84,8 @@ html.card-open {
   position: relative;
   flex: 0 0 clamp(260px, 24vw, 320px);
   height: clamp(360px, 50vh, 420px);
+  margin-block-start: 1.6rem;
+  margin-inline-start: 1rem;
   perspective: 1800px;
   transform-style: preserve-3d;
   transition:
@@ -288,14 +290,14 @@ html.card-open {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(1.05);
-  width: min(92vw, 660px);
-  height: min(88vh, 760px);
-  z-index: 950;
+  width: min(92vw, 680px);
+  height: min(90vh, 780px);
+  transform: translate(-50%, -50%) scale(1.08);
+  z-index: 1200;
   flex: 0 0 auto;
   box-shadow:
-    0 40px 120px rgba(0, 0, 0, 0.65),
-    0 0 55px rgba(255, 215, 0, 0.38);
+    0 42px 120px rgba(0, 0, 0, 0.65),
+    0 0 52px rgba(255, 215, 0, 0.36);
   border-radius: 22px;
   overflow: hidden;
   perspective: 2200px;
@@ -313,7 +315,7 @@ html.card-open {
 
 .vault-card.is-active .vault-face.vault-content {
   opacity: 1;
-  filter: brightness(1);
+  filter: brightness(1.08) saturate(1.05);
   pointer-events: auto;
   overflow-y: auto;
   padding: clamp(2rem, 3vw, 2.6rem);

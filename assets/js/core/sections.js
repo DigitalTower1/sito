@@ -4,6 +4,7 @@
   const mainNav = document.getElementById("mainNav");
   const heroSection = document.getElementById("hero");
   const contactSection = document.getElementById("contact");
+  const footer = document.querySelector("footer");
 
   let ticking = false;
 
@@ -33,7 +34,11 @@
     const contactBottom = contactSection
       ? contactSection.offsetTop + contactSection.offsetHeight
       : docHeight;
-    const range = Math.max(1, contactBottom - heroTop);
+    const footerBottom = footer
+      ? footer.offsetTop + footer.offsetHeight
+      : docHeight;
+    const rangeEnd = Math.max(contactBottom, footerBottom);
+    const range = Math.max(1, rangeEnd - heroTop);
     const viewportCenter = window.scrollY + window.innerHeight * 0.5;
     const rawProgress = (viewportCenter - heroTop) / range;
     window.__towerScrollProgress = clamp(rawProgress, 0, 1);
