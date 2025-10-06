@@ -15,7 +15,7 @@
   align-self: center;
 }
 
-section.visible .scroll-indicator {
+section.visible + .scroll-indicator {
   opacity: 0.9;
   transform: translateY(0);
 }

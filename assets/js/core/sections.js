@@ -41,7 +41,13 @@
 
   function updateIndicators() {
     scrollIndicators.forEach((indicator) => {
-      const section = indicator.closest("section");
+      let section = indicator.closest("section");
+      if (!section) {
+        const sibling = indicator.previousElementSibling;
+        if (sibling && sibling.tagName === "SECTION") {
+          section = sibling;
+        }
+      }
       const isActive = section ? section.classList.contains("visible") : false;
       indicator.classList.toggle("is-visible", isActive);
     });

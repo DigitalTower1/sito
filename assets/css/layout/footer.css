@@ -68,6 +68,9 @@ footer {
   border-radius: 4px;
 }
 .newsletter-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 0.8rem 1.5rem;
   background: linear-gradient(135deg, var(--orange), var(--gold));
   color: #000;
@@ -81,6 +84,7 @@ footer {
   transition: all 0.3s;
   position: relative;
   overflow: hidden;
+  text-decoration: none;
 }
 .newsletter-btn::before {
   content: "";
@@ -95,6 +99,18 @@ footer {
 .newsletter-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(255, 107, 53, 0.5);
+}
+
+@keyframes ctaPulse {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
 }
 .footer-bottom {
   display: flex;
