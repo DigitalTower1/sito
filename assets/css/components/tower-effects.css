@@ -1,8 +1,9 @@
 #tower3DContainer {
   position: fixed;
   top: 0;
-  right: 0;
-  width: clamp(420px, 55vw, 880px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(100vw, 1200px);
   height: 100vh;
   z-index: 0;
   pointer-events: none;

@@ -11,15 +11,17 @@
   .team-card {
     min-width: 280px;
     max-width: 280px;
-    margin-inline-start: 0.75rem;
-    margin-block-start: 1.2rem;
+    margin-inline-start: 1.1rem;
+    margin-block-start: 1.6rem;
   }
   .vault-card {
     height: 380px;
   }
   #tower3DContainer {
     opacity: 0.4 !important;
-    width: clamp(280px, 50vw, 400px);
+    width: min(90vw, 520px);
+    left: 50%;
+    transform: translateX(-50%);
   }
   .sub-footer {
     grid-template-columns: 1fr 1fr;
@@ -52,8 +54,8 @@
   .team-card {
     min-width: 260px;
     max-width: 260px;
-    margin-inline-start: 0.5rem;
-    margin-block-start: 1.1rem;
+    margin-inline-start: 0.9rem;
+    margin-block-start: 1.4rem;
   }
   .vault-card {
     height: 360px;
@@ -82,8 +84,8 @@
   .team-card {
     min-width: 240px;
     max-width: 240px;
-    margin-inline-start: 0.35rem;
-    margin-block-start: 1rem;
+    margin-inline-start: 0.75rem;
+    margin-block-start: 1.25rem;
   }
   .mobile-menu {
     max-width: 100%;
