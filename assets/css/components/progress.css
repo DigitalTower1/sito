@@ -6,6 +6,11 @@
   transform: translateX(-50%);
   width: 4px;
   height: 100vh;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  mix-blend-mode: screen;
   z-index: 999;
   pointer-events: none;
   opacity: 0;
@@ -23,6 +28,22 @@
   background: linear-gradient(
     180deg,
     rgba(255, 107, 53, 0) 0%,
+    rgba(255, 107, 53, 0.55) 12%,
+    rgba(212, 175, 55, 0.7) 42%,
+    rgba(74, 155, 142, 0.65) 78%,
+    rgba(74, 155, 142, 0) 100%
+  );
+  box-shadow:
+    0 0 25px rgba(212, 175, 55, 0.7),
+    0 0 45px rgba(255, 107, 53, 0.4);
+  transition:
+    height 0.12s linear,
+    filter 0.3s ease,
+    box-shadow 0.3s ease;
+  filter: blur(0.6px);
+  will-change: height;
+  animation: progressGlow 3s ease-in-out infinite;
+  mix-blend-mode: screen;
     rgba(255, 107, 53, 0.9) 15%,
     rgba(212, 175, 55, 0.95) 50%,
     rgba(74, 155, 142, 0.9) 85%,
@@ -50,6 +71,17 @@
       0 0 100px rgba(255, 107, 53, 0.7);
   }
 }
+.progress-bar.scroll-glow {
+  animation:
+    scrollSectionPulse 0.8s ease-out,
+    progressGlow 3s ease-in-out infinite;
+}
+.progress-bar.scroll-contact {
+  filter: blur(0.4px);
+  box-shadow:
+    0 0 30px rgba(255, 255, 255, 0.7),
+    0 0 70px rgba(255, 184, 0, 0.55);
+}
 .progress-bar::before {
   content: "";
   position: absolute;
@@ -65,6 +97,11 @@
     0 0 30px var(--orange);
   animation: dotPulse 2s ease-in-out infinite;
 }
+.progress-bar.scroll-glow::before {
+  animation:
+    dotPulse 2s ease-in-out infinite,
+    beamTip 0.8s ease-out;
+}
 @keyframes dotPulse {
   0%,
   100% {
@@ -76,6 +113,21 @@
     opacity: 0.8;
   }
 }
+@keyframes beamTip {
+  0% {
+    box-shadow:
+      0 0 12px rgba(255, 255, 255, 0.8),
+      0 0 28px rgba(255, 215, 0, 0.8);
+    transform: translateX(-50%) scale(1.2);
+  }
+  100% {
+    box-shadow:
+      0 0 8px rgba(255, 255, 255, 0.6),
+      0 0 18px rgba(255, 215, 0, 0.4);
+    transform: translateX(-50%) scale(1);
+  }
+}
+@keyframes scrollSectionPulse {
 .progress-bar.section-pulse {
   animation:
     sectionPulse 0.8s ease-out,
@@ -132,6 +184,23 @@ section.visible .scroll-indicator {
 }
 .scroll-indicator:hover {
   opacity: 1;
+}
+.scroll-indicator.pulse {
+  animation: scrollPulse 0.9s ease-out;
+}
+@keyframes scrollPulse {
+  0% {
+    transform: translateX(-50%) scale(1);
+    filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.3));
+  }
+  50% {
+    transform: translateX(-50%) scale(1.08);
+    filter: drop-shadow(0 0 16px rgba(255, 215, 0, 0.6));
+  }
+  100% {
+    transform: translateX(-50%) scale(1);
+    filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.3));
+  }
 }
 .scroll-text {
   font-size: 0.7rem;

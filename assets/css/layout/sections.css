@@ -57,6 +57,34 @@ section.visible {
   border-radius: 20px;
 }
 #hero .section-bg {
+  background-image: url("https://images.unsplash.com/photo-1529429617124-aee01c1fc2f0?w=1600&q=80&auto=format&fit=crop");
+}
+#about .section-bg {
+  background-image: url("https://images.unsplash.com/photo-1553877522-43269d4ea984?w=1600&q=80&auto=format&fit=crop");
+}
+#mission .section-bg {
+  background-image: url("https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1600&q=80&auto=format&fit=crop");
+}
+#vision .section-bg {
+  background-image: url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1600&q=80&auto=format&fit=crop");
+}
+#values .section-bg {
+  background-image: url("https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1600&q=80&auto=format&fit=crop");
+}
+#services .section-bg {
+  background-image: url("https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=1600&q=80&auto=format&fit=crop");
+}
+#team .section-bg {
+  background-image: url("https://images.unsplash.com/photo-1545239351-1141bd82e8a6?w=1600&q=80&auto=format&fit=crop");
+}
+#testimonials .section-bg {
+  background-image: url("https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1600&q=80&auto=format&fit=crop");
+}
+#blog .section-bg {
+  background-image: url("https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1600&q=80&auto=format&fit=crop");
+}
+#contact .section-bg {
+  background-image: url("https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1600&q=80&auto=format&fit=crop");
   background-image: url("https://images.unsplash.com/photo-1518709268801-4f5d3f4c5c3d?w=1200&q=80&auto=format&fit=crop");
 }
 #about .section-bg {

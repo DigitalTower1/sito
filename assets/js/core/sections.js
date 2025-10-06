@@ -1,4 +1,8 @@
 const sections = Array.from(document.querySelectorAll("section"));
+const scrollIndicators = Array.from(
+  document.querySelectorAll(".scroll-indicator"),
+);
+const indicatorCooldown = new WeakMap();
 function initSections() {
   (sections[0] && sections[0].classList.add("visible"), updateSections());
 }
@@ -15,6 +19,11 @@ function updateProgressBar() {
     footerTop = footer
       ? footer.getBoundingClientRect().top + scrollY
       : document.documentElement.scrollHeight,
+    maxHeight = Math.max(0, footerTop - navHeight - 80),
+    docHeight = document.documentElement.scrollHeight - window.innerHeight,
+    scrollPercent = docHeight > 0 ? Math.max(0, Math.min(1, scrollY / docHeight)) : 0;
+  const progressHeight = Math.min(maxHeight, scrollPercent * maxHeight);
+  progressBar.style.height = `${progressHeight}px`;
     maxHeight = footerTop - navHeight - 80,
     docHeight = document.documentElement.scrollHeight - window.innerHeight,
     scrollPercent = Math.max(0, Math.min(1, scrollY / docHeight));
@@ -27,6 +36,37 @@ function updateProgressBar() {
   });
   if (currentSection && currentSection !== lastSection) {
     ((lastSection = currentSection),
+      progressBar.classList.add("scroll-glow"),
+      setTimeout(() => {
+        progressBar.classList.remove("scroll-glow");
+      }, 800));
+  }
+  if (progressHeight > 0) {
+    const barRect = progressBar.getBoundingClientRect();
+    const tipY = barRect.bottom;
+    scrollIndicators.forEach((indicator) => {
+      const rect = indicator.getBoundingClientRect();
+      const indicatorMid = rect.top + rect.height / 2;
+      if (indicatorMid < 0 || indicatorMid > window.innerHeight) return;
+      if (Math.abs(indicatorMid - tipY) > 36) return;
+      const now = performance.now();
+      const last = indicatorCooldown.get(indicator) || 0;
+      if (now - last < 900) return;
+      indicatorCooldown.set(indicator, now);
+      indicator.classList.add("pulse");
+      progressBar.classList.add("scroll-contact");
+      progressBar.classList.add("scroll-glow");
+      setTimeout(() => {
+        indicator.classList.remove("pulse");
+      }, 900);
+      setTimeout(() => {
+        progressBar.classList.remove("scroll-contact");
+      }, 450);
+      setTimeout(() => {
+        progressBar.classList.remove("scroll-glow");
+      }, 750);
+    });
+  }
       progressBar.classList.add("section-pulse"),
       setTimeout(() => {
         progressBar.classList.remove("section-pulse");

@@ -237,6 +237,77 @@
           </ul>
         </li>
         <li>
+        </li>
+        <li>
+          <a href="javascript:void(0)" onclick="scrollToSection('services')"
+            >Servizi</a
+          >
+        </li>
+        <li>
+          <a href="javascript:void(0)" onclick="scrollToSection('team')"
+            >Team</a
+          >
+        </li>
+        <li>
+          <a href="javascript:void(0)" onclick="scrollToSection('testimonials')"
+            >Testimonial</a
+          >
+        </li>
+        <li>
+          <a href="javascript:void(0)" onclick="scrollToSection('blog')"
+            >Blog</a
+          >
+        </li>
+        <li>
+          <a
+            href="javascript:void(0)"
+            onclick="scrollToSection('contact')"
+            class="nav-cta"
+            >CONSULENZA</a
+          >
+        </li>
+      </ul>
+      <div class="hamburger" id="hamburger">
+        <span> </span>
+        <span> </span>
+        <span> </span>
+      </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <ul class="mobile-menu-links">
+        <li>
+          <div
+            class="mobile-dropdown-toggle"
+            onclick="toggleMobileSubmenu(this)"
+          >
+            <span>Chi Siamo</span>
+          </div>
+          <ul class="mobile-submenu">
+            <li>
+              <a
+                href="javascript:void(0)"
+                onclick="scrollToSection('mission');closeMobileMenu()"
+                >Missione</a
+              >
+            </li>
+            <li>
+              <a
+                href="javascript:void(0)"
+                onclick="scrollToSection('vision');closeMobileMenu()"
+                >Visione</a
+              >
+            </li>
+            <li>
+              <a
+                href="javascript:void(0)"
+                onclick="scrollToSection('values');closeMobileMenu()"
+                >Valori</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li>
           <a
             href="javascript:void(0)"
             onclick="scrollToSection('services');closeMobileMenu()"
@@ -382,6 +453,11 @@
         </p>
         <div class="slider-container">
           <div class="slider-wrapper" id="valuesSlider">
+            <div
+              class="vault-card vault-card-values"
+              data-vault-group="values"
+              onclick="toggleCard(this)"
+            >
             <div class="vault-card" onclick="toggleVault(this)">
               <div class="vault-door">
                 <div class="vault-front">
@@ -404,6 +480,11 @@
                 </div>
               </div>
             </div>
+            <div
+              class="vault-card vault-card-values"
+              data-vault-group="values"
+              onclick="toggleCard(this)"
+            >
             <div class="vault-card" onclick="toggleVault(this)">
               <div class="vault-door">
                 <div class="vault-front">
@@ -426,6 +507,11 @@
                 </div>
               </div>
             </div>
+            <div
+              class="vault-card vault-card-values"
+              data-vault-group="values"
+              onclick="toggleCard(this)"
+            >
             <div class="vault-card" onclick="toggleVault(this)">
               <div class="vault-door">
                 <div class="vault-front">
@@ -448,6 +534,11 @@
                 </div>
               </div>
             </div>
+            <div
+              class="vault-card vault-card-values"
+              data-vault-group="values"
+              onclick="toggleCard(this)"
+            >
             <div class="vault-card" onclick="toggleVault(this)">
               <div class="vault-door">
                 <div class="vault-front">
@@ -493,6 +584,13 @@
         <p class="section-text">
           Soluzioni digitali complete e integrate per trasformare radicalmente
           la tua presenza online e generare risultati concreti e misurabili.
+          Ogni strategia è pensata come un abito su misura: studiata,
+          perfezionata, arricchita di dettagli capaci di far vibrare il tuo
+          pubblico e di tradurre le emozioni in azioni misurabili.
+        </p>
+        <div class="services-grid">
+          <div class="service-card vault-card vault-card-servizi" data-vault-group="servizi" onclick="toggleCard(this)">
+            <div class="service-card-inner vault-card-inner">
         </p>
         <div class="services-grid">
           <div class="service-card" onclick="toggleCard(this)">
@@ -519,6 +617,8 @@
               </div>
             </div>
           </div>
+          <div class="service-card vault-card vault-card-servizi" data-vault-group="servizi" onclick="toggleCard(this)">
+            <div class="service-card-inner vault-card-inner">
           <div class="service-card" onclick="toggleCard(this)">
             <div class="service-card-inner">
               <div class="service-front">
@@ -543,6 +643,8 @@
               </div>
             </div>
           </div>
+          <div class="service-card vault-card vault-card-servizi" data-vault-group="servizi" onclick="toggleCard(this)">
+            <div class="service-card-inner vault-card-inner">
           <div class="service-card" onclick="toggleCard(this)">
             <div class="service-card-inner">
               <div class="service-front">
@@ -567,6 +669,8 @@
               </div>
             </div>
           </div>
+          <div class="service-card vault-card vault-card-servizi" data-vault-group="servizi" onclick="toggleCard(this)">
+            <div class="service-card-inner vault-card-inner">
           <div class="service-card" onclick="toggleCard(this)">
             <div class="service-card-inner">
               <div class="service-front">
@@ -591,6 +695,8 @@
               </div>
             </div>
           </div>
+          <div class="service-card vault-card vault-card-servizi" data-vault-group="servizi" onclick="toggleCard(this)">
+            <div class="service-card-inner vault-card-inner">
           <div class="service-card" onclick="toggleCard(this)">
             <div class="service-card-inner">
               <div class="service-front">
@@ -613,6 +719,8 @@
               </div>
             </div>
           </div>
+          <div class="service-card vault-card vault-card-servizi" data-vault-group="servizi" onclick="toggleCard(this)">
+            <div class="service-card-inner vault-card-inner">
           <div class="service-card" onclick="toggleCard(this)">
             <div class="service-card-inner">
               <div class="service-front">
@@ -650,6 +758,28 @@
         <p class="section-text">
           Professionisti appassionati ed esperti, uniti da una visione comune di
           eccellenza digitale e dalla determinazione a trasformare ogni progetto
+          in un successo straordinario. Siamo un team orgogliosamente italiano:
+          portiamo in ogni progetto quella combinazione unica di sensibilità,
+          tenacia e cura artigianale che rende ogni collaborazione una storia di
+          crescita condivisa.
+        </p>
+        <div class="slider-container">
+          <div class="slider-wrapper" id="teamSlider">
+            <div
+              class="team-card vault-card vault-card-team"
+              data-vault-group="team"
+              onclick="toggleCard(this)"
+            >
+              <div class="team-card-inner vault-card-inner">
+                <div class="team-front vault-face">
+                  <div class="team-photo"></div>
+                  <div class="team-info">
+                    <h3 class="team-name">Roberto Esposito</h3>
+                    <p class="team-role">CEO &amp; FOUNDER</p>
+                    <p class="team-bio">
+                      Stratega napoletano cresciuto tra startup e multinazionali,
+                      Roberto ispira il team con una visione audace e un amore
+                      contagioso per l'innovazione che genera impatto reale.
           in un successo straordinario.
         </p>
         <div class="slider-container">
@@ -690,6 +820,27 @@
                     </div>
                   </div>
                 </div>
+                <div class="team-back vault-back">
+                  <div class="vault-icon">⚡</div>
+                  <h3>Roberto Esposito</h3>
+                  <p>
+                    Laureato alla Federico II, ha guidato oltre 180 progetti
+                    digitali complessi portando brand italiani sui mercati
+                    internazionali. La sua leadership empatica fa sentire ogni
+                    cliente parte della squadra.
+                  </p>
+                  <a href="#team-roberto" class="vault-cta">Scopri di più</a>
+                </div>
+              </div>
+            </div>
+            <div
+              class="team-card vault-card vault-card-team"
+              data-vault-group="team"
+              onclick="toggleCard(this)"
+            >
+              <div class="team-card-inner vault-card-inner">
+                <div class="team-front vault-face">
+                </div>
                 <div class="team-back">
                   <div class="vault-icon">⚡</div>
                   <h3>Gennaro Silvestri</h3>
@@ -711,6 +862,8 @@
                     <h3 class="team-name">Laura Bianchi</h3>
                     <p class="team-role">CREATIVE DIRECTOR</p>
                     <p class="team-bio">
+                      Milanese, amante dell'arte contemporanea, guida concept
+                      immersivi e brand identity che emozionano e convertono.
                       Creatività senza limiti e visione artistica d'avanguardia
                       che trasforma idee in realtà visive.
                     </p>
@@ -739,6 +892,26 @@
                     </div>
                   </div>
                 </div>
+                <div class="team-back vault-back">
+                  <div class="vault-icon">🎨</div>
+                  <h3>Laura Bianchi</h3>
+                  <p>
+                    Ha guidato progetti di rebranding per maison italiane e
+                    scaleup tech. Cura colori, tipografie e motion come fossero
+                    una colonna sonora, creando esperienze memorabili.
+                  </p>
+                  <a href="#team-laura" class="vault-cta">Scopri di più</a>
+                </div>
+              </div>
+            </div>
+            <div
+              class="team-card vault-card vault-card-team"
+              data-vault-group="team"
+              onclick="toggleCard(this)"
+            >
+              <div class="team-card-inner vault-card-inner">
+                <div class="team-front vault-face">
+                </div>
                 <div class="team-back">
                   <div class="vault-icon">🎨</div>
                   <h3>Laura Bianchi</h3>
@@ -760,6 +933,8 @@
                     <h3 class="team-name">Marco Verdi</h3>
                     <p class="team-role">TECH LEAD</p>
                     <p class="team-bio">
+                      Romano di nascita, full stack engineer con il cuore nel
+                      cloud e l'ossessione per le performance millimetriche.
                       Architetto tecnologico e problem solver che costruisce
                       soluzioni digitali solide e scalabili.
                     </p>
@@ -788,6 +963,13 @@
                     </div>
                   </div>
                 </div>
+                <div class="team-back vault-back">
+                  <div class="vault-icon">💻</div>
+                  <h3>Marco Verdi</h3>
+                  <p>
+                    Ex ingegnere Google, certificato AWS e GCP, orquestra stack
+                    headless e architetture scalabili che tengono il sito rapido
+                    come un fulmine anche nei picchi di traffico.
                 <div class="team-back">
                   <div class="vault-icon">💻</div>
                   <h3>Marco Verdi</h3>
@@ -801,6 +983,13 @@
                 </div>
               </div>
             </div>
+            <div
+              class="team-card vault-card vault-card-team"
+              data-vault-group="team"
+              onclick="toggleCard(this)"
+            >
+              <div class="team-card-inner vault-card-inner">
+                <div class="team-front vault-face">
             <div class="team-card" onclick="toggleCard(this)">
               <div class="team-card-inner">
                 <div class="team-front">
@@ -809,6 +998,8 @@
                     <h3 class="team-name">Sofia Marino</h3>
                     <p class="team-role">MARKETING DIRECTOR</p>
                     <p class="team-bio">
+                      Torinese, cuore analitico e storytelling magnetico: guida
+                      campagne omnicanale che fanno vibrare pubblico e KPI.
                       Stratega di marketing data-driven con track record
                       impressionante nel generare ROI eccezionale.
                     </p>
@@ -837,6 +1028,13 @@
                     </div>
                   </div>
                 </div>
+                <div class="team-back vault-back">
+                  <div class="vault-icon">📈</div>
+                  <h3>Sofia Marino</h3>
+                  <p>
+                    Ex consulente McKinsey, ha trasformato budget modesti in
+                    scale-up da record. Con lei i dati diventano storie che
+                    accendono community e fatturato.
                 <div class="team-back">
                   <div class="vault-icon">📊</div>
                   <h3>Sofia Marino</h3>
@@ -847,6 +1045,110 @@
                     precise e costantemente ottimizzate.
                   </p>
                   <a href="#team-sofia" class="vault-cta">Scopri di più</a>
+                </div>
+              </div>
+            </div>
+            <div
+              class="team-card vault-card vault-card-team"
+              data-vault-group="team"
+              onclick="toggleCard(this)"
+            >
+              <div class="team-card-inner vault-card-inner">
+                <div class="team-front vault-face">
+                  <div class="team-photo"></div>
+                  <div class="team-info">
+                    <h3 class="team-name">Giulia Contini</h3>
+                    <p class="team-role">UX RESEARCH LEAD</p>
+                    <p class="team-bio">
+                      Fiorentina, psicologa digitale: traduce insight profondi in
+                      esperienze fluide che fanno innamorare gli utenti.
+                    </p>
+                    <div class="team-social">
+                      <a href="#" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24">
+                          <path
+                            d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"
+                          />
+                        </svg>
+                      </a>
+                      <a href="#" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24">
+                          <path
+                            d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"
+                          />
+                        </svg>
+                      </a>
+                      <a href="#" aria-label="Website">
+                        <svg viewBox="0 0 24 24">
+                          <path
+                            d="M16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2m-5.15 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56M14.34 14H9.66c-.1-.66-.16-1.32-.16-2 0-.68.06-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2M12 19.96c-.83-1.2-1.5-2.53-1.91-3.96h3.82c-.41 1.43-1.08 2.76-1.91 3.96M8 8H5.08A7.923 7.923 0 0 1 9.4 4.44C8.8 5.55 8.35 6.75 8 8m-2.92 8H8c.35 1.25.8 2.45 1.4 3.56A8.008 8.008 0 0 1 5.08 16m-.82-2C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2M12 4.03c.83 1.2 1.5 2.54 1.91 3.97h-3.82c.41-1.43 1.08-2.77 1.91-3.97M18.92 8h-2.95a15.65 15.65 0 0 0-1.38-3.56c1.84.63 3.37 1.9 4.33 3.56M12 2C6.47 2 2 6.5 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2z"
+                          />
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="team-back vault-back">
+                  <div class="vault-icon">🔍</div>
+                  <h3>Giulia Contini</h3>
+                  <p>
+                    Ha condotto oltre 300 sessioni di user research per brand
+                    italiani. Coniuga psicologia comportamentale e UI per creare
+                    percorsi intuitivi e inclusivi.
+                  </p>
+                  <a href="#team-giulia" class="vault-cta">Scopri di più</a>
+                </div>
+              </div>
+            </div>
+            <div
+              class="team-card vault-card vault-card-team"
+              data-vault-group="team"
+              onclick="toggleCard(this)"
+            >
+              <div class="team-card-inner vault-card-inner">
+                <div class="team-front vault-face">
+                  <div class="team-photo"></div>
+                  <div class="team-info">
+                    <h3 class="team-name">Alessandro Rinaldi</h3>
+                    <p class="team-role">HEAD OF DATA &amp; AI</p>
+                    <p class="team-bio">
+                      Bolognese, ingegnere gestionale: orchestra algoritmi e
+                      automazioni che potenziano creatività e conversioni.
+                    </p>
+                    <div class="team-social">
+                      <a href="#" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24">
+                          <path
+                            d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"
+                          />
+                        </svg>
+                      </a>
+                      <a href="#" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24">
+                          <path
+                            d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"
+                          />
+                        </svg>
+                      </a>
+                      <a href="#" aria-label="Website">
+                        <svg viewBox="0 0 24 24">
+                          <path
+                            d="M16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2m-5.15 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56M14.34 14H9.66c-.1-.66-.16-1.32-.16-2 0-.68.06-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2M12 19.96c-.83-1.2-1.5-2.53-1.91-3.96h3.82c-.41 1.43-1.08 2.76-1.91 3.96M8 8H5.08A7.923 7.923 0 0 1 9.4 4.44C8.8 5.55 8.35 6.75 8 8m-2.92 8H8c.35 1.25.8 2.45 1.4 3.56A8.008 8.008 0 0 1 5.08 16m-.82-2C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2M12 4.03c.83 1.2 1.5 2.54 1.91 3.97h-3.82c.41-1.43 1.08-2.77 1.91-3.97M18.92 8h-2.95a15.65 15.65 0 0 0-1.38-3.56c1.84.63 3.37 1.9 4.33 3.56M12 2C6.47 2 2 6.5 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2z"
+                          />
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="team-back vault-back">
+                  <div class="vault-icon">🧠</div>
+                  <h3>Alessandro Rinaldi</h3>
+                  <p>
+                    Ex data scientist per fintech italiane, oggi guida modelli
+                    predittivi e automazioni AI che ottimizzano campagne e funnel
+                    in tempo reale.
+                  </p>
+                  <a href="#team-alessandro" class="vault-cta">Scopri di più</a>
                 </div>
               </div>
             </div>
@@ -877,6 +1179,280 @@
         <h2 class="section-title">Cosa Dicono</h2>
         <p class="section-text">
           Le testimonianze dei nostri clienti raccontano storie autentiche di
+          trasformazione, crescita e successo condiviso. Ogni parola è una
+          promessa mantenuta, un risultato misurabile e un'emozione che continua
+          a risuonare molto tempo dopo la consegna del progetto.
+        </p>
+        <div class="slider-container">
+          <div class="slider-wrapper" id="testimonialsSlider">
+            <div
+              class="testimonial-card vault-card vault-card-testimonials"
+              data-vault-group="testimonials"
+              onclick="toggleCard(this)"
+            >
+              <div class="testimonial-card-inner vault-card-inner">
+                <div class="testimonial-front vault-face">
+                  <div class="testimonial-image"></div>
+                  <p class="testimonial-text">
+                    "Digital Tower ha riacceso il nostro brand. In tre mesi gli ordini
+                    online sono esplosi e i clienti parlano di noi con entusiasmo."
+                  </p>
+                  <p class="testimonial-author">Chiara Romano</p>
+                  <p class="testimonial-company">
+                    Maison Aurora | Moda Artigianale | Milano
+                  </p>
+                </div>
+                <div class="testimonial-back vault-back">
+                  <p>
+                    Abbiamo ripensato il sito e tutta la comunicazione social. Il traffico
+                    organico è cresciuto del 320%, le vendite internazionali sono triplicate
+                    e ora spediamo abiti in tutta Europa con una community fedele.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="testimonial-card vault-card vault-card-testimonials"
+              data-vault-group="testimonials"
+              onclick="toggleCard(this)"
+            >
+              <div class="testimonial-card-inner vault-card-inner">
+                <div class="testimonial-front vault-face">
+                  <div class="testimonial-image"></div>
+                  <p class="testimonial-text">
+                    "Hanno trasformato la nostra start-up tech in un marchio riconoscibile.
+                    Ogni campagna lanciata ha generato lead di altissima qualità."
+                  </p>
+                  <p class="testimonial-author">Luca Ferraro</p>
+                  <p class="testimonial-company">
+                    Sensea | IoT per Smart Home | Torino
+                  </p>
+                </div>
+                <div class="testimonial-back vault-back">
+                  <p>
+                    Digital Tower ha integrato storytelling, inbound marketing e automation.
+                    Il tasso di conversione dei demo request è passato dal 6% al 22% e abbiamo
+                    chiuso il round di investimento con numeri solidi.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="testimonial-card vault-card vault-card-testimonials"
+              data-vault-group="testimonials"
+              onclick="toggleCard(this)"
+            >
+              <div class="testimonial-card-inner vault-card-inner">
+                <div class="testimonial-front vault-face">
+                  <div class="testimonial-image"></div>
+                  <p class="testimonial-text">
+                    "Un team presente, rapido e straordinariamente creativo. Il nostro
+                    lancio e-commerce è stato un successo commovente."
+                  </p>
+                  <p class="testimonial-author">Elena Rossi</p>
+                  <p class="testimonial-company">
+                    Fior di Sale | Gourmet Experience | Firenze
+                  </p>
+                </div>
+                <div class="testimonial-back vault-back">
+                  <p>
+                    Hanno costruito un percorso cliente emozionale, dalla fotografia al
+                    copywriting. Abbiamo registrato +410% di fatturato e fidelizzato clienti
+                    VIP con programmi esclusivi.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="testimonial-card vault-card vault-card-testimonials"
+              data-vault-group="testimonials"
+              onclick="toggleCard(this)"
+            >
+              <div class="testimonial-card-inner vault-card-inner">
+                <div class="testimonial-front vault-face">
+                  <div class="testimonial-image"></div>
+                  <p class="testimonial-text">
+                    "Ci hanno guidati passo dopo passo. Ogni touchpoint ora respira il nostro
+                    DNA e i clienti si sentono parte di una famiglia."
+                  </p>
+                  <p class="testimonial-author">Davide Conti</p>
+                  <p class="testimonial-company">
+                    Conti Motors | Concessionaria Premium | Roma
+                  </p>
+                </div>
+                <div class="testimonial-back vault-back">
+                  <p>
+                    Dal CRM alla comunicazione post-vendita, tutto è stato riprogettato.
+                    Customer satisfaction +58%, vendite ricorrenti +74%, recensioni a 5 stelle
+                    su ogni piattaforma.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="testimonial-card vault-card vault-card-testimonials"
+              data-vault-group="testimonials"
+              onclick="toggleCard(this)"
+            >
+              <div class="testimonial-card-inner vault-card-inner">
+                <div class="testimonial-front vault-face">
+                  <div class="testimonial-image"></div>
+                  <p class="testimonial-text">
+                    "Hanno dato voce alla nostra cooperativa sociale. Ogni contenuto emoziona
+                    e coinvolge, attirando nuovi sostenitori e partner."
+                  </p>
+                  <p class="testimonial-author">Marta Gallo</p>
+                  <p class="testimonial-company">
+                    Vite Intrecciate | Terzo Settore | Palermo
+                  </p>
+                </div>
+                <div class="testimonial-back vault-back">
+                  <p>
+                    Con un portale storytelling e campagne fundraising abbiamo raccolto il 185%
+                    di donazioni in più, creando relazioni sincere con aziende e cittadini.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="testimonial-card vault-card vault-card-testimonials"
+              data-vault-group="testimonials"
+              onclick="toggleCard(this)"
+            >
+              <div class="testimonial-card-inner vault-card-inner">
+                <div class="testimonial-front vault-face">
+                  <div class="testimonial-image"></div>
+                  <p class="testimonial-text">
+                    "Il rebranding che hanno creato ci rappresenta al 100%. Ora veniamo
+                    percepiti come leader del nostro settore."
+                  </p>
+                  <p class="testimonial-author">Federico Neri</p>
+                  <p class="testimonial-company">
+                    Neri Energia | Servizi Energetici | Bologna
+                  </p>
+                </div>
+                <div class="testimonial-back vault-back">
+                  <p>
+                    Nuova identità visiva, sito corporate, campagne B2B e PR digitali: il fatturato
+                    annuale è cresciuto del 63% e abbiamo chiuso accordi con partner strategici.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="testimonial-card vault-card vault-card-testimonials"
+              data-vault-group="testimonials"
+              onclick="toggleCard(this)"
+            >
+              <div class="testimonial-card-inner vault-card-inner">
+                <div class="testimonial-front vault-face">
+                  <div class="testimonial-image"></div>
+                  <p class="testimonial-text">
+                    "Hanno curato il lancio del mio corso online in modo impeccabile. Mi sono
+                    sentita accompagnata e sostenuta in ogni scelta."
+                  </p>
+                  <p class="testimonial-author">Beatrice Leone</p>
+                  <p class="testimonial-company">
+                    Leone Vocal Studio | Formazione Artistica | Napoli
+                  </p>
+                </div>
+                <div class="testimonial-back vault-back">
+                  <p>
+                    Funnel di lancio, webinar, advertising e community management. Risultato:
+                    1.200 studenti iscritti al primo anno e una reputazione stellare nel settore.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="testimonial-card vault-card vault-card-testimonials"
+              data-vault-group="testimonials"
+              onclick="toggleCard(this)"
+            >
+              <div class="testimonial-card-inner vault-card-inner">
+                <div class="testimonial-front vault-face">
+                  <div class="testimonial-image"></div>
+                  <p class="testimonial-text">
+                    "Strategie precise, copy magnetici e report trasparenti. È il partner che
+                    ogni imprenditore desidera al proprio fianco."
+                  </p>
+                  <p class="testimonial-author">Giorgio Vitale</p>
+                  <p class="testimonial-company">
+                    Vitale Consulting | Servizi Professionali | Verona
+                  </p>
+                </div>
+                <div class="testimonial-back vault-back">
+                  <p>
+                    Abbiamo rilanciato blog, newsletter e campagne LinkedIn. Il numero di richieste
+                    consulenziali è cresciuto del 210% e l'authority personale è salita alle stelle.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="testimonial-card vault-card vault-card-testimonials"
+              data-vault-group="testimonials"
+              onclick="toggleCard(this)"
+            >
+              <div class="testimonial-card-inner vault-card-inner">
+                <div class="testimonial-front vault-face">
+                  <div class="testimonial-image"></div>
+                  <p class="testimonial-text">
+                    "Con loro abbiamo costruito un ecosistema digitale che trasmette fiducia e
+                    calore umano. I pazienti ci scelgono e ci raccomandano."
+                  </p>
+                  <p class="testimonial-author">Alessia Greco</p>
+                  <p class="testimonial-company">
+                    Centro Medico Greco | Sanità Privata | Bari
+                  </p>
+                </div>
+                <div class="testimonial-back vault-back">
+                  <p>
+                    Branding, video storytelling e campagne locali: +68% di prenotazioni, +95%
+                    di recensioni positive e una reputazione digitale curata ogni giorno.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="testimonial-card vault-card vault-card-testimonials"
+              data-vault-group="testimonials"
+              onclick="toggleCard(this)"
+            >
+              <div class="testimonial-card-inner vault-card-inner">
+                <div class="testimonial-front vault-face">
+                  <div class="testimonial-image"></div>
+                  <p class="testimonial-text">
+                    "Finalmente un'agenzia che ascolta davvero. Hanno trasformato il nostro
+                    laboratorio artigiano in un marchio desiderabile."
+                  </p>
+                  <p class="testimonial-author">Tommaso Parisi</p>
+                  <p class="testimonial-company">
+                    Officine Parisi | Arredo Su Misura | Venezia
+                  </p>
+                </div>
+                <div class="testimonial-back vault-back">
+                  <p>
+                    Shooting immersivi, storytelling sui social e un e-commerce sartoriale.
+                    Ora vendiamo in Italia e all'estero con ordini personalizzati ogni giorno.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-nav">
+            <div
+              class="carousel-arrow"
+              onclick="carouselPrev('testimonialsSlider')"
+            >
+              ‹
+            </div>
+            <div
+              class="carousel-arrow"
+              onclick="carouselNext('testimonialsSlider')"
+            >
+              ›
+            </div>
           trasformazione, crescita e successo condiviso.
         </p>
         <div class="slider-container">
@@ -940,6 +1516,291 @@
         <h2 class="section-title">Dal Nostro Blog</h2>
         <p class="section-text">
           Riflessioni strategiche, trend emergenti e case study approfonditi dal
+          mondo del marketing digitale contemporaneo. Ogni articolo è pensato
+          per offrirti ispirazione immediata e strumenti pratici da applicare
+          subito, senza fronzoli, con la forza delle idee che funzionano davvero.
+        </p>
+        <div class="slider-container">
+          <div class="slider-wrapper" id="blogSlider">
+            <div
+              class="blog-card vault-card vault-card-blog"
+              data-vault-group="blog"
+              onclick="toggleCard(this)"
+            >
+              <div class="blog-card-inner vault-card-inner">
+                <div class="blog-front vault-face">
+                  <div class="blog-image"></div>
+                  <div class="blog-content">
+                    <p class="blog-date">15 Gen 2025</p>
+                    <h3 class="blog-title">Design Immersivo</h3>
+                    <p class="blog-subtitle">Trend e Tecnologie</p>
+                    <p class="blog-excerpt">
+                      Come il web 3D e le interfacce cinematiche stanno rivoluzionando
+                      l'esperienza utente.
+                    </p>
+                  </div>
+                </div>
+                <div class="blog-back vault-back">
+                  <h3>Design Immersivo 2025</h3>
+                  <p>
+                    Analizziamo casi studio italiani e internazionali per progettare siti che
+                    combinano microinterazioni, ambienti tridimensionali e storytelling sonoro.
+                  </p>
+                  <a href="#blog-design-immersivo" class="vault-cta">Leggi l'articolo</a>
+                </div>
+              </div>
+            </div>
+            <div
+              class="blog-card vault-card vault-card-blog"
+              data-vault-group="blog"
+              onclick="toggleCard(this)"
+            >
+              <div class="blog-card-inner vault-card-inner">
+                <div class="blog-front vault-face">
+                  <div class="blog-image"></div>
+                  <div class="blog-content">
+                    <p class="blog-date">08 Gen 2025</p>
+                    <h3 class="blog-title">Storyselling</h3>
+                    <p class="blog-subtitle">Emozione &amp; Conversione</p>
+                    <p class="blog-excerpt">
+                      Tecniche narrative per trasformare lettori in clienti innamorati del brand.
+                    </p>
+                  </div>
+                </div>
+                <div class="blog-back vault-back">
+                  <h3>Storyselling Evoluto</h3>
+                  <p>
+                    Template narrativi, esempi di copy vincenti e KPI da monitorare per dare voce
+                    autentica al tuo progetto digitale e fidelizzare le community.
+                  </p>
+                  <a href="#blog-storyselling" class="vault-cta">Leggi l'articolo</a>
+                </div>
+              </div>
+            </div>
+            <div
+              class="blog-card vault-card vault-card-blog"
+              data-vault-group="blog"
+              onclick="toggleCard(this)"
+            >
+              <div class="blog-card-inner vault-card-inner">
+                <div class="blog-front vault-face">
+                  <div class="blog-image"></div>
+                  <div class="blog-content">
+                    <p class="blog-date">02 Gen 2025</p>
+                    <h3 class="blog-title">AI &amp; Marketing</h3>
+                    <p class="blog-subtitle">Automazioni Umane</p>
+                    <p class="blog-excerpt">
+                      Strumenti intelligenti per scalare personalizzazione e customer care.
+                    </p>
+                  </div>
+                </div>
+                <div class="blog-back vault-back">
+                  <h3>AI al Servizio del Brand</h3>
+                  <p>
+                    Workflow, prompt e best practice per creare esperienze iper-personalizzate senza
+                    perdere autenticità e calore umano nelle relazioni.
+                  </p>
+                  <a href="#blog-ai" class="vault-cta">Leggi l'articolo</a>
+                </div>
+              </div>
+            </div>
+            <div
+              class="blog-card vault-card vault-card-blog"
+              data-vault-group="blog"
+              onclick="toggleCard(this)"
+            >
+              <div class="blog-card-inner vault-card-inner">
+                <div class="blog-front vault-face">
+                  <div class="blog-image"></div>
+                  <div class="blog-content">
+                    <p class="blog-date">26 Dic 2024</p>
+                    <h3 class="blog-title">SEO Locale</h3>
+                    <p class="blog-subtitle">Domina il Territorio</p>
+                    <p class="blog-excerpt">
+                      Strategie per conquistare Google Maps e le ricerche geolocalizzate.
+                    </p>
+                  </div>
+                </div>
+                <div class="blog-back vault-back">
+                  <h3>SEO Locale Senza Segreti</h3>
+                  <p>
+                    Guide pratiche, esempi di schede perfette e tattiche review per diventare il
+                    punto di riferimento digitale nella tua città.
+                  </p>
+                  <a href="#blog-seo-locale" class="vault-cta">Leggi l'articolo</a>
+                </div>
+              </div>
+            </div>
+            <div
+              class="blog-card vault-card vault-card-blog"
+              data-vault-group="blog"
+              onclick="toggleCard(this)"
+            >
+              <div class="blog-card-inner vault-card-inner">
+                <div class="blog-front vault-face">
+                  <div class="blog-image"></div>
+                  <div class="blog-content">
+                    <p class="blog-date">18 Dic 2024</p>
+                    <h3 class="blog-title">E-mail Resonanti</h3>
+                    <p class="blog-subtitle">Newsletter Iconiche</p>
+                    <p class="blog-excerpt">
+                      Sequenze emozionali che generano click-through e vendite ricorrenti.
+                    </p>
+                  </div>
+                </div>
+                <div class="blog-back vault-back">
+                  <h3>Newsletter che Incantano</h3>
+                  <p>
+                    Layout, oggetti magnetici, segmentazioni intelligenti e KPI per costruire un
+                    dialogo continuo e profittevole con la tua lista.
+                  </p>
+                  <a href="#blog-email" class="vault-cta">Leggi l'articolo</a>
+                </div>
+              </div>
+            </div>
+            <div
+              class="blog-card vault-card vault-card-blog"
+              data-vault-group="blog"
+              onclick="toggleCard(this)"
+            >
+              <div class="blog-card-inner vault-card-inner">
+                <div class="blog-front vault-face">
+                  <div class="blog-image"></div>
+                  <div class="blog-content">
+                    <p class="blog-date">10 Dic 2024</p>
+                    <h3 class="blog-title">Video Brevi</h3>
+                    <p class="blog-subtitle">Strategie Reels &amp; TikTok</p>
+                    <p class="blog-excerpt">
+                      Come creare format virali e sostenibili per il tuo brand.
+                    </p>
+                  </div>
+                </div>
+                <div class="blog-back vault-back">
+                  <h3>Short Video Mastery</h3>
+                  <p>
+                    Script, storyboard e metriche per trasformare i video brevi in un motore di
+                    awareness e conversione costante.
+                  </p>
+                  <a href="#blog-video" class="vault-cta">Leggi l'articolo</a>
+                </div>
+              </div>
+            </div>
+            <div
+              class="blog-card vault-card vault-card-blog"
+              data-vault-group="blog"
+              onclick="toggleCard(this)"
+            >
+              <div class="blog-card-inner vault-card-inner">
+                <div class="blog-front vault-face">
+                  <div class="blog-image"></div>
+                  <div class="blog-content">
+                    <p class="blog-date">02 Dic 2024</p>
+                    <h3 class="blog-title">Brand Sonoro</h3>
+                    <p class="blog-subtitle">Identità Audio</p>
+                    <p class="blog-excerpt">
+                      Costruire un'esperienza multisensoriale memorabile con musica e sound design.
+                    </p>
+                  </div>
+                </div>
+                <div class="blog-back vault-back">
+                  <h3>Sound Branding</h3>
+                  <p>
+                    Playlist, podcast e signature audio: perché il suono è il nuovo tocco distintivo
+                    per rafforzare il posizionamento del tuo marchio.
+                  </p>
+                  <a href="#blog-sound" class="vault-cta">Leggi l'articolo</a>
+                </div>
+              </div>
+            </div>
+            <div
+              class="blog-card vault-card vault-card-blog"
+              data-vault-group="blog"
+              onclick="toggleCard(this)"
+            >
+              <div class="blog-card-inner vault-card-inner">
+                <div class="blog-front vault-face">
+                  <div class="blog-image"></div>
+                  <div class="blog-content">
+                    <p class="blog-date">25 Nov 2024</p>
+                    <h3 class="blog-title">UX per Luxury</h3>
+                    <p class="blog-subtitle">Esperienze Premium</p>
+                    <p class="blog-excerpt">
+                      Guidare il cliente in percorsi digitali sofisticati e irresistibili.
+                    </p>
+                  </div>
+                </div>
+                <div class="blog-back vault-back">
+                  <h3>UX del Lusso</h3>
+                  <p>
+                    Microinterazioni, materiali visivi e ritmo narrativo per siti che evocano esclusività,
+                    fiducia e desiderio.
+                  </p>
+                  <a href="#blog-ux-lusso" class="vault-cta">Leggi l'articolo</a>
+                </div>
+              </div>
+            </div>
+            <div
+              class="blog-card vault-card vault-card-blog"
+              data-vault-group="blog"
+              onclick="toggleCard(this)"
+            >
+              <div class="blog-card-inner vault-card-inner">
+                <div class="blog-front vault-face">
+                  <div class="blog-image"></div>
+                  <div class="blog-content">
+                    <p class="blog-date">17 Nov 2024</p>
+                    <h3 class="blog-title">Analytics Umani</h3>
+                    <p class="blog-subtitle">Data Storytelling</p>
+                    <p class="blog-excerpt">
+                      Interpretare i numeri con sensibilità per decisioni strategiche illuminate.
+                    </p>
+                  </div>
+                </div>
+                <div class="blog-back vault-back">
+                  <h3>Data Storytelling</h3>
+                  <p>
+                    Dashboard emozionali, insight narrativi e framework decisionali per guidare il team
+                    verso azioni concrete e condivise.
+                  </p>
+                  <a href="#blog-analytics" class="vault-cta">Leggi l'articolo</a>
+                </div>
+              </div>
+            </div>
+            <div
+              class="blog-card vault-card vault-card-blog"
+              data-vault-group="blog"
+              onclick="toggleCard(this)"
+            >
+              <div class="blog-card-inner vault-card-inner">
+                <div class="blog-front vault-face">
+                  <div class="blog-image"></div>
+                  <div class="blog-content">
+                    <p class="blog-date">09 Nov 2024</p>
+                    <h3 class="blog-title">Customer Journey</h3>
+                    <p class="blog-subtitle">Esperienze Integrate</p>
+                    <p class="blog-excerpt">
+                      Mappare e ottimizzare ogni fase del viaggio del cliente, online e offline.
+                    </p>
+                  </div>
+                </div>
+                <div class="blog-back vault-back">
+                  <h3>Journey Orchestrato</h3>
+                  <p>
+                    Tecniche di service design, strumenti pratici e checklist per creare percorsi armonici
+                    che generano fedeltà e advocacy.
+                  </p>
+                  <a href="#blog-journey" class="vault-cta">Leggi l'articolo</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-nav">
+            <div class="carousel-arrow" onclick="carouselPrev('blogSlider')">
+              ‹
+            </div>
+            <div class="carousel-arrow" onclick="carouselNext('blogSlider')">
+              ›
+            </div>
           mondo del marketing digitale contemporaneo.
         </p>
         <div class="slider-container">
@@ -1161,6 +2022,9 @@
         <p class="section-text">
           Sei pronto a trasformare la tua visione in realtà? Contattaci ora per
           una consulenza strategica gratuita e inizia il viaggio verso il
+          successo digitale che meriti. Ogni progetto che affidiamo al nostro
+          team viene seguito con dedizione, ascolto e responsabilità: saliamo
+          insieme fino alla cima, passo dopo passo, senza mai lasciarti solo.
           successo digitale che meriti.
         </p>
         <form class="contact-form" id="contactForm">
@@ -1201,6 +2065,28 @@
                 name="azienda"
                 placeholder="Azienda"
               />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <select class="form-select" name="budget" required>
+                <option value="">Budget</option>
+                <option value="<5k">< €5k</option>
+                <option value="5-10k">€5-10k</option>
+                <option value="10-20k">€10-20k</option>
+                <option value=">20k">> €20k</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <select class="form-select" name="settore" required>
+                <option value="">Settore</option>
+                <option value="retail">Retail</option>
+                <option value="tech">Tech</option>
+                <option value="fashion">Fashion</option>
+                <option value="hospitality">Hospitality</option>
+                <option value="altro">Altro</option>
+              </select>
+            </div>
             </div>
           </div>
           <div class="form-row">
