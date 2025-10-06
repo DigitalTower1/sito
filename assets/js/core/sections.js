@@ -41,7 +41,12 @@
     const range = Math.max(1, rangeEnd - heroTop);
     const viewportCenter = window.scrollY + window.innerHeight * 0.5;
     const rawProgress = (viewportCenter - heroTop) / range;
-    window.__towerScrollProgress = clamp(rawProgress, 0, 1);
+    const clamped = clamp(rawProgress, 0, 1);
+    window.__towerScrollProgress = clamped;
+    document.documentElement.style.setProperty(
+      "--cloud-progress",
+      clamped.toFixed(3),
+    );
   }
 
   function updateIndicators() {

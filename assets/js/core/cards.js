@@ -5,6 +5,20 @@
   let activeCard = null;
   let unlockTimeout = null;
 
+  function setActiveCardMetrics(card) {
+    if (!card) {
+      return;
+    }
+    const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+    const horizontalPadding = viewportWidth <= 640 ? 32 : viewportWidth <= 1024 ? 96 : 140;
+    const verticalPadding = viewportHeight <= 720 ? 56 : 160;
+    const width = Math.max(280, Math.min(viewportWidth - horizontalPadding, 780));
+    const height = Math.max(340, Math.min(viewportHeight - verticalPadding, 840));
+    card.style.setProperty("--vault-active-width", `${width}px`);
+    card.style.setProperty("--vault-active-height", `${height}px`);
+  }
+
   function dimGroup(target, dimmed) {
     const group = target.dataset.vaultGroup || "global";
     vaultCards.forEach((card) => {
@@ -42,6 +56,9 @@
       return;
     }
     activeCard.classList.remove("is-active");
+    activeCard.setAttribute("aria-expanded", "false");
+    activeCard.style.removeProperty("--vault-active-width");
+    activeCard.style.removeProperty("--vault-active-height");
     lockCard(activeCard);
     dimGroup(activeCard, false);
     activeCard = null;
@@ -64,7 +81,9 @@
       closeActiveCard();
     }
     unlockCard(card);
+    setActiveCardMetrics(card);
     card.classList.add("is-active");
+    card.setAttribute("aria-expanded", "true");
     dimGroup(card, true);
     if (overlay) {
       overlay.classList.add("active");
@@ -73,6 +92,10 @@
     document.documentElement.classList.add("card-open");
     activeCard = card;
     const closeButton = card.querySelector(".vault-close");
+    const contentFace = card.querySelector(".vault-face.vault-content");
+    if (contentFace) {
+      contentFace.scrollTop = 0;
+    }
     if (closeButton) {
       try {
         closeButton.focus({ preventScroll: true });
@@ -106,6 +129,7 @@
     if (!card.hasAttribute("tabindex")) {
       card.setAttribute("tabindex", "0");
     }
+    card.setAttribute("aria-expanded", "false");
 
     card.addEventListener("click", (event) => {
       onCardClick(card, event);
@@ -160,8 +184,17 @@
     "resize",
     () => {
       if (activeCard) {
-        // ensure active card remains centered on resize
-        activeCard.classList.add("is-active");
+        setActiveCardMetrics(activeCard);
+      }
+    },
+    { passive: true },
+  );
+
+  window.addEventListener(
+    "orientationchange",
+    () => {
+      if (activeCard) {
+        setActiveCardMetrics(activeCard);
       }
     },
     { passive: true },

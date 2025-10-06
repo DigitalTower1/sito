@@ -24,6 +24,96 @@
   background-size: 6px 6px;
   pointer-events: none;
 }
+
+.cloud-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+  opacity: calc(0.1 + var(--cloud-progress) * 0.4);
+  transition: opacity 0.6s ease;
+  mix-blend-mode: screen;
+}
+
+.cloud-layer .cloud {
+  position: absolute;
+  width: clamp(220px, 32vw, 420px);
+  height: clamp(120px, 18vw, 240px);
+  border-radius: 50%;
+  animation: cloudFloat var(--cloud-speed, 72s) ease-in-out infinite;
+  will-change: transform;
+}
+
+.cloud-layer .cloud::before {
+  content: "";
+  position: absolute;
+  inset: -20% -10%;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.7), transparent 70%),
+    radial-gradient(circle at 70% 60%, rgba(200, 220, 255, 0.55), transparent 75%),
+    radial-gradient(circle at 50% 50%, rgba(180, 210, 240, 0.45), transparent 80%);
+  filter: blur(22px);
+  opacity: calc(0.18 + var(--cloud-progress) * 0.5);
+  transform: scale(calc(1 + var(--cloud-progress) * var(--cloud-grow, 0.4)));
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+.cloud-layer .cloud.cloud--1 {
+  top: 12%;
+  left: 6%;
+  --cloud-grow: 0.45;
+  --cloud-drift: 6%;
+  --cloud-speed: 78s;
+}
+
+.cloud-layer .cloud.cloud--2 {
+  top: 38%;
+  right: 8%;
+  --cloud-grow: 0.55;
+  --cloud-drift: 9%;
+  --cloud-speed: 92s;
+}
+
+.cloud-layer .cloud.cloud--3 {
+  bottom: 22%;
+  left: 14%;
+  --cloud-grow: 0.5;
+  --cloud-drift: 7%;
+  --cloud-speed: 86s;
+}
+
+.cloud-layer .cloud.cloud--4 {
+  bottom: 8%;
+  right: 16%;
+  --cloud-grow: 0.62;
+  --cloud-drift: 10%;
+  --cloud-speed: 104s;
+}
+
+.cloud-layer .cloud.cloud--5 {
+  top: 55%;
+  left: 42%;
+  width: clamp(260px, 40vw, 520px);
+  height: clamp(140px, 22vw, 280px);
+  --cloud-grow: 0.68;
+  --cloud-drift: 11%;
+  --cloud-speed: 120s;
+}
+
+@keyframes cloudFloat {
+  0%,
+  100% {
+    transform: translate3d(calc(var(--cloud-drift, 6%) * -1), 0, 0);
+  }
+  50% {
+    transform: translate3d(var(--cloud-drift, 6%), 0, 0);
+  }
+}
+
 .vignette {
   position: fixed;
   top: 0;
@@ -31,7 +121,7 @@
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 3;
+  z-index: 4;
   background: radial-gradient(
     ellipse at center,
     transparent 15%,

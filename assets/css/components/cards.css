@@ -83,8 +83,11 @@ html.card-open {
   position: relative;
   flex: 0 0 clamp(260px, 24vw, 320px);
   height: clamp(360px, 50vh, 420px);
-  margin-block-start: 2.4rem;
-  margin-inline-start: 1.6rem;
+  margin-block-start: clamp(2.6rem, 4vw, 3.6rem);
+  margin-inline-start: clamp(1.8rem, 3vw, 2.8rem);
+  margin-block-end: clamp(2rem, 3vw, 2.6rem);
+  --vault-active-width: min(92vw, 680px);
+  --vault-active-height: min(90vh, 780px);
   perspective: 1800px;
   transform-style: preserve-3d;
   transition:
@@ -289,17 +292,21 @@ html.card-open {
   position: fixed;
   top: 50%;
   left: 50%;
-  width: min(92vw, 680px);
-  height: min(90vh, 780px);
-  transform: translate(-50%, -50%) scale(1.08);
+  width: var(--vault-active-width);
+  height: var(--vault-active-height);
+  transform: translate(-50%, -50%);
   z-index: 1200;
   flex: 0 0 auto;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
   box-shadow:
     0 42px 120px rgba(0, 0, 0, 0.65),
     0 0 52px rgba(255, 215, 0, 0.36);
   border-radius: 22px;
   overflow: hidden;
   perspective: 2200px;
+  background: rgba(7, 12, 20, 0.95);
 }
 
 .vault-card.is-active .vault-card-inner {
@@ -321,6 +328,9 @@ html.card-open {
   scrollbar-width: none;
   -ms-overflow-style: none;
   overscroll-behavior: contain;
+  background:
+    radial-gradient(circle at 18% 20%, rgba(255, 214, 153, 0.2), transparent 60%),
+    linear-gradient(180deg, rgba(15, 28, 44, 0.96), rgba(5, 12, 20, 0.92));
 }
 
 .vault-card.is-active .vault-face.vault-content::-webkit-scrollbar {

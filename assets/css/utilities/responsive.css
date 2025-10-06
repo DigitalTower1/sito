@@ -11,11 +11,13 @@
   .team-card {
     min-width: 280px;
     max-width: 280px;
-    margin-inline-start: 1.1rem;
-    margin-block-start: 1.6rem;
+    margin-inline-start: 1.4rem;
+    margin-block-start: 2.1rem;
   }
   .vault-card {
     height: 380px;
+    --vault-active-width: min(96vw, 600px);
+    --vault-active-height: min(94vh, 760px);
   }
   #tower3DContainer {
     opacity: 0.4 !important;
@@ -54,11 +56,13 @@
   .team-card {
     min-width: 260px;
     max-width: 260px;
-    margin-inline-start: 0.9rem;
-    margin-block-start: 1.4rem;
+    margin-inline-start: 1.1rem;
+    margin-block-start: 1.8rem;
   }
   .vault-card {
     height: 360px;
+    --vault-active-width: calc(100vw - 2.6rem);
+    --vault-active-height: calc(100vh - 2.6rem);
   }
   .services-grid {
     grid-template-columns: 1fr;
@@ -84,8 +88,12 @@
   .team-card {
     min-width: 240px;
     max-width: 240px;
-    margin-inline-start: 0.75rem;
-    margin-block-start: 1.25rem;
+    margin-inline-start: 0.9rem;
+    margin-block-start: 1.6rem;
+  }
+  .vault-card {
+    --vault-active-width: calc(100vw - 1.8rem);
+    --vault-active-height: calc(100vh - 1.8rem);
   }
   .mobile-menu {
     max-width: 100%;

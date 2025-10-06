@@ -11,4 +11,5 @@
   --white: #e8eaed;
   --white-dim: #94a3b8;
   --left: clamp(24px, 8vw, 120px);
+  --cloud-progress: 0;
 }
