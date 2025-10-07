@@ -48,6 +48,150 @@
     <link rel="stylesheet" href="../../assets/css/layout/footer.css" />
     <link rel="stylesheet" href="../../assets/css/layout/pages.css" />
     <link rel="stylesheet" href="../../assets/css/utilities/responsive.css" />
+    <style>
+      .blog-hero {
+        position: relative;
+        overflow: hidden;
+        background: radial-gradient(120% 120% at 80% 0%, rgba(119, 141, 255, 0.2), transparent),
+          radial-gradient(120% 120% at 20% 20%, rgba(255, 143, 199, 0.18), transparent);
+      }
+
+      .blog-hero::after {
+        content: "";
+        position: absolute;
+        inset: -120px;
+        background: conic-gradient(
+          from 180deg,
+          rgba(88, 119, 255, 0.25),
+          rgba(0, 0, 0, 0),
+          rgba(255, 119, 153, 0.25),
+          rgba(0, 0, 0, 0)
+        );
+        filter: blur(120px);
+        animation: pulseGlow 14s linear infinite;
+        z-index: 0;
+      }
+
+      @keyframes pulseGlow {
+        0% {
+          transform: rotate(0deg) scale(1);
+        }
+        50% {
+          transform: rotate(180deg) scale(1.08);
+        }
+        100% {
+          transform: rotate(360deg) scale(1);
+        }
+      }
+
+      .blog-hero > div,
+      .blog-hero__visual {
+        position: relative;
+        z-index: 1;
+      }
+
+      .blog-index-card,
+      .blog-feature-card {
+        backdrop-filter: blur(8px);
+        background: linear-gradient(135deg, rgba(18, 22, 35, 0.9), rgba(18, 22, 35, 0.6));
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        box-shadow: 0 24px 48px rgba(12, 17, 43, 0.32);
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+          box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .blog-index-card:hover,
+      .blog-feature-card:hover {
+        transform: translateY(-12px) rotate3d(1, -1, 0, 6deg);
+        box-shadow: 0 32px 64px rgba(15, 19, 48, 0.5);
+      }
+
+      .blog-index__toc {
+        display: grid;
+        gap: 1.5rem;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .blog-index__toc-card {
+        background: rgba(18, 22, 35, 0.65);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 16px;
+        padding: 1.5rem;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.4s ease, border-color 0.4s ease;
+      }
+
+      .blog-index__toc-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(120deg, rgba(102, 126, 234, 0.24), rgba(118, 75, 162, 0));
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+
+      .blog-index__toc-card:hover {
+        transform: translateY(-6px);
+        border-color: rgba(102, 126, 234, 0.45);
+      }
+
+      .blog-index__toc-card:hover::after {
+        opacity: 1;
+      }
+
+      .blog-index__toc-card h3 {
+        margin-bottom: 0.75rem;
+        font-size: 1.125rem;
+      }
+
+      .blog-index__toc-card ul {
+        list-style: disc;
+        margin-left: 1.25rem;
+        display: grid;
+        gap: 0.35rem;
+      }
+
+      .blog-index__faq {
+        background: linear-gradient(135deg, rgba(21, 28, 45, 0.95), rgba(16, 21, 34, 0.9));
+        border-radius: 24px;
+        padding: 2.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: 0 32px 64px rgba(12, 17, 43, 0.35);
+      }
+
+      .blog-index__faq details {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        padding: 1rem 0;
+      }
+
+      .blog-index__faq details:last-of-type {
+        border-bottom: none;
+      }
+
+      .blog-index__faq summary {
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        font-weight: 600;
+        font-size: 1.05rem;
+      }
+
+      .blog-index__faq p {
+        margin-top: 0.75rem;
+        color: rgba(255, 255, 255, 0.85);
+      }
+
+      @media (max-width: 768px) {
+        .blog-hero::after {
+          animation-duration: 18s;
+        }
+
+        .blog-index__faq {
+          padding: 1.75rem;
+        }
+      }
+    </style>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
