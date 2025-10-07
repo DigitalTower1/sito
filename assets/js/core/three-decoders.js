@@ -1,10 +1,20 @@
 (() => {
-  const LOCAL_VENDOR_ROOT = "assets/js/vendor/three/";
+  const scriptRef =
+    document.currentScript || document.querySelector("script[src*='three-decoders']");
+  const baseURL = scriptRef ? scriptRef.src.replace(/[^/]+$/, "") : "";
+
+  const localVendorRoot = baseURL
+    ? new URL("../vendor/three/", baseURL).href
+    : "assets/js/vendor/three/";
+
+  const toAbsolute = (filename) => `${localVendorRoot}${filename}`;
+
+  const LOCAL_VENDOR_ROOT = localVendorRoot;
   const DRACO_DECODER_BASE = `${LOCAL_VENDOR_ROOT}draco/`;
-  const MESHOPT_SRC = `${LOCAL_VENDOR_ROOT}meshopt_decoder.js`;
-  const DRACO_LOADER_SRC = `${LOCAL_VENDOR_ROOT}DRACOLoader.js`;
-  const KTX2_LOADER_SRC = `${LOCAL_VENDOR_ROOT}KTX2Loader.js`;
-  const BASIS_TRANSCODER_SRC = `${LOCAL_VENDOR_ROOT}basis_transcoder.js`;
+  const MESHOPT_SRC = toAbsolute("meshopt_decoder.js");
+  const DRACO_LOADER_SRC = toAbsolute("DRACOLoader.js");
+  const KTX2_LOADER_SRC = toAbsolute("KTX2Loader.js");
+  const BASIS_TRANSCODER_SRC = toAbsolute("basis_transcoder.js");
 
   function loadScript(src) {
     return new Promise((resolve, reject) => {
@@ -50,7 +60,7 @@
     if (!window.MeshoptDecoder) {
       tasks.push(
         loadScript(MESHOPT_SRC).catch(() => {
-          console.warn("Meshopt decoder non caricato");
+          console.debug("Meshopt decoder non disponibile: asset opzionale");
         }),
       );
     }
@@ -66,7 +76,7 @@
             }
           })
           .catch(() => {
-            console.warn("DRACO loader non disponibile");
+            console.debug("DRACO loader non disponibile (nessun asset compresso rilevato)");
           }),
       );
     }
@@ -82,7 +92,7 @@
             }
           })
           .catch(() => {
-            console.warn("KTX2 loader non disponibile");
+            console.debug("KTX2 loader non disponibile: fallback su texture tradizionali");
           }),
       );
     }

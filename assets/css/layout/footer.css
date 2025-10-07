@@ -1,18 +1,34 @@
 footer {
-  padding: 4rem 5%;
+  padding: clamp(3rem, 5vw, 4rem) 5%;
   border-top: 1px solid rgba(74, 155, 142, 0.3);
-  margin-top: 8rem;
+  margin-top: clamp(6rem, 9vw, 8rem);
   position: relative;
   z-index: 20;
-  background: rgba(10, 14, 20, 0.5);
+  background: rgba(10, 14, 20, 0.55);
+  backdrop-filter: blur(12px);
 }
-.sub-footer {
+.sub-footer,
+.footer-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 3rem;
-  margin-bottom: 3rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: clamp(2rem, 4vw, 3rem);
+  margin-bottom: clamp(2.5rem, 4vw, 3.5rem);
+  position: relative;
+  isolation: isolate;
 }
-.footer-section h3 {
+
+.footer-grid::before {
+  content: "";
+  position: absolute;
+  inset: -15% -10% -20%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.18), transparent 70%);
+  filter: blur(60px);
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: -1;
+}
+.footer-section h3,
+.footer-col h4 {
   font-size: 1rem;
   color: var(--gold);
   margin-bottom: 1.5rem;
@@ -39,24 +55,33 @@ footer {
   outline: 2px solid rgba(255, 215, 0, 0.6);
   outline-offset: 4px;
 }
-.footer-bio {
+.footer-bio,
+.footer-text {
   color: var(--white-dim);
   line-height: 1.7;
   font-size: 0.9rem;
 }
-.footer-menu {
+
+.footer-text {
+  letter-spacing: 0.08em;
+}
+.footer-menu,
+.footer-grid ul {
   list-style: none;
 }
-.footer-menu li {
+.footer-menu li,
+.footer-grid li {
   margin-bottom: 0.8rem;
 }
-.footer-menu a {
+.footer-menu a,
+.footer-grid a {
   color: var(--white-dim);
   text-decoration: none;
   font-size: 0.9rem;
   transition: color 0.3s;
 }
-.footer-menu a:hover {
+.footer-menu a:hover,
+.footer-grid a:hover {
   color: var(--gold);
 }
 .footer-contact {
@@ -99,11 +124,6 @@ footer {
   flex-wrap: wrap;
   gap: 1rem;
 }
-.footer-text {
-  font-size: 0.9rem;
-  color: var(--white-dim);
-  letter-spacing: 0.1em;
-}
 .footer-links {
   display: flex;
   gap: 2rem;
@@ -116,4 +136,29 @@ footer {
 }
 .footer-links a:hover {
   color: var(--gold);
+}
+
+@media (max-width: 768px) {
+  footer {
+    margin-top: 4.5rem;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-links {
+    gap: 1rem;
+  }
+}
+.footer-col,
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.footer-col h4 {
+  margin: 0;
 }

@@ -26,6 +26,7 @@
     }
     card.classList.add("is-active");
     card.classList.add("is-unlocked");
+    card.classList.remove("is-muted");
     card.setAttribute("aria-expanded", "true");
     dimGroup(card, true);
     activeCard = card;
