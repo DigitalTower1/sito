@@ -41,7 +41,7 @@ body.inner-page {
 body.inner-page section {
   min-height: auto;
   padding: 0;
-  margin-block: clamp(90px, 11vw, 150px);
+  margin-block: clamp(110px, 12vw, 180px);
   opacity: 0;
   transform: translateY(48px) scale(0.98);
   transition:
@@ -58,11 +58,11 @@ body.inner-page section:first-of-type {
   margin-block-start: 0;
 }
 
-main.page-wrapper > section:first-of-type {
-  margin-top: clamp(60px, 8vw, 100px);
+.page-wrapper > section:first-of-type {
+  margin-top: clamp(50px, 6vw, 90px);
 }
 
-main.page-wrapper > section:last-of-type {
+.page-wrapper > section:last-of-type {
   margin-bottom: clamp(110px, 13vw, 170px);
 }
 
@@ -102,8 +102,9 @@ body.inner-page::after {
 .page-hero {
   position: relative;
   margin: 0 auto;
-  padding: clamp(110px, 15vh, 160px) 5% clamp(72px, 10vh, 110px);
-  max-width: 1200px;
+  padding: clamp(110px, 15vh, 160px) clamp(1.5rem, 5vw, 2.75rem) clamp(72px, 10vh, 110px);
+  max-width: var(--content-max-width);
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: clamp(2.5rem, 5vw, 4.5rem);
@@ -351,7 +352,8 @@ section.visible .page-section::after {
 }
 
 .page-section__inner {
-  max-width: 1160px;
+  max-width: var(--content-max-width);
+  width: min(var(--content-max-width), 100%);
   margin: 0 auto;
   display: grid;
   gap: clamp(2.4rem, 5vw, 3.2rem);
@@ -360,6 +362,56 @@ section.visible .page-section::after {
   transition:
     transform 0.8s cubic-bezier(0.19, 1, 0.22, 1) 0.15s,
     opacity 0.8s ease 0.15s;
+}
+
+.page-section__inner > * {
+  width: 100%;
+}
+
+.breadcrumb {
+  width: min(var(--content-max-width), 92vw);
+  margin: clamp(40px, 6vw, 70px) auto 0;
+  padding: 0 clamp(1.2rem, 4vw, 2rem);
+  display: flex;
+  align-items: center;
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  gap: 0.75rem;
+}
+
+.breadcrumb__list {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.breadcrumb__item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.breadcrumb__item + .breadcrumb__item::before {
+  content: "➜";
+  font-size: 0.75rem;
+  color: rgba(255, 215, 0, 0.7);
+}
+
+.breadcrumb a {
+  color: rgba(255, 255, 255, 0.78);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.breadcrumb a:hover,
+.breadcrumb a:focus-visible {
+  color: var(--gold);
 }
 
 .page-section__header {

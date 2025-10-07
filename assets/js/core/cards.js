@@ -8,27 +8,13 @@
   const audio = window.uiSound || null;
   let activeCard = null;
 
-  function dimGroup(target, dimmed) {
-    const group = target.dataset.vaultGroup || "global";
-    vaultCards.forEach((card) => {
-      if (card === target) {
-        return;
-      }
-      if ((card.dataset.vaultGroup || "global") === group) {
-        card.classList.toggle("is-muted", dimmed);
-      }
-    });
-  }
-
   function openCard(card) {
     if (activeCard && activeCard !== card) {
       closeCard(activeCard);
     }
     card.classList.add("is-active");
     card.classList.add("is-unlocked");
-    card.classList.remove("is-muted");
     card.setAttribute("aria-expanded", "true");
-    dimGroup(card, true);
     activeCard = card;
     if (overlay) {
       overlay.classList.add("active");
@@ -45,7 +31,6 @@
     card.classList.remove("is-hovered");
     card.classList.remove("is-unlocked");
     card.setAttribute("aria-expanded", "false");
-    dimGroup(card, false);
     if (audio && activeCard === card) {
       audio.play("card-close");
     }
@@ -106,9 +91,6 @@
 
     card.addEventListener("mouseenter", () => {
       card.classList.add("is-hovered");
-      if (!card.classList.contains("is-active")) {
-        dimGroup(card, true);
-      }
       if (audio && !card.classList.contains("is-active")) {
         audio.play("card-hover");
       }
@@ -116,9 +98,6 @@
 
     card.addEventListener("mouseleave", () => {
       card.classList.remove("is-hovered");
-      if (!card.classList.contains("is-active")) {
-        dimGroup(card, false);
-      }
     });
 
     card.addEventListener("keydown", (event) => {

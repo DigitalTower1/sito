@@ -58,26 +58,18 @@
     const tasks = [];
 
     if (!window.MeshoptDecoder) {
-      tasks.push(
-        loadScript(MESHOPT_SRC).catch(() => {
-          console.debug("Meshopt decoder non disponibile: asset opzionale");
-        }),
-      );
+      tasks.push(loadScript(MESHOPT_SRC).catch(() => {}));
     }
 
     const needsDraco = !THREE_NS.DRACOLoader;
     if (needsDraco) {
       tasks.push(
-        loadScript(DRACO_LOADER_SRC)
-          .then(() => {
-            if (THREE_NS.DRACOLoader) {
-              THREE_NS.DRACOLoader.setDecoderConfig({ type: "js" });
-              THREE_NS.DRACOLoader.setDecoderPath(DRACO_DECODER_BASE);
-            }
-          })
-          .catch(() => {
-            console.debug("DRACO loader non disponibile (nessun asset compresso rilevato)");
-          }),
+        loadScript(DRACO_LOADER_SRC).then(() => {
+          if (THREE_NS.DRACOLoader) {
+            THREE_NS.DRACOLoader.setDecoderConfig({ type: "js" });
+            THREE_NS.DRACOLoader.setDecoderPath(DRACO_DECODER_BASE);
+          }
+        }),
       );
     }
 
@@ -91,9 +83,7 @@
               THREE_NS.KTX2Loader.BasisWorkerUrl = BASIS_TRANSCODER_SRC;
             }
           })
-          .catch(() => {
-            console.debug("KTX2 loader non disponibile: fallback su texture tradizionali");
-          }),
+          .catch(() => {}),
       );
     }
 

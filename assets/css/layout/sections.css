@@ -18,7 +18,7 @@ section.visible {
   transform: translateY(0);
 }
 .section-content {
-  max-width: min(100%, 1040px);
+  max-width: var(--content-max-width);
   width: 100%;
   text-align: left;
   z-index: 20;
@@ -37,7 +37,7 @@ section.visible {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 78%;
-  max-width: 1040px;
+  max-width: var(--content-max-width);
   height: 82%;
   z-index: -1;
   background-size: cover;
