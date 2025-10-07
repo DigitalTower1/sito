@@ -34,6 +34,7 @@
       overlay.classList.add("active");
       overlay.removeAttribute("hidden");
     }
+    document.body.classList.add("card-open");
     if (audio) {
       audio.play("card-flip");
     }
@@ -51,9 +52,12 @@
     if (activeCard === card) {
       activeCard = null;
     }
-    if (!activeCard && overlay) {
-      overlay.classList.remove("active");
-      overlay.setAttribute("hidden", "");
+    if (!activeCard) {
+      document.body.classList.remove("card-open");
+      if (overlay) {
+        overlay.classList.remove("active");
+        overlay.setAttribute("hidden", "");
+      }
     }
   }
 

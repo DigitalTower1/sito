@@ -2,20 +2,35 @@
 .slider-container {
   position: relative;
   margin-top: 3rem;
-  padding: clamp(4rem, 6vw, 5rem) 1.5rem 1.8rem clamp(2.2rem, 4vw, 2.8rem);
+  padding: clamp(5rem, 7vw, 6.5rem) clamp(1.5rem, 4vw, 2.2rem) clamp(2.2rem, 4vw, 3rem);
   overflow: visible;
 }
 
+.slider-container::after {
+  content: "";
+  position: absolute;
+  top: clamp(4rem, 7vw, 5.5rem);
+  right: clamp(0.5rem, 3vw, 1.5rem);
+  width: clamp(60px, 12vw, 140px);
+  bottom: clamp(1.8rem, 4vw, 2.6rem);
+  pointer-events: none;
+  background: linear-gradient(270deg, rgba(5, 10, 18, 0.95), transparent);
+  opacity: 0.65;
+}
+
 .slider-wrapper {
+  --slider-padding: clamp(1.2rem, 4vw, 2.6rem);
   display: flex;
-  gap: clamp(1.5rem, 3vw, 2.5rem);
+  gap: clamp(1.4rem, 2.6vw, 2.3rem);
   overflow-x: auto;
   overflow-y: visible;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
-  padding: 1.5rem 0 0.5rem 0.5rem;
+  padding: 1.5rem calc(var(--slider-padding) * 1.8) 0.75rem var(--slider-padding);
+  margin-inline: calc(var(--slider-padding) * -0.35) calc(var(--slider-padding) * -0.15);
   scrollbar-width: none;
   -ms-overflow-style: none;
+  scroll-padding-left: var(--slider-padding);
 }
 
 .slider-wrapper::-webkit-scrollbar {
@@ -23,7 +38,7 @@
 }
 
 .slider-wrapper > * {
-  scroll-snap-align: center;
+  scroll-snap-align: start;
 }
 
 .carousel-nav {
@@ -61,27 +76,49 @@
 #cardOverlay.card-overlay {
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle at 30% 30%, rgba(8, 16, 28, 0.15), transparent 55%);
+  background:
+    radial-gradient(circle at 30% 30%, rgba(8, 16, 28, 0.22), transparent 60%),
+    radial-gradient(circle at 70% 70%, rgba(6, 10, 18, 0.28), transparent 62%);
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.35s ease, visibility 0.35s ease;
   z-index: 200;
   pointer-events: none;
+  backdrop-filter: blur(10px);
 }
 
 #cardOverlay.card-overlay.active {
   opacity: 1;
   visibility: visible;
+  pointer-events: auto;
+}
+
+body.card-open {
+  overflow: hidden;
+}
+
+body.card-open .slider-wrapper,
+body.card-open .vault-card {
+  pointer-events: none;
+}
+
+body.card-open .vault-card.is-active {
+  pointer-events: auto;
 }
 
 /* Vault card base */
 .vault-card {
+  --vault-card-width: clamp(260px, 24vw, 320px);
+  --vault-card-height: clamp(360px, 52vh, 440px);
+  --vault-active-width: min(92vw, 700px);
+  --vault-active-height: min(90vh, 640px);
   position: relative;
-  flex: 0 0 clamp(260px, 24vw, 320px);
-  height: clamp(360px, 52vh, 440px);
-  margin-block-start: clamp(7rem, 9vw, 8.2rem);
-  margin-inline-start: clamp(5.4rem, 7vw, 6.2rem);
-  margin-block-end: clamp(2.4rem, 3.8vw, 3.2rem);
+  flex: 0 0 var(--vault-card-width);
+  width: var(--vault-card-width);
+  height: var(--vault-card-height);
+  margin-block-start: clamp(1.5rem, 3vw, 2.5rem);
+  margin-block-end: clamp(2.6rem, 4vw, 3.4rem);
+  margin-inline-start: clamp(1.2rem, 3vw, 2.6rem);
   perspective: 1600px;
   transform-style: preserve-3d;
   transition:
@@ -91,9 +128,9 @@
     opacity 0.3s ease;
   border-radius: 18px;
   transform-origin: center;
+  transform: translate3d(0, 0, 0);
   overflow: visible;
   background: transparent;
-  will-change: transform;
   z-index: 1;
 }
 
@@ -116,7 +153,7 @@
   height: 100%;
   transform-style: preserve-3d;
   transition: transform 0.6s cubic-bezier(0.22, 1, 0.27, 1);
-  will-change: transform;
+  transform: rotateY(0deg);
 }
 
 .vault-face {
@@ -140,7 +177,6 @@
     0 24px 46px rgba(0, 0, 0, 0.55);
   transition: transform 0.6s cubic-bezier(0.22, 1, 0.27, 1), opacity 0.35s ease,
     visibility 0.35s ease;
-  will-change: transform, opacity;
 }
 
 .vault-face.vault-locked {
@@ -154,18 +190,18 @@
 }
 
 .vault-face.vault-content {
-  transform: rotateY(-180deg);
+  transform: rotateY(180deg);
   align-items: flex-start;
   justify-content: flex-start;
   gap: 1.2rem;
   text-align: left;
   background:
-    radial-gradient(circle at 78% 12%, rgba(90, 200, 255, 0.3), rgba(12, 24, 38, 0.95) 68%),
-    linear-gradient(172deg, rgba(12, 24, 38, 0.98), rgba(22, 36, 52, 0.98));
+    radial-gradient(circle at 78% 12%, rgba(90, 200, 255, 0.22), rgba(12, 24, 38, 1) 68%),
+    linear-gradient(172deg, rgba(12, 24, 38, 1), rgba(22, 36, 52, 0.98));
   overflow: hidden;
   opacity: 0;
   visibility: hidden;
-  color: rgba(255, 255, 255, 0.92);
+  color: rgba(255, 255, 255, 0.95);
 }
 
 .vault-face.vault-content::-webkit-scrollbar {
@@ -281,26 +317,43 @@
 }
 
 .vault-card.is-active {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: var(--vault-active-width);
+  height: auto;
+  max-height: var(--vault-active-height);
+  flex: 0 0 auto;
+  margin: 0;
   z-index: 950;
-  transform: translateY(-6px) scale(1.05);
   box-shadow:
-    0 36px 90px rgba(0, 0, 0, 0.6),
-    0 0 38px rgba(255, 215, 0, 0.35);
+    0 36px 90px rgba(0, 0, 0, 0.7),
+    0 0 44px rgba(255, 215, 0, 0.4);
+  background: transparent;
+}
+
+.vault-card.is-active .vault-card-inner {
+  transform: rotateY(180deg);
+  min-height: min(var(--vault-active-height), clamp(420px, 70vh, 600px));
+}
+
+.vault-card.is-active .vault-face {
+  position: relative;
+  height: auto;
+  min-height: clamp(420px, 60vh, 560px);
 }
 
 .vault-card.is-active .vault-face.vault-locked {
   pointer-events: none;
   opacity: 0;
   visibility: hidden;
-  transform: rotateY(180deg);
 }
 
 .vault-card.is-active .vault-face.vault-content {
   pointer-events: auto;
-  padding: clamp(2rem, 3vw, 2.4rem);
   opacity: 1;
   visibility: visible;
-  transform: rotateY(0deg);
   z-index: 3;
 }
 
