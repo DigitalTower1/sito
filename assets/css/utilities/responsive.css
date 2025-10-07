@@ -5,7 +5,6 @@
   section {
     min-height: auto;
   }
-  .vault-card,
   .testimonial-card,
   .blog-card,
   .team-card {
@@ -15,9 +14,11 @@
     margin-block-start: 2.1rem;
   }
   .vault-card {
-    height: 380px;
-    --vault-active-width: min(96vw, 600px);
-    --vault-active-height: min(94vh, 760px);
+    --vault-card-size: 320px;
+    min-width: var(--vault-card-size);
+    max-width: var(--vault-card-size);
+    margin-inline-start: 1.4rem;
+    margin-block-start: 2.1rem;
   }
   #tower3DContainer {
     opacity: 0.4 !important;
@@ -50,7 +51,6 @@
   .form-row {
     grid-template-columns: 1fr;
   }
-  .vault-card,
   .testimonial-card,
   .blog-card,
   .team-card {
@@ -60,9 +60,11 @@
     margin-block-start: 1.8rem;
   }
   .vault-card {
-    height: 360px;
-    --vault-active-width: calc(100vw - 2.6rem);
-    --vault-active-height: calc(100vh - 2.6rem);
+    --vault-card-size: 300px;
+    min-width: var(--vault-card-size);
+    max-width: var(--vault-card-size);
+    margin-inline-start: 1.1rem;
+    margin-block-start: 1.8rem;
   }
   .services-grid {
     grid-template-columns: 1fr;
@@ -82,7 +84,6 @@
   .section-content {
     padding: 2rem 1rem;
   }
-  .vault-card,
   .testimonial-card,
   .blog-card,
   .team-card {
@@ -92,8 +93,11 @@
     margin-block-start: 1.6rem;
   }
   .vault-card {
-    --vault-active-width: calc(100vw - 1.8rem);
-    --vault-active-height: calc(100vh - 1.8rem);
+    --vault-card-size: 280px;
+    min-width: var(--vault-card-size);
+    max-width: var(--vault-card-size);
+    margin-inline-start: 0.9rem;
+    margin-block-start: 1.6rem;
   }
   .mobile-menu {
     max-width: 100%;

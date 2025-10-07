@@ -44,7 +44,6 @@
     <link rel="stylesheet" href="../../assets/css/base/variables.css" />
     <link rel="stylesheet" href="../../assets/css/base/base.css" />
     <link rel="stylesheet" href="../../assets/css/components/background.css" />
-    <link rel="stylesheet" href="../../assets/css/components/cursor.css" />
     <link rel="stylesheet" href="../../assets/css/layout/navigation.css" />
     <link rel="stylesheet" href="../../assets/css/layout/sections.css" />
     <link rel="stylesheet" href="../../assets/css/components/cards.css" />
@@ -52,6 +51,172 @@
     <link rel="stylesheet" href="../../assets/css/layout/footer.css" />
     <link rel="stylesheet" href="../../assets/css/layout/pages.css" />
     <link rel="stylesheet" href="../../assets/css/utilities/responsive.css" />
+    <style>
+      .article-page--ai-nel-marketing .page-hero {
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(135deg, rgba(48, 64, 144, 0.75), rgba(22, 28, 52, 0.95));
+        border-radius: 24px;
+      }
+
+      .article-page--ai-nel-marketing .page-hero::before,
+      .article-page--ai-nel-marketing .page-hero::after {
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+        mix-blend-mode: screen;
+        opacity: 0.6;
+        filter: blur(80px);
+        animation: floatOrbs 18s ease-in-out infinite;
+      }
+
+      .article-page--ai-nel-marketing .page-hero::before {
+        width: 420px;
+        height: 420px;
+        background: radial-gradient(circle, rgba(119, 220, 255, 0.35), rgba(20, 32, 72, 0));
+        top: -160px;
+        right: -140px;
+        animation-delay: -3s;
+      }
+
+      .article-page--ai-nel-marketing .page-hero::after {
+        width: 360px;
+        height: 360px;
+        background: radial-gradient(circle, rgba(255, 138, 221, 0.4), rgba(20, 32, 72, 0));
+        bottom: -140px;
+        left: -120px;
+      }
+
+      @keyframes floatOrbs {
+        0%,
+        100% {
+          transform: translate3d(0, 0, 0) scale(1);
+        }
+        50% {
+          transform: translate3d(30px, -20px, 0) scale(1.08);
+        }
+      }
+
+      .article-toc {
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 18px;
+        padding: 1.75rem;
+        margin-bottom: 2.5rem;
+        background: linear-gradient(135deg, rgba(21, 28, 45, 0.85), rgba(16, 20, 33, 0.88));
+        box-shadow: 0 24px 48px rgba(12, 17, 43, 0.35);
+      }
+
+      .article-toc__title {
+        font-size: 1.125rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .article-toc__list {
+        list-style: decimal-leading-zero;
+        margin-left: 1.25rem;
+        display: grid;
+        gap: 0.5rem;
+      }
+
+      .article-toc__list a {
+        color: #e5ecff;
+        font-weight: 500;
+      }
+
+      .article-visual {
+        position: relative;
+        border-radius: 20px;
+        overflow: hidden;
+        margin: 2rem 0 3rem;
+      }
+
+      .article-visual img {
+        display: block;
+        width: 100%;
+        height: auto;
+        filter: saturate(1.15) contrast(1.05);
+      }
+
+      .article-visual__caption {
+        position: absolute;
+        bottom: 0.75rem;
+        right: 1rem;
+        background: rgba(10, 13, 30, 0.75);
+        padding: 0.5rem 0.9rem;
+        border-radius: 999px;
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .article-summary {
+        background: rgba(16, 21, 34, 0.8);
+        border-radius: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        padding: 1.5rem;
+        margin-bottom: 2.5rem;
+      }
+
+      .article-summary h2 {
+        font-size: 1.25rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .article-summary ul {
+        display: grid;
+        gap: 0.45rem;
+        list-style: disc;
+        margin-left: 1.25rem;
+      }
+
+      .article-faq {
+        margin-top: 3rem;
+        padding: 2rem;
+        border-radius: 20px;
+        background: linear-gradient(135deg, rgba(30, 41, 82, 0.9), rgba(18, 24, 46, 0.92));
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        box-shadow: 0 24px 48px rgba(10, 14, 35, 0.4);
+      }
+
+      .article-faq details {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 1rem 0;
+      }
+
+      .article-faq details:last-child {
+        border-bottom: none;
+      }
+
+      .article-faq summary {
+        cursor: pointer;
+        font-weight: 600;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .article-faq p {
+        margin-top: 0.75rem;
+      }
+
+      @media (max-width: 768px) {
+        .article-toc {
+          padding: 1.25rem;
+        }
+
+        .article-summary {
+          padding: 1.25rem;
+        }
+
+        .article-faq {
+          padding: 1.5rem;
+        }
+      }
+    </style>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -73,11 +238,41 @@
         "dateModified": "2025-05-12"
       }
     </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Quali sono i primi processi da automatizzare?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Inizia da attività ripetitive come la segmentazione delle lead list, il recap delle call e la creazione di bozze per newsletter. Sono processi a basso rischio che permettono di addestrare i modelli con feedback rapidi."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Come mantengo il controllo sulla qualità dei contenuti?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Imposta revisioni a due step: verifica semantica con strumenti di controllo e approvazione finale umana per garantire coerenza con il tone of voice e con le policy del brand."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Quali competenze servono al team?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Combina figure strategiche come SEO specialist e marketing manager con profili data-driven capaci di leggere i risultati. Organizza formazione continua su prompt engineering, privacy e misurazione delle performance."
+            }
+          }
+        ]
+      }
+    </script>
   </head>
   <body class="inner-page article-page article-page--ai-nel-marketing">
     <div class="vignette"></div>
-    <div class="cursor"></div>
-    <div class="cursor-follower"></div>
     <div class="carbon-fiber"></div>
 
 <nav id="mainNav" class="visible">
@@ -243,12 +438,18 @@
         </div>
       </section>
       <section class="page-section">
+
         <div class="article-body">
           <div class="article-intro">
             <p>
-              Le aziende che adottano l'intelligenza artificiale senza un piano rischiano di produrre contenuti
-              generici. Questo approfondimento nasce per chi cerca istruzioni operative e desidera comprendere come
-              far dialogare algoritmi e team creativi nel rispetto dell'intento di ricerca.
+              L'intelligenza artificiale è un moltiplicatore di risultati soltanto quando segue una regia strategica. In
+              questa guida trovi un percorso completo per integrare AI generativa e predittiva nel marketing senza
+              perdere controllo sul tono di voce e sulla qualità dei contenuti.
+            </p>
+            <p>
+              L'articolo è pensato per marketing manager e founder che vogliono orchestrare team, dati e tecnologia
+              verso obiettivi misurabili: dalla lead generation alla fidelizzazione. Ogni sezione include esempi, check
+              list e collegamenti interni per approfondire.
             </p>
             <ul class="article-highlights">
               <li>Allinea automazioni e tone of voice con revisioni editoriali costanti.</li>
@@ -257,55 +458,111 @@
             </ul>
           </div>
 
-          <h2>Automazioni smart guidate dall'intento</h2>
+          <section class="article-summary" aria-labelledby="perche-leggere">
+            <h2 id="perche-leggere">Che cosa troverai</h2>
+            <ul>
+              <li>Un framework operativo per usare AI nel marketing rispettando l'intento di ricerca e la brand identity.</li>
+              <li>Strumenti concreti per monitorare performance, gestire i dati e migliorare la collaborazione tra reparti.</li>
+              <li>Risorse interne ed esterne per continuare l'approfondimento con casi d'uso e checklist dedicate.</li>
+            </ul>
+          </section>
+
+          <nav class="article-toc" aria-labelledby="sommario-articolo">
+            <h2 class="article-toc__title" id="sommario-articolo">In questo articolo</h2>
+            <ol class="article-toc__list">
+              <li><a href="#automazioni-ai-intent">Automazioni smart guidate dall'intento</a></li>
+              <li><a href="#contenuti-eeat">Contenuti assistiti con approccio E-E-A-T</a></li>
+              <li><a href="#analisi-predittive">Analisi predittive e governance dei dati</a></li>
+              <li><a href="#piano-seo-contenuti">Piano SEO e contenuti da seguire</a></li>
+              <li><a href="#conclusioni-ai">Conclusioni e prossimi step</a></li>
+              <li><a href="#faq-ai-marketing">FAQ sul marketing con AI</a></li>
+            </ol>
+          </nav>
+
+          <figure class="article-visual">
+            <img
+              src="https://images.unsplash.com/photo-1526662092594-e98c1e356d6a?w=1200&auto=format&fit=crop&q=80"
+              alt="Team marketing che analizza dati con dashboard AI"
+              loading="lazy"
+            />
+            <figcaption class="article-visual__caption">AI Marketing Control Room</figcaption>
+          </figure>
+
+          <h2 id="automazioni-ai-intent">Automazioni smart guidate dall'intento</h2>
           <p>
-            L'AI diventa efficace quando mappa le query informative, transazionali e navigazionali che intercettano i
-            tuoi clienti. Prepara dataset con domande frequenti, integra CRM e <a href="./metriche-da-monitorare.html">
-            indicatori di performance</a> e costruisci classificazioni che assegnino priorità ai lead.
+            L'AI diventa davvero efficace quando intercetta le query informative, transazionali e navigazionali dei tuoi
+            clienti. Prepara dataset con domande frequenti, integra CRM e <a href="./metriche-da-monitorare.html">indicatori
+            di performance</a> per costruire modelli di scoring che diano priorità ai lead con maggior potenziale.
           </p>
+          <h3 id="dataset-e-crm">Dataset, CRM e governance dei prompt</h3>
           <p>
-            Imposta un processo di revisione umana ogni volta che un modello suggerisce azioni di nurturing o messaggi
-            personalizzati. Le linee guida di <a href="https://developers.google.com/search/blog" target="_blank" rel="noopener">Google Search Central</a>
-            ricordano che l'esperienza reale e la trasparenza restano fattori chiave per la visibilità organica.
+            Unisci CRM, piattaforme di marketing automation e knowledge base interne per alimentare sistemi RAG (Retrieval
+            Augmented Generation). In questo modo i copy generati restano coerenti con le informazioni aggiornate e con gli
+            accordi di servizio condivisi con i clienti.
           </p>
           <ul class="article-list">
-            <li>Utilizza sistemi RAG per recuperare risposte da knowledge base interne aggiornate.</li>
-            <li>Automatizza i follow-up, ma lascia al team la decisione finale sui contenuti sensibili.</li>
-            <li>Tagga ogni output con fonte e data per facilitare audit successivi.</li>
+            <li>Segmenta i dati in base al funnel per attivare messaggi contestualizzati in ogni fase del percorso.</li>
+            <li>Automatizza i follow-up routinari lasciando al team la validazione finale dei contenuti sensibili.</li>
+            <li>Tagga ogni output con fonte, data e probabilità di accuratezza per facilitare audit successivi.</li>
           </ul>
-
-          <h2>Contenuti assistiti con approccio E-E-A-T</h2>
+          <h3 id="quality-control">Quality control umano e compliance</h3>
           <p>
-            I modelli generativi accelerano la produzione di bozze, ma l'autorevolezza nasce da contributi originali.
-            Struttura outline e cluster attorno a keyword semantiche, arricchisci con esempi di casi studio italiani e
+            Le linee guida di <a href="https://developers.google.com/search/blog" target="_blank" rel="noopener">Google
+            Search Central</a> sottolineano l'importanza di esperienza reale e trasparenza. Programma revisioni editoriali,
+            assicurati che i prompt includano riferimenti al tone of voice e documenta i feedback per migliorare
+            l'affidabilità dei modelli.
+          </p>
+
+          <h2 id="contenuti-eeat">Contenuti assistiti con approccio E-E-A-T</h2>
+          <p>
+            I modelli generativi accelerano la produzione di bozze, ma l'autorevolezza nasce da contributi originali e
+            dimostrabili. Struttura outline basati su keyword semantiche, arricchisci con esempi di progetti italiani e
             sfrutta <a href="./brand-storytelling-che-converte.html">storytelling orientato ai risultati</a> per aumentare
-            il tempo di permanenza sulla pagina.
+            la permanenza sulla pagina.
           </p>
+          <h3 id="workflow-editoriali">Workflow editoriali ibridi</h3>
           <p>
-            Ogni asset dovrebbe includere testimonianze, dati proprietari e call to action coerenti con la fase del
-            funnel. Cura alt text, tag title e metadescription: sono il primo contatto con l'utente e con gli algoritmi
-            dei motori di ricerca.
+            Prepara schede editoriali con obiettivi, fonti e CTA. Fai generare all'AI bozze, caption social e alternative di
+            headline, poi integra testimonianze, dati proprietari e insight del team. Centralizza il tutto in un content
+            hub condiviso per garantire versioning e collaborazione.
           </p>
           <ul class="article-list">
-            <li>Genera varianti di copy per test A/B e conserva le versioni che convertono di più.</li>
-            <li>Integra immagini generate o ottimizzate con strumenti AI, ma comprimi in WebP/AVIF per mantenere velocità.</li>
-            <li>Collega articoli del cluster per rafforzare il silos semantico e favorire la navigazione.</li>
+            <li>Genera varianti di copy per test A/B e conserva le versioni che registrano tassi di conversione migliori.</li>
+            <li>Integra immagini generate o ottimizzate con strumenti AI, comprimendole in WebP/AVIF per mantenere performance.</li>
+            <li>Collega articoli del cluster per rafforzare il silos semantico e favorire la navigazione interna.</li>
           </ul>
-
-          <h2>Analisi predittive e governance dei dati</h2>
+          <h3 id="media-visuali">Visual immersivi e accessibilità</h3>
           <p>
-            Modelli di propensity score e churn prediction rendono più preciso il budget media. Collega strumenti di
-            marketing automation a dashboard che visualizzano lead scoring, lifetime value e margini. Imposta alert per
-            variazioni significative così da intervenire rapidamente su campagne paid e contenuti organici.
+            Cura alt text, tag title e meta description: sono il primo contatto con utenti e motori di ricerca. Affianca alle
+            immagini elementi interattivi come slider o infographic animate per rendere l'esperienza più immersiva, mantenendo
+            sempre contrasto e leggibilità per l'accessibilità.
           </p>
+
+          <h2 id="analisi-predittive">Analisi predittive e governance dei dati</h2>
           <p>
-            Per consolidare l'autorità, condividi i risultati attraverso case study e white paper collegati da link
-            interni contestualizzati. Includi sempre fonti esterne autorevoli per supportare le tue tesi e ottenere
-            backlink naturali da community e partner.
+            Modelli di propensity score, lead scoring e churn prediction rendono più preciso l'investimento media e la
+            distribuzione del budget. Collega strumenti di marketing automation a dashboard che visualizzano lifetime value e
+            margini per prendere decisioni basate sui dati.
+          </p>
+          <h3 id="dashboard-intelligenti">Dashboard intelligenti e alert</h3>
+          <p>
+            Crea dashboard dinamiche collegando data warehouse, CRM e piattaforme di advertising. Imposta alert quando le
+            metriche superano soglie critiche per intervenire rapidamente su campagne paid e contenuti organici.
+          </p>
+          <ul class="article-list">
+            <li>Monitora KPI strategici come conversion rate, retention e revenue per segmento.</li>
+            <li>Integra modelli predittivi in tool di business intelligence per simulare scenari di crescita.</li>
+            <li>Condividi snapshot settimanali con marketing e sales per allineare priorità e investimenti.</li>
+          </ul>
+          <h3 id="sharing-authority">Condivisione dei risultati e autorevolezza</h3>
+          <p>
+            Trasforma gli insight in case study, white paper e webinar collegati da link interni contestualizzati. Includi
+            sempre fonti autorevoli per ottenere backlink naturali e rafforzare la reputazione del brand nei motori di
+            ricerca e nelle community di settore.
           </p>
 
           <div class="article-framework">
-            <h2>Piano SEO e contenuti da seguire</h2>
+            <h2 id="piano-seo-contenuti">Piano SEO e contenuti da seguire</h2>
             <div class="article-panel">
               <h3>Content &amp; Keyword Strategy</h3>
               <ul>
@@ -341,6 +598,52 @@
               </ul>
             </div>
           </div>
+
+          <h2 id="conclusioni-ai">Conclusioni e prossimi step</h2>
+          <p>
+            L'intelligenza artificiale nel marketing diventa un alleato quando è supportata da dati accurati, processi
+            trasparenti e controllo umano continuo. Concentrati su tre priorità per rendere scalabile il progetto:
+          </p>
+          <ul class="article-list">
+            <li>Definisci un playbook di prompt, revisioni e metriche condivise da marketing, sales e customer service.</li>
+            <li>Costruisci dashboard integrate per valutare impatto su conversioni, retention e marginalità.</li>
+            <li>Aggiorna periodicamente contenuti e workflow in base ai feedback degli utenti e alle evoluzioni algoritmiche.</li>
+          </ul>
+
+          <section class="article-faq" aria-labelledby="faq-ai-marketing">
+            <h2 id="faq-ai-marketing">FAQ sul marketing con AI</h2>
+            <details open>
+              <summary>
+                Quali sono i primi processi da automatizzare?
+                <span aria-hidden="true">+</span>
+              </summary>
+              <p>
+                Inizia da attività ripetitive come la segmentazione delle lead list, il recap delle call e la creazione di
+                bozze per newsletter. Sono processi a basso rischio che permettono di addestrare i modelli con feedback rapidi.
+              </p>
+            </details>
+            <details>
+              <summary>
+                Come mantengo il controllo sulla qualità dei contenuti?
+                <span aria-hidden="true">+</span>
+              </summary>
+              <p>
+                Imposta revisioni a due step: verifica semantica con strumenti come Grammarly o LanguageTool e controllo
+                umano finale per coerenza con il tone of voice. Archivia le versioni approvate per creare una knowledge base.
+              </p>
+            </details>
+            <details>
+              <summary>
+                Quali competenze servono al team?
+                <span aria-hidden="true">+</span>
+              </summary>
+              <p>
+                Abbina figure strategiche (SEO specialist, marketing manager) a profili data-driven in grado di leggere i
+                risultati. Prevedi sessioni di formazione periodiche su prompt engineering, privacy e misurazione delle
+                performance.
+              </p>
+            </details>
+          </section>
 
           <aside class="article-links">
             <h2>Risorse e collegamenti utili</h2>
@@ -443,9 +746,50 @@
         © 2025 Digital Tower - Scaliamo insieme la torre del successo
       </p>
       <ul class="footer-social">
-        <li><a href="https://www.instagram.com/digitaltower" target="_blank" rel="noopener">Instagram</a></li>
-        <li><a href="https://www.linkedin.com/company/digitaltower" target="_blank" rel="noopener">LinkedIn</a></li>
-        <li><a href="https://www.youtube.com/@digitaltower" target="_blank" rel="noopener">YouTube</a></li>
+        <li>
+          <a class="footer-social__link" href="https://www.instagram.com/digitaltower" target="_blank" rel="noopener" aria-label="Instagram">
+            <span class="sr-only">Instagram</span>
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <rect x="3.5" y="3.5" width="17" height="17" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="1.5" />
+              <circle cx="12" cy="12" r="4.25" fill="none" stroke="currentColor" stroke-width="1.5" />
+              <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" />
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a class="footer-social__link" href="https://www.facebook.com/digitaltower" target="_blank" rel="noopener" aria-label="Facebook">
+            <span class="sr-only">Facebook</span>
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <path d="M14.5 4.5h2.3V2h-2.3c-2.8 0-4.5 1.7-4.5 4.4V9H7v2.7h3v8.3h3v-8.3h2.6l.4-2.7H13V6.6c0-1 .5-2.1 1.5-2.1z" fill="currentColor" />
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a class="footer-social__link" href="https://www.linkedin.com/company/digitaltower" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <span class="sr-only">LinkedIn</span>
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <rect x="3.5" y="3.5" width="17" height="17" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.5" />
+              <path d="M8.3 10.4H6V18h2.3zM7.15 6a1.35 1.35 0 1 0 0 2.7 1.35 1.35 0 0 0 0-2.7zm10.85 12h-2.3v-4c0-1.1-.4-1.8-1.4-1.8-.8 0-1.2.5-1.4 1-.1.2-.1.5-.1.8V18H10v-7.6h2.2v1c.3-.5 1-1.2 2.4-1.2 1.8 0 3.4 1.2 3.4 3.7z" fill="currentColor" />
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a class="footer-social__link" href="https://www.tiktok.com/@digitaltower" target="_blank" rel="noopener" aria-label="TikTok">
+            <span class="sr-only">TikTok</span>
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <path d="M19.5 7.1a4.3 4.3 0 0 1-3.2-1.5v7.1c0 3.1-2.5 5.6-5.6 5.6s-5.6-2.5-5.6-5.6 2.4-5.6 5.5-5.6c.6 0 1.2.08 1.8.25v2.9c-.6-.26-1.1-.39-1.7-.39-1.8 0-3.2 1.4-3.2 3.2s1.4 3.2 3.2 3.2 3.2-1.4 3.2-3.2V2.5h2.5a4.3 4.3 0 0 0 3.1 3.7z" fill="currentColor" />
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a class="footer-social__link" href="https://www.youtube.com/@digitaltower" target="_blank" rel="noopener" aria-label="YouTube">
+            <span class="sr-only">YouTube</span>
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <path d="M21 8.2c0-1.2-.9-2.3-2-2.4-3.1-.3-6.2-.3-9.3 0-1.1.1-2 1.2-2 2.4v7.6c0 1.2.9 2.3 2 2.4 3.1.3 6.2.3 9.3 0 1.1-.1 2-1.2 2-2.4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+              <polygon points="10 9 15.5 12 10 15" fill="currentColor" />
+            </svg>
+          </a>
+        </li>
       </ul>
       <div class="footer-links">
         <a href="#">Privacy Policy</a>
@@ -454,8 +798,6 @@
     </div>
   </div>
 </footer>
-
-    <script src="../../assets/js/core/cursor.js" defer></script>
     <script src="../../assets/js/core/audio.js" defer></script>
     <script src="../../assets/js/core/navigation.js" defer></script>
     <script src="../../assets/js/core/sections.js" defer></script>
