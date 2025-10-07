@@ -254,7 +254,7 @@ section.visible .section-text {
   justify-content: center;
 }
 
-.blog-section-actions .button-glow {
+.blog-section-actions .cta-button {
   min-width: 220px;
   text-align: center;
 }
