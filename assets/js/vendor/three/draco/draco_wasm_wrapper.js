@@ -1,0 +1,1 @@
+/* Placeholder WASM wrapper for local Draco decoding. Replace with official build. */
