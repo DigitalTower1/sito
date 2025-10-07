@@ -49,6 +49,150 @@
     <link rel="stylesheet" href="../../assets/css/layout/footer.css" />
     <link rel="stylesheet" href="../../assets/css/layout/pages.css" />
     <link rel="stylesheet" href="../../assets/css/utilities/responsive.css" />
+    <style>
+      .blog-hero {
+        position: relative;
+        overflow: hidden;
+        background: radial-gradient(120% 120% at 80% 0%, rgba(119, 141, 255, 0.2), transparent),
+          radial-gradient(120% 120% at 20% 20%, rgba(255, 143, 199, 0.18), transparent);
+      }
+
+      .blog-hero::after {
+        content: "";
+        position: absolute;
+        inset: -120px;
+        background: conic-gradient(
+          from 180deg,
+          rgba(88, 119, 255, 0.25),
+          rgba(0, 0, 0, 0),
+          rgba(255, 119, 153, 0.25),
+          rgba(0, 0, 0, 0)
+        );
+        filter: blur(120px);
+        animation: pulseGlow 14s linear infinite;
+        z-index: 0;
+      }
+
+      @keyframes pulseGlow {
+        0% {
+          transform: rotate(0deg) scale(1);
+        }
+        50% {
+          transform: rotate(180deg) scale(1.08);
+        }
+        100% {
+          transform: rotate(360deg) scale(1);
+        }
+      }
+
+      .blog-hero > div,
+      .blog-hero__visual {
+        position: relative;
+        z-index: 1;
+      }
+
+      .blog-index-card,
+      .blog-feature-card {
+        backdrop-filter: blur(8px);
+        background: linear-gradient(135deg, rgba(18, 22, 35, 0.9), rgba(18, 22, 35, 0.6));
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        box-shadow: 0 24px 48px rgba(12, 17, 43, 0.32);
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+          box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .blog-index-card:hover,
+      .blog-feature-card:hover {
+        transform: translateY(-12px) rotate3d(1, -1, 0, 6deg);
+        box-shadow: 0 32px 64px rgba(15, 19, 48, 0.5);
+      }
+
+      .blog-index__toc {
+        display: grid;
+        gap: 1.5rem;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .blog-index__toc-card {
+        background: rgba(18, 22, 35, 0.65);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 16px;
+        padding: 1.5rem;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.4s ease, border-color 0.4s ease;
+      }
+
+      .blog-index__toc-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(120deg, rgba(102, 126, 234, 0.24), rgba(118, 75, 162, 0));
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+
+      .blog-index__toc-card:hover {
+        transform: translateY(-6px);
+        border-color: rgba(102, 126, 234, 0.45);
+      }
+
+      .blog-index__toc-card:hover::after {
+        opacity: 1;
+      }
+
+      .blog-index__toc-card h3 {
+        margin-bottom: 0.75rem;
+        font-size: 1.125rem;
+      }
+
+      .blog-index__toc-card ul {
+        list-style: disc;
+        margin-left: 1.25rem;
+        display: grid;
+        gap: 0.35rem;
+      }
+
+      .blog-index__faq {
+        background: linear-gradient(135deg, rgba(21, 28, 45, 0.95), rgba(16, 21, 34, 0.9));
+        border-radius: 24px;
+        padding: 2.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: 0 32px 64px rgba(12, 17, 43, 0.35);
+      }
+
+      .blog-index__faq details {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        padding: 1rem 0;
+      }
+
+      .blog-index__faq details:last-of-type {
+        border-bottom: none;
+      }
+
+      .blog-index__faq summary {
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        font-weight: 600;
+        font-size: 1.05rem;
+      }
+
+      .blog-index__faq p {
+        margin-top: 0.75rem;
+        color: rgba(255, 255, 255, 0.85);
+      }
+
+      @media (max-width: 768px) {
+        .blog-hero::after {
+          animation-duration: 18s;
+        }
+
+        .blog-index__faq {
+          padding: 1.75rem;
+        }
+      }
+    </style>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -249,6 +393,54 @@
           </div>
         </aside>
       </header>
+
+      <section class="page-section" aria-labelledby="sommario-blog">
+        <div class="page-section__inner">
+          <div class="page-section__header">
+            <span class="page-section__eyebrow" id="sommario-blog">Sommario editoriale</span>
+            <h2 class="page-section__title">Esplora il blog in base ai tuoi obiettivi di crescita</h2>
+            <p class="page-section__intro">
+              Questa mappa ti aiuta a individuare rapidamente il contenuto giusto. Ogni categoria contiene articoli
+              ottimizzati con heading chiari, elenchi puntati e call to action pensate per accompagnarti fino alla
+              conversione.
+            </p>
+          </div>
+          <div class="blog-index__toc">
+            <article class="blog-index__toc-card">
+              <h3>Strategie e framework</h3>
+              <ul>
+                <li><a href="#ultimi-articoli" class="internal-link">Customer journey omnicanale</a></li>
+                <li><a href="./metriche-da-monitorare.html">Metriche da monitorare</a></li>
+                <li><a href="./performance-ads-2025.html">Performance Ads 2025</a></li>
+              </ul>
+            </article>
+            <article class="blog-index__toc-card">
+              <h3>Branding e contenuti</h3>
+              <ul>
+                <li><a href="./brand-storytelling-che-converte.html">Brand storytelling che converte</a></li>
+                <li><a href="./ux-writing-per-ecommerce.html">UX writing per eCommerce</a></li>
+                <li><a href="./email-journey-memorabili.html">Email journey memorabili</a></li>
+              </ul>
+            </article>
+            <article class="blog-index__toc-card">
+              <h3>Innovazione e AI</h3>
+              <ul>
+                <li><a href="./ai-nel-marketing.html">AI nel marketing</a></li>
+                <li><a href="./social-commerce.html">Social commerce</a></li>
+                <li><a href="./customer-journey-omnicanale.html">Omnicanalità guidata dai dati</a></li>
+              </ul>
+            </article>
+            <article class="blog-index__toc-card">
+              <h3>SEO e performance</h3>
+              <ul>
+                <li><a href="./seo-locale-per-pmi.html">SEO locale per PMI</a></li>
+                <li><a href="./rebranding-senza-stress.html">Rebranding senza stress</a></li>
+                <li><a href="../../pages/servizi/seo-strategico.html">Servizio SEO strategico</a></li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
 
       <section class="page-section page-section--story">
         <div class="page-section__inner">
@@ -780,24 +972,88 @@
         </div>
       </section>
 
-      <section class="page-section blog-index__cta" aria-labelledby="blog-cta">
+      <section class="page-section" aria-labelledby="approfondimenti-consigliati">
         <div class="page-section__inner">
-          <div class="blog-cta">
-            <span class="page-section__eyebrow" id="blog-cta">Prossimo passo</span>
-            <h2 class="page-section__title">Trasformiamo la tua visione in risultati tangibili</h2>
-            <p>
-              Dalla strategia alla delivery, il nostro team accompagna la tua azienda con
-              roadmap chiare, sperimentazione rapida e una cura artigianale per i dettagli.
-              Scrivici e iniziamo a costruire insieme la prossima storia di successo.
+          <div class="page-section__header">
+            <span class="page-section__eyebrow" id="approfondimenti-consigliati">Percorso consigliato</span>
+            <h2 class="page-section__title">Dalla scoperta alla conversione in tre mosse</h2>
+            <p class="page-section__intro">
+              Segui questi step per sfruttare al massimo le risorse del nostro blog. Ogni fase include link interni e
+              checklist rapide per mettere in pratica ciò che impari.
             </p>
-            <div class="page-hero__actions" style="justify-content: center">
-              <a class="button-glow" href="../../digital-tower-optimized(1).html#contact">
-                Richiedi una call
-              </a>
-              <a class="button-outline" href="../../digital-tower-optimized(1).html#services">
-                Scopri i servizi
-              </a>
-            </div>
+          </div>
+          <ol class="page-list">
+            <li>
+              <strong>Comprendi il contesto:</strong> parti dalle guide su <a href="./ai-nel-marketing.html">AI nel
+              marketing</a> e <a href="./social-commerce.html">social commerce</a> per identificare opportunità di
+              crescita immediate.
+            </li>
+            <li>
+              <strong>Progetta l'esperienza:</strong> approfondisci <a href="./customer-journey-omnicanale.html">customer
+              journey omnicanale</a> e <a href="./ux-writing-per-ecommerce.html">UX writing</a> per orchestrare
+              touchpoint coerenti.
+            </li>
+            <li>
+              <strong>Ottimizza e misura:</strong> usa <a href="./metriche-da-monitorare.html">metriche da monitorare</a> e
+              <a href="./performance-ads-2025.html">performance ads 2025</a> per verificare risultati e scalare ciò che
+              funziona.
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="page-section" aria-labelledby="faq-blog">
+        <div class="page-section__inner blog-index__faq">
+          <div class="page-section__header">
+            <span class="page-section__eyebrow" id="faq-blog">FAQ</span>
+            <h2 class="page-section__title">Domande frequenti sul nostro approccio editoriale</h2>
+          </div>
+          <details open>
+            <summary>
+              Come vengono scelti i topic del blog?
+              <span aria-hidden="true">+</span>
+            </summary>
+            <p>
+              Ogni mese analizziamo i dati di Search Console, le conversazioni social e le richieste dei clienti. Da qui
+              definiamo una scaletta che privilegia keyword strategiche, domande emergenti e casi studio rilevanti per le
+              PMI italiane.
+            </p>
+          </details>
+          <details>
+            <summary>
+              Con quale frequenza aggiornate gli articoli?
+              <span aria-hidden="true">+</span>
+            </summary>
+            <p>
+              Gli insight vengono revisionati trimestralmente: controlliamo performance, aggiorniamo dati e inseriamo nuovi
+              link interni per accompagnarti tra risorse correlate, migliorando l'esperienza utente.
+            </p>
+          </details>
+          <details>
+            <summary>
+              Posso contattarvi per un contenuto personalizzato?
+              <span aria-hidden="true">+</span>
+            </summary>
+            <p>
+              Certo. Compila il modulo nella sezione <a href="../../digital-tower-optimized(1).html#contact">contatti</a>
+              e raccontaci il tuo progetto: creeremo un piano editoriale e SEO su misura per il tuo brand.
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <section class="page-cta" id="cta-blog">
+        <div class="page-cta__inner">
+          <h2 class="page-cta__title">Vuoi trasformare questi insight in un piano d'azione?</h2>
+          <p class="page-cta__text">
+            Prenota una sessione strategica di 30 minuti: analizzeremo i tuoi obiettivi, individueremo le keyword prioritarie
+            e creeremo una roadmap personalizzata.
+          </p>
+          <div class="page-cta__actions">
+            <a class="button-glow" href="../../digital-tower-optimized(1).html#contact">Richiedi la consulenza</a>
+            <a class="cta-button" href="mailto:info@digitaltower.it?subject=Richiesta%20consulenza%20editoriale">
+              Scrivici ora
+            </a>
           </div>
         </div>
       </section>
@@ -862,9 +1118,86 @@
         © 2025 Digital Tower - Scaliamo insieme la torre del successo
       </p>
       <ul class="footer-social">
-        <li><a href="https://www.instagram.com/digitaltower" target="_blank" rel="noopener">Instagram</a></li>
-        <li><a href="https://www.linkedin.com/company/digitaltower" target="_blank" rel="noopener">LinkedIn</a></li>
-        <li><a href="https://www.youtube.com/@digitaltower" target="_blank" rel="noopener">YouTube</a></li>
+        <li>
+          <a
+            class="footer-social__link"
+            href="https://www.instagram.com/digitaltower"
+            target="_blank"
+            rel="noopener"
+            aria-label="Instagram"
+          >
+            <span class="sr-only">Instagram</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path
+                d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.5a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11Zm0 2a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Zm5.25-3a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"
+              />
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a
+            class="footer-social__link"
+            href="https://www.facebook.com/digitaltower"
+            target="_blank"
+            rel="noopener"
+            aria-label="Facebook"
+          >
+            <span class="sr-only">Facebook</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path
+                d="M13.5 21.75v-7.26h2.44l.36-2.83h-2.8V9.57c0-.82.23-1.38 1.4-1.38h1.48V5.62c-.26-.04-1.15-.11-2.18-.11-2.16 0-3.64 1.32-3.64 3.75v2.3H8.12v2.83h2.64v7.26h2.74Z"
+              />
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a
+            class="footer-social__link"
+            href="https://www.linkedin.com/company/digitaltower"
+            target="_blank"
+            rel="noopener"
+            aria-label="LinkedIn"
+          >
+            <span class="sr-only">LinkedIn</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path
+                d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 8.98h3.96V21H3V8.98Zm6.69 0h3.79v1.7h.05c.53-.97 1.82-2 3.74-2 3.99 0 4.73 2.5 4.73 5.78V21h-3.96v-4.96c0-1.18-.02-2.7-1.65-2.7-1.65 0-1.9 1.29-1.9 2.62V21H9.69V8.98Z"
+              />
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a
+            class="footer-social__link"
+            href="https://www.tiktok.com/@digitaltower"
+            target="_blank"
+            rel="noopener"
+            aria-label="TikTok"
+          >
+            <span class="sr-only">TikTok</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path
+                d="M21 8.4c-1.86-.17-3.47-.98-4.74-2.25v8.83a6.1 6.1 0 1 1-6.1-6.1c.32 0 .63.03.93.09v2.68a3.43 3.43 0 1 0 2.5 3.31V2.25h2.8c.2 1.86 1.7 3.34 3.61 3.47V8.4Z"
+              />
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a
+            class="footer-social__link"
+            href="https://www.youtube.com/@digitaltower"
+            target="_blank"
+            rel="noopener"
+            aria-label="YouTube"
+          >
+            <span class="sr-only">YouTube</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path
+                d="M21.75 8.02s-.18-1.38-.7-1.9c-.67-.71-1.42-.72-1.76-.77-2.46-.18-6.29-.18-6.29-.18h-.01s-3.83 0-6.29.18c-.34.05-1.09.06-1.76.77-.52.52-.7 1.9-.7 1.9S4 9.56 4 11.1v1.74c0 1.55.24 3.08.24 3.08s.18 1.38.7 1.9c.67.72 1.55.69 1.95.77 1.41.14 6.06.18 6.06.18s3.84-.01 6.3-.19c.34-.04 1.09-.05 1.76-.76.52-.52.7-1.9.7-1.9s.24-1.54.24-3.09V11.1c0-1.54-.24-3.08-.24-3.08ZM10.5 13.9v-4.4l4 2.2-4 2.2Z"
+              />
+            </svg>
+          </a>
+        </li>
       </ul>
       <div class="footer-links">
         <a href="#">Privacy Policy</a>
