@@ -13,6 +13,21 @@ body.inner-page {
   overflow-x: hidden;
 }
 
+body.inner-page section {
+  min-height: auto;
+  padding: 0;
+  opacity: 0;
+  transform: translateY(48px) scale(0.98);
+  transition:
+    transform 0.85s cubic-bezier(0.19, 1, 0.22, 1),
+    opacity 0.85s ease;
+}
+
+body.inner-page section.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
 .inner-page .carbon-fiber {
   opacity: 0.08;
 }
@@ -47,12 +62,38 @@ body.inner-page::after {
 .page-hero {
   position: relative;
   margin: 0 auto;
-  padding: clamp(120px, 16vh, 180px) 5% clamp(90px, 12vh, 140px);
+  padding: clamp(110px, 15vh, 160px) 5% clamp(72px, 10vh, 110px);
   max-width: 1200px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: clamp(2.5rem, 5vw, 4.5rem);
   align-items: center;
+}
+
+.page-hero > * {
+  opacity: 0;
+  transform: translateY(36px);
+  transition:
+    transform 0.85s cubic-bezier(0.19, 1, 0.22, 1),
+    opacity 0.85s ease;
+}
+
+section.visible.page-hero > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+[data-animate] {
+  opacity: 0;
+  transform: translateY(42px) scale(0.98);
+  transition:
+    transform 0.9s cubic-bezier(0.19, 1, 0.22, 1),
+    opacity 0.9s ease;
+}
+
+[data-animate].is-animated {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 
 .page-hero__tag {
@@ -185,7 +226,7 @@ body.inner-page::after {
 
 .page-section {
   position: relative;
-  padding: clamp(90px, 12vw, 140px) 5%;
+  padding: clamp(72px, 10vw, 120px) 5%;
 }
 
 .page-section__inner {
@@ -193,10 +234,20 @@ body.inner-page::after {
   margin: 0 auto;
   display: grid;
   gap: clamp(2.4rem, 5vw, 3.2rem);
+  opacity: 0;
+  transform: translateY(28px) scale(0.98);
+  transition:
+    transform 0.8s cubic-bezier(0.19, 1, 0.22, 1) 0.15s,
+    opacity 0.8s ease 0.15s;
 }
 
 .page-section__header {
   max-width: 820px;
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    transform 0.75s cubic-bezier(0.19, 1, 0.22, 1) 0.25s,
+    opacity 0.75s ease 0.25s;
 }
 
 .page-section__eyebrow {
@@ -217,6 +268,83 @@ body.inner-page::after {
   color: var(--white-dim);
   line-height: 1.8;
   font-size: 1rem;
+}
+
+.page-story {
+  padding: clamp(2rem, 3.5vw, 2.8rem);
+  border-radius: 22px;
+  background:
+    linear-gradient(140deg, rgba(10, 20, 32, 0.95), rgba(16, 34, 48, 0.92)),
+    url("https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?w=1200&auto=format&fit=crop&q=80") center/cover;
+  border: 1px solid rgba(255, 215, 0, 0.18);
+  box-shadow:
+    0 30px 70px rgba(0, 0, 0, 0.55),
+    inset 0 0 28px rgba(64, 196, 255, 0.12);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.page-story::before {
+  content: "";
+  position: absolute;
+  inset: -20% -10%;
+  background: radial-gradient(circle at 20% 30%, rgba(255, 140, 0, 0.28), transparent 65%);
+  mix-blend-mode: screen;
+  opacity: 0.65;
+  transform: translate3d(0, 0, 0) scale(1);
+  transition: transform 1.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.page-story:hover::before {
+  transform: scale(1.1);
+}
+
+.page-story h3 {
+  font-size: 1.4rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 1rem;
+}
+
+.page-story p {
+  color: rgba(232, 234, 237, 0.88);
+  line-height: 1.9;
+  margin-bottom: 1rem;
+}
+
+.page-story p:last-child {
+  margin-bottom: 0;
+}
+
+section.visible .page-section__inner,
+section.visible .page-section__header {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.page-section__content,
+.page-story,
+.page-grid,
+.page-pillars,
+.page-timeline,
+.page-cta__inner {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    transform 0.85s cubic-bezier(0.19, 1, 0.22, 1) 0.3s,
+    opacity 0.85s ease 0.3s;
+}
+
+section.visible .page-section__content,
+section.visible .page-story,
+section.visible .page-grid,
+section.visible .page-pillars,
+section.visible .page-timeline,
+section.visible .page-cta__inner {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .blog-index__filters .page-section__inner {

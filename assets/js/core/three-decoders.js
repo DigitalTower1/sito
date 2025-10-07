@@ -1,9 +1,10 @@
 (() => {
   const DECODER_BASE = "https://www.gstatic.com/draco/v1/decoders/";
-  const MESHOPT_SRC = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/examples/js/libs/meshopt_decoder.js";
-  const DRACO_LOADER_SRC = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/examples/js/loaders/DRACOLoader.js";
-  const KTX2_LOADER_SRC = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/examples/js/loaders/KTX2Loader.js";
-  const BASIS_TRANSCODER_SRC = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/examples/js/libs/basis/basis_transcoder.js";
+  const LOCAL_VENDOR_ROOT = "assets/js/vendor/three/";
+  const MESHOPT_SRC = `${LOCAL_VENDOR_ROOT}meshopt_decoder.js`;
+  const DRACO_LOADER_SRC = `${LOCAL_VENDOR_ROOT}DRACOLoader.js`;
+  const KTX2_LOADER_SRC = `${LOCAL_VENDOR_ROOT}KTX2Loader.js`;
+  const BASIS_TRANSCODER_SRC = `${LOCAL_VENDOR_ROOT}basis_transcoder.js`;
 
   function loadScript(src) {
     return new Promise((resolve, reject) => {

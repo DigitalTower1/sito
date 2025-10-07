@@ -66,11 +66,13 @@
   visibility: hidden;
   transition: opacity 0.35s ease, visibility 0.35s ease;
   z-index: 900;
+  pointer-events: none;
 }
 
 #cardOverlay.card-overlay.active {
   opacity: 1;
   visibility: visible;
+  pointer-events: auto;
 }
 
 /* Vault card base */
@@ -78,8 +80,8 @@
   position: relative;
   flex: 0 0 clamp(260px, 24vw, 320px);
   height: clamp(360px, 52vh, 440px);
-  margin-block-start: clamp(5rem, 7vw, 6rem);
-  margin-inline-start: clamp(4rem, 6.4vw, 4.8rem);
+  margin-block-start: clamp(6rem, 8vw, 7rem);
+  margin-inline-start: clamp(4.6rem, 6.8vw, 5.2rem);
   margin-block-end: clamp(2.4rem, 3.8vw, 3.2rem);
   perspective: 1600px;
   transform-style: preserve-3d;
@@ -131,8 +133,8 @@
   -webkit-backface-visibility: hidden;
   overflow: hidden;
   background:
-    radial-gradient(circle at 22% 18%, rgba(255, 213, 120, 0.28), transparent 65%),
-    linear-gradient(155deg, rgba(16, 29, 44, 0.98), rgba(6, 12, 20, 0.98));
+    radial-gradient(circle at 22% 18%, rgba(255, 213, 120, 0.32), transparent 65%),
+    linear-gradient(155deg, rgba(16, 29, 44, 1), rgba(6, 12, 20, 1));
   border: 1px solid rgba(212, 175, 55, 0.28);
   box-shadow:
     inset 0 0 22px rgba(255, 215, 0, 0.12),
@@ -147,8 +149,8 @@
   opacity: 1;
   visibility: visible;
   background:
-    radial-gradient(circle at 22% 18%, rgba(255, 213, 120, 0.32), transparent 60%),
-    linear-gradient(160deg, rgba(20, 36, 54, 0.98), rgba(8, 13, 21, 0.98));
+    radial-gradient(circle at 22% 18%, rgba(255, 213, 120, 0.4), transparent 60%),
+    linear-gradient(160deg, rgba(20, 36, 54, 1), rgba(8, 13, 21, 1));
 }
 
 .vault-face.vault-content {
@@ -158,11 +160,12 @@
   gap: 1.2rem;
   text-align: left;
   background:
-    radial-gradient(circle at 78% 12%, rgba(90, 200, 255, 0.2), transparent 70%),
-    linear-gradient(172deg, rgba(12, 24, 38, 0.98), rgba(22, 36, 52, 0.98));
+    radial-gradient(circle at 78% 12%, rgba(90, 200, 255, 0.26), transparent 70%),
+    linear-gradient(172deg, rgba(12, 24, 38, 1), rgba(22, 36, 52, 1));
   overflow: hidden;
   opacity: 0;
   visibility: hidden;
+  color: rgba(255, 255, 255, 0.92);
 }
 
 .vault-face.vault-content::-webkit-scrollbar {
@@ -278,8 +281,8 @@
 }
 
 .vault-card.is-active {
-  z-index: 15;
-  transform: translateY(-12px) scale(1.05);
+  z-index: 950;
+  transform: translateY(-8px) scale(1.04);
   box-shadow:
     0 36px 90px rgba(0, 0, 0, 0.6),
     0 0 38px rgba(255, 215, 0, 0.35);

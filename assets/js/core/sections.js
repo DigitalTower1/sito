@@ -7,6 +7,9 @@
   const footer = document.querySelector("footer");
   const homeLinkElement = document.querySelector('link[rel="home"]');
   const homeHref = homeLinkElement ? homeLinkElement.getAttribute("href") : null;
+  const animatedElements = Array.from(
+    document.querySelectorAll("[data-animate]") || [],
+  );
 
   let ticking = false;
 
@@ -65,6 +68,26 @@
     });
   }
 
+  function updateAnimatedElements() {
+    if (!animatedElements.length) {
+      return;
+    }
+    const viewportHeight = window.innerHeight || 1;
+    animatedElements.forEach((element) => {
+      const rect = element.getBoundingClientRect();
+      const visibleHeight = Math.max(
+        0,
+        Math.min(viewportHeight, rect.top + rect.height) - Math.max(0, rect.top),
+      );
+      const ratio = visibleHeight / Math.max(rect.height, 1);
+      if (ratio > 0.45) {
+        element.classList.add("is-animated");
+      } else {
+        element.classList.remove("is-animated");
+      }
+    });
+  }
+
   function updateSections() {
     const viewportHeight = window.innerHeight || 1;
     sections.forEach((section) => {
@@ -82,6 +105,7 @@
     });
     updateIndicators();
     computeProgress();
+    updateAnimatedElements();
   }
 
   function requestUpdate() {
@@ -99,6 +123,7 @@
   function handleResize() {
     updateSections();
     updateNavState();
+    updateAnimatedElements();
   }
 
   function scrollToSection(id) {
@@ -158,6 +183,7 @@
     }
     updateSections();
     updateNavState();
+    updateAnimatedElements();
     window.addEventListener("scroll", requestUpdate, { passive: true });
     window.addEventListener("resize", handleResize, { passive: true });
   }
