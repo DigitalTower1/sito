@@ -1,5 +1,6 @@
 (() => {
   const vaultCards = Array.from(document.querySelectorAll(".vault-card"));
+  const overlay = document.getElementById("cardOverlay");
   if (!vaultCards.length) {
     return;
   }
@@ -28,6 +29,10 @@
     card.setAttribute("aria-expanded", "true");
     dimGroup(card, true);
     activeCard = card;
+    if (overlay) {
+      overlay.classList.add("active");
+      overlay.removeAttribute("hidden");
+    }
     if (audio) {
       audio.play("card-flip");
     }
@@ -44,6 +49,10 @@
     }
     if (activeCard === card) {
       activeCard = null;
+    }
+    if (!activeCard && overlay) {
+      overlay.classList.remove("active");
+      overlay.setAttribute("hidden", "");
     }
   }
 
@@ -131,4 +140,12 @@
       closeCard(activeCard);
     }
   });
+
+  if (overlay) {
+    overlay.addEventListener("click", () => {
+      if (activeCard) {
+        closeCard(activeCard);
+      }
+    });
+  }
 })();
