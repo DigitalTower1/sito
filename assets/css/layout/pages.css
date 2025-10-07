@@ -725,6 +725,7 @@ section.visible .page-cta__inner {
 .blog-archive__articles {
   display: grid;
   gap: clamp(1.8rem, 3vw, 2.6rem);
+  grid-column: 1 / span 2;
 }
 
 .blog-archive__header {
@@ -1354,6 +1355,9 @@ section.visible .page-cta__inner {
   }
   .blog-archive__inner {
     grid-template-columns: minmax(0, 1fr);
+  }
+  .blog-archive__articles {
+    grid-column: auto;
   }
   .blog-archive__grid {
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
