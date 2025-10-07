@@ -1078,6 +1078,29 @@ section.visible .page-cta__inner {
   z-index: 1;
 }
 
+.article-body a {
+  color: var(--gold);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 215, 0, 0.65);
+  text-decoration-thickness: 0.14em;
+  text-underline-offset: 0.28em;
+  transition: color 0.3s ease, text-decoration-color 0.3s ease,
+    text-shadow 0.3s ease;
+}
+
+.article-body a:hover,
+.article-body a:focus-visible {
+  color: var(--orange);
+  text-decoration-color: var(--teal);
+  text-shadow: 0 0 16px rgba(74, 155, 142, 0.45);
+}
+
+.article-body a:focus-visible {
+  outline: 2px solid rgba(212, 175, 55, 0.55);
+  outline-offset: 4px;
+}
+
 .article-intro {
   display: grid;
   gap: 1.2rem;
@@ -1159,15 +1182,19 @@ section.visible .page-cta__inner {
 
 .article-links a,
 .article-related a {
-  color: rgba(116, 209, 255, 0.9);
+  color: var(--gold);
   text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.05em;
   transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
 .article-links a:hover,
-.article-related a:hover {
-  color: #fff;
-  text-shadow: 0 0 12px rgba(116, 209, 255, 0.55);
+.article-links a:focus-visible,
+.article-related a:hover,
+.article-related a:focus-visible {
+  color: var(--orange);
+  text-shadow: 0 0 14px rgba(74, 155, 142, 0.45);
 }
 
 .article-body h2,
