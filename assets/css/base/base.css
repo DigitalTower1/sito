@@ -13,7 +13,7 @@ body {
   background: #000;
   color: var(--white);
   overflow-x: hidden;
-  cursor: none;
+  cursor: auto;
   -webkit-font-smoothing: antialiased;
   position: relative;
   min-height: 100vh;
