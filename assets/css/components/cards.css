@@ -22,6 +22,7 @@
   --slider-padding: clamp(1.2rem, 4vw, 2.6rem);
   display: flex;
   gap: clamp(1.4rem, 2.6vw, 2.3rem);
+  align-items: stretch;
   overflow-x: auto;
   overflow-y: visible;
   scroll-snap-type: x mandatory;
@@ -74,12 +75,12 @@
 
 /* Vault card base */
 .vault-card {
-  --vault-card-width: clamp(260px, 24vw, 320px);
-  --vault-card-min-height: clamp(320px, 48vw, 420px);
+  --vault-card-size: clamp(340px, 26vw, 420px);
   position: relative;
-  flex: 0 0 var(--vault-card-width);
-  width: var(--vault-card-width);
-  min-height: var(--vault-card-min-height);
+  flex: 0 0 var(--vault-card-size);
+  width: var(--vault-card-size);
+  min-height: var(--vault-card-size);
+  height: var(--vault-card-size);
   margin-block-start: clamp(1.5rem, 3vw, 2.5rem);
   margin-block-end: clamp(2.6rem, 4vw, 3.4rem);
   margin-inline-start: clamp(0.8rem, 2.5vw, 2rem);
@@ -105,6 +106,7 @@
   position: relative;
   width: 100%;
   min-height: inherit;
+  height: 100%;
   display: grid;
   grid-template-areas: "stack";
   align-content: stretch;
