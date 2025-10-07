@@ -72,51 +72,22 @@
     0 0 18px rgba(255, 215, 0, 0.35);
 }
 
-/* Overlay */
-#cardOverlay.card-overlay {
-  position: fixed;
-  inset: 0;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-  z-index: 200;
-  pointer-events: none;
-  background: transparent;
-}
-
-#cardOverlay.card-overlay.active {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-}
-
-body.card-open {
-  overflow: hidden;
-}
-
 /* Vault card base */
 .vault-card {
   --vault-card-width: clamp(260px, 24vw, 320px);
-  --vault-card-height: clamp(360px, 52vh, 440px);
-  --vault-active-width: min(92vw, 720px);
-  --vault-active-height: calc(100vh - 120px);
+  --vault-card-min-height: clamp(320px, 48vw, 420px);
   position: relative;
   flex: 0 0 var(--vault-card-width);
   width: var(--vault-card-width);
-  height: var(--vault-card-height);
+  min-height: var(--vault-card-min-height);
   margin-block-start: clamp(1.5rem, 3vw, 2.5rem);
   margin-block-end: clamp(2.6rem, 4vw, 3.4rem);
   margin-inline-start: clamp(0.8rem, 2.5vw, 2rem);
-  perspective: 1600px;
+  perspective: 1200px;
   transform-style: preserve-3d;
-  transition:
-    transform 0.45s ease,
-    box-shadow 0.45s ease,
-    filter 0.45s ease,
-    opacity 0.3s ease;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
   border-radius: 18px;
   transform-origin: center;
-  transform: translate3d(0, 0, 0);
   overflow: visible;
   background: transparent;
   z-index: 1;
@@ -124,7 +95,7 @@ body.card-open {
 
 .vault-card:not(.is-active):hover,
 .vault-card.is-hovered:not(.is-active) {
-  transform: translateY(-6px) scale(1.03);
+  transform: translateY(-6px);
   box-shadow:
     0 32px 70px rgba(0, 0, 0, 0.55),
     0 0 28px rgba(255, 215, 0, 0.25);
@@ -133,15 +104,19 @@ body.card-open {
 .vault-card-inner {
   position: relative;
   width: 100%;
-  height: 100%;
+  min-height: inherit;
+  display: grid;
+  grid-template-areas: "stack";
+  align-content: stretch;
   transform-style: preserve-3d;
-  transition: transform 0.6s cubic-bezier(0.22, 1, 0.27, 1);
+  transition: transform 0.5s ease;
   transform: rotateY(0deg);
 }
 
 .vault-face {
-  position: absolute;
-  inset: 0;
+  grid-area: stack;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -182,8 +157,10 @@ body.card-open {
     radial-gradient(circle at 78% 12%, rgba(90, 200, 255, 0.22), rgba(12, 24, 38, 1) 68%),
     linear-gradient(172deg, rgba(12, 24, 38, 1), rgba(22, 36, 52, 0.98));
   overflow: hidden;
+  overflow-y: auto;
   opacity: 0;
   visibility: hidden;
+  pointer-events: none;
   color: rgba(255, 255, 255, 0.95);
 }
 
@@ -300,40 +277,25 @@ body.card-open {
 }
 
 .vault-card.is-active {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: var(--vault-active-width);
-  height: auto;
-  max-height: var(--vault-active-height);
-  flex: 0 0 auto;
-  margin: 0;
-  z-index: 950;
+  z-index: 5;
+  transform: translateY(-8px);
   box-shadow:
-    0 36px 90px rgba(0, 0, 0, 0.7),
-    0 0 44px rgba(255, 215, 0, 0.4);
-  background: transparent;
-  overflow: visible;
+    0 32px 70px rgba(0, 0, 0, 0.65),
+    0 0 32px rgba(255, 215, 0, 0.28);
 }
 
 .vault-card.is-active .vault-card-inner {
   transform: rotateY(180deg);
-  height: auto;
-  min-height: clamp(420px, 55vh, 620px);
 }
 
 .vault-card.is-active .vault-face {
-  position: relative;
   height: auto;
-  min-height: clamp(360px, 55vh, 580px);
 }
 
 .vault-card.is-active .vault-face.vault-locked {
   pointer-events: none;
   opacity: 0;
   visibility: hidden;
-  transform: rotateY(180deg);
 }
 
 .vault-card.is-active .vault-face.vault-content {
